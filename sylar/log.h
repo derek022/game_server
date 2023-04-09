@@ -55,7 +55,8 @@ namespace sylar
          * @brief 返回日志内容
          */
         std::string getContent() const { return m_ss.str();}
-        
+
+        std::stringstream& getSS() { return m_ss; }
 
         /**
          * @brief 格式化写入日志内容

@@ -4,6 +4,8 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <iostream>
+#include <sys/types.h>
+#include <sys/syscall.h>
 
 namespace sylar{
 
