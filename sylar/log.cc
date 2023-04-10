@@ -62,6 +62,7 @@ namespace sylar
 
     Logger::Logger(const std::string name) : m_name(name),m_level(LogLevel::DEBUG)
     {
+        m_formatter.reset(new LogFormatter("%d{%Y-%m-%d %H:%M:%S}%T%t%T%N%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"));
     }
 
     void Logger::log(LogLevel::Level level, LogEvent::ptr event)
@@ -129,6 +130,7 @@ namespace sylar
 
     LogFormatter::LogFormatter(const std::string &pattern) : m_pattern(pattern)
     {
+        init();
     }
 
     std::string LogFormatter::format(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event)
@@ -180,7 +182,7 @@ namespace sylar
     public:
         NameFormatItem(const std::string& str = "") {}
         void format(std::ostream& os, Logger::ptr logger, LogLevel::Level level, LogEvent::ptr event) override {
-            os << event->getLogger()->getName();
+            os << event->getThreadName();
         }
     };
 
