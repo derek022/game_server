@@ -67,7 +67,7 @@ namespace sylar
 
     void Logger::log(LogLevel::Level level, LogEvent::ptr event)
     {
-        if (level > m_level)
+        if (level >= m_level)
         {
             auto self = shared_from_this();
             if(!m_appenders.empty())
