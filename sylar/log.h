@@ -18,7 +18,7 @@ static std::string defName = "main";
 	if(logger->getLevel() <= level) \
 		sylar::LogEventWrap(sylar::LogEvent::ptr(new sylar::LogEvent(logger,level,\
 		__FILE__,__LINE__,0,sylar::GetThreadId(), \
-		sylar::GetFiberId(),time(0),defName))).getSS();
+		sylar::GetFiberId(),time(0),defName))).getSS()
 
 
 #define SYLAR_LOG_DEBUG(logger) SYLAR_LOG_LEVEL(logger,sylar::LogLevel::DEBUG)
