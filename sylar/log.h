@@ -40,6 +40,11 @@ static std::string defName = "main";
 #define SYLAR_LOG_FMT_ERROR(logger,fmt,...) SYLAR_LOG_FMT_LEVEL(logger,sylar::LogLevel::ERROR,fmt,__VA_ARGS__)
 #define SYLAR_LOG_FMT_FATAL(logger,fmt,...) SYLAR_LOG_FMT_LEVEL(logger,sylar::LogLevel::FATAL,fmt,__VA_ARGS__)
 
+#define SYLAR_LOG_ROOT() sylar::LoggerMgr::GetInstance()->getRoot();
+
+#define SYLAR_LOG_NAME(name) sylar::LoggerMgr::GetInstance()->getLogger(name); 
+
+
 namespace sylar
 {
     class Logger;
@@ -236,7 +241,7 @@ public:
 	LoggerManager();
 
 	Logger::ptr getLogger(const std::string& name);
-
+	Logger::ptr getRoot()const{ return m_root; }
 	void init();
 
 
