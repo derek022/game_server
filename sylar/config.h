@@ -8,7 +8,7 @@
 #include <memory>
 #include <boost/lexical_cast.hpp>
 #include <unordered_map>
-
+#include <yaml-cpp/yaml.h>
 
 namespace sylar{
 
@@ -19,8 +19,10 @@ public:
 	ConfigVarBase(const std::string& name, const std::string& description = "")
        		:m_name(name)
         	,m_description(description) {
-    	}
 
+		std::transform(m_name.begin(),m_name.end(),m_name.begin(), ::tolower);
+    	
+	}
 
     /**
      * @brief 析构函数
@@ -76,8 +78,7 @@ public:
             //return ToStr()(m_val);
         } catch (std::exception& e) {
             SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "ConfigVar::toString exception "
-                << e.what() << " convert: " <<typeid(m_val).name() << " to string"
-                << " name=" << m_name;
+                << e.what() << " convert: " <<typeid(m_val).name() << " to string";
         }
         return "";
     }
@@ -148,6 +149,10 @@ public:
 
 		return std::dynamic_pointer_cast<ConfigVar<T>>( it->second);
 	}
+
+	static ConfigVarBase::ptr LookupBase(const std::string& name);
+	
+	static void LoadFromYaml(const YAML::Node& root);
 
 private:
 	static ConfigVarMap s_datas;
