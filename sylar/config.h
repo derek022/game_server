@@ -15,6 +15,7 @@
 #include <map>
 #include <set>
 #include <vector>
+#include <functional>
 
 namespace sylar{
 
@@ -54,7 +55,10 @@ public:
      * @brief 从字符串初始化值
      */
     virtual bool fromString(const std::string& val) = 0;
-private:
+
+    virtual std::string getTypeName() const = 0;
+
+protected:
     std::string m_name;
     std::string m_description;
 };
@@ -304,6 +308,8 @@ public:
 
     typedef std::shared_ptr<ConfigVar> ptr;
 
+    typedef std::function<void (const T& old_value,const T& new_value)> on_change_cb;
+
     ConfigVar(const std::string& name
             ,const T& default_value
             ,const std::string& description = "")
@@ -337,10 +343,10 @@ public:
 		setValue(FromStr()(val));
 		//m_val = boost::lexical_cast<T>(val);
         } catch (std::exception& e) {
-            SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "ConfigVar::fromString exception "
-                << e.what() << " convert: string to " << typeid(m_val).name();
-                //<< " name=" << m_name
-                //<< " - " << val;
+           SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "ConfigVar::fromString exception "
+                << e.what() << " convert: string to " << typeid(m_val).name()
+                << " name=" << m_name
+                << " - " << val;
         }
         return false;
     }
@@ -350,12 +356,45 @@ public:
     }
 
     void setValue(const T& val){
+
+	    {
+		    if( val == m_val)
+		    {
+			    return;
+		    }
+		    for(auto &i : m_cbs)
+		    {
+			i.second(m_val,val);
+		    }
+	    }
     	m_val = val;
+    }
+
+    std::string getTypeName() const override { return typeid(T).name(); }
+
+
+
+    uint64_t addListener(on_change_cb cb){
+    	static uint64_t s_fun_id = 0;
+	++s_fun_id;
+	m_cbs[s_fun_id] = cb;
+	return s_fun_id;
+    }
+
+    void delListener(uint64_t key)
+    {
+	    m_cbs.erase(key);
+    }
+
+    on_change_cb getListener(uint64_t key)
+    {
+	    auto it = m_cbs.find(key);
+	    return it == m_cbs.end() ? nullptr : it->second;
     }
 
 private:
     T m_val;
-
+std::map<uint64_t , on_change_cb> m_cbs;
 
 };
 
@@ -366,7 +405,26 @@ public:
 	template<class T>
 		static typename ConfigVar<T>::ptr Lookup(const std::string& name,
 				const T& default_value, const std::string& description = "") {
-	
+
+		auto it = s_datas.find(name);
+		
+		if(it != s_datas.end())
+		{
+			auto tmp = std::dynamic_pointer_cast<ConfigVar<T>> (it->second);
+			if(tmp){
+				
+				SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "LOOKUP NAME = " << name << "exists";
+				return tmp;
+			}else
+			{
+				
+				SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "LOOKUP NAME = " << name << "exists but type not "
+					<< typeid(name).name() << "real_type = "<< it->second->getTypeName()
+					<< " " << it->second->toString();
+				return nullptr;
+			}
+		}
+
 		auto tmp = Lookup<T>(name);
 		if(tmp){
 			SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "LOOKUP NAME = " << name << "exists";

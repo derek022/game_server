@@ -2,7 +2,7 @@
 #include "sylar/log.h"
 #include "sylar/config.h"
 #include <yaml-cpp/yaml.h>
-
+#if 0
 sylar::ConfigVar<int>::ptr g_int_value_config = 
 	sylar::Config::Lookup("system.port",(int)8080, "system port");
 
@@ -107,12 +107,95 @@ void test_config() {
     XX_M(g_str_int_umap_value_config, str_int_umap, after);
 }
 
+#endif
+
+class Person
+{
+	public:
+		std::string m_name;
+		int m_age = 0;
+		bool m_sex = false;;
+	public:
+		Person(){}
+
+		std::string toString() const {
+			std::stringstream ss;
+			ss << "[Person name="<<m_name
+				<< " , age=" << m_age
+				<< " , sex=" << m_sex
+				<< "]";
+
+			return ss.str();
+		}
+
+		bool operator== (const Person& oth)const {
+			return m_name == oth.m_name
+				&& m_age == oth.m_age
+				&& m_sex == oth.m_sex;
+		}
+};
+
+namespace sylar {
+
+template<>
+class LexicalCast<std::string, Person> {
+public:
+    Person operator()(const std::string& v) {
+        YAML::Node node = YAML::Load(v);
+        Person p;
+        p.m_name = node["name"].as<std::string>();
+        p.m_age = node["age"].as<int>();
+        p.m_sex = node["sex"].as<bool>();
+        return p;
+    }
+};
+
+template<>
+class LexicalCast<Person, std::string> {
+public:
+    std::string operator()(const Person& p) {
+        YAML::Node node;
+        node["name"] = p.m_name;
+        node["age"] = p.m_age;
+        node["sex"] = p.m_sex;
+        std::stringstream ss;
+        ss << node;
+        return ss.str();
+    }
+};
+
+}
+
+
+sylar::ConfigVar<Person>::ptr g_person =
+    sylar::Config::Lookup("class.person", Person(), "system person");
+
+void test_class()
+{
+
+	SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "before: " << g_person->getValue().toString() << " - " << g_person->toString();
+
+
+	g_person->addListener([](const Person& old_value, const Person& new_value){
+        
+		SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "old_value=" << old_value.toString()
+		<< " new_value=" << new_value.toString();
+	});
+
+    YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
+    sylar::Config::LoadFromYaml(root);
+
+    SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
+
+
+}
+
 
 
 int main()
 {
-	
-	test_config();
+
+	test_class();
 
 	return 0;
 }
