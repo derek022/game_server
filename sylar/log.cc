@@ -629,7 +629,7 @@ namespace sylar
 		}
 
             if(!m_formatter->format(m_filestream, logger, level, event)){
-	    	std::cout << "error " << std::endl;
+	    	std::cout << "filelog format error " << std::endl;
 	    }
         }
     }
