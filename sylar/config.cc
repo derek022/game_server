@@ -1,78 +1,71 @@
 
 #include "sylar/config.h"
 
-namespace sylar{
-
-Config::ConfigVarMap Config::s_datas;
-
-
-ConfigVarBase::ptr Config::LookupBase(const std::string& name) {
-    auto it = s_datas.find(name);
-    return it == s_datas.end() ? nullptr : it->second;
-}
-
-
-static void ListAllMember(const std::string& prefix,
-		const YAML::Node& node,
-		std::list<std::pair<std::string, const YAML::Node>> & output){
-
-	if(prefix.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") 
-			!= std::string::npos) {
-	
-		SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "Config invalid Name: " << prefix << " : " << node;
-		return;
-	
+namespace sylar
+{
+	ConfigVarBase::ptr Config::LookupBase(const std::string &name)
+	{
+		auto it = GetDatas().find(name);
+		return it == GetDatas().end() ? nullptr : it->second;
 	}
 
-	output.push_back(std::make_pair(prefix,node));
-
-	if(node.IsMap())
+	static void ListAllMember(const std::string &prefix,
+							  const YAML::Node &node,
+							  std::list<std::pair<std::string, const YAML::Node>> &output)
 	{
-		for(auto it = node.begin(); it!= node.end(); it++)
+
+		if (prefix.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") != std::string::npos)
 		{
-			ListAllMember(prefix.empty() ? it->first.Scalar() 
-					: prefix + "." + it->first.Scalar(), it->second, output);
-		}
-	}
 
-
-
-}
-
-
-void Config::LoadFromYaml(const YAML::Node& root){
-	
-	std::list<std::pair<std::string,const YAML::Node>> all_nodes;
-	ListAllMember("",root,all_nodes);
-	
-
-	for(auto& i : all_nodes)
-	{
-		std::string key = i.first;
-		if(key.empty())
-		{
-			continue;
+			SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "Config invalid Name: " << prefix << " : " << node;
+			return;
 		}
 
-		std::transform(key.begin(),key.end(),key.begin(), ::tolower);
-		ConfigVarBase::ptr var = LookupBase(key);
+		output.push_back(std::make_pair(prefix, node));
 
-		if(var)
+		if (node.IsMap())
 		{
-			if(i.second.IsScalar())
+			for (auto it = node.begin(); it != node.end(); it++)
 			{
-				var->fromString(i.second.Scalar());
-			}else{
-			
-				std::stringstream ss;
-				ss << i.second;
-				var->fromString(ss.str());
+				ListAllMember(prefix.empty() ? it->first.Scalar()
+											 : prefix + "." + it->first.Scalar(),
+							  it->second, output);
 			}
 		}
+	}
 
+	void Config::LoadFromYaml(const YAML::Node &root)
+	{
+
+		std::list<std::pair<std::string, const YAML::Node>> all_nodes;
+		ListAllMember("", root, all_nodes);
+
+		for (auto &i : all_nodes)
+		{
+			std::string key = i.first;
+			if (key.empty())
+			{
+				continue;
+			}
+
+			std::transform(key.begin(), key.end(), key.begin(), ::tolower);
+			ConfigVarBase::ptr var = LookupBase(key);
+
+			if (var)
+			{
+				if (i.second.IsScalar())
+				{
+					var->fromString(i.second.Scalar());
+				}
+				else
+				{
+
+					std::stringstream ss;
+					ss << i.second;
+					var->fromString(ss.str());
+				}
+			}
+		}
 	}
 
 }
-
-}
-

@@ -182,7 +182,7 @@ void test_class()
 		<< " new_value=" << new_value.toString();
 	});
 
-    YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
+    YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/test.yml");
     sylar::Config::LoadFromYaml(root);
 
     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
@@ -191,12 +191,30 @@ void test_class()
 }
 
 
+void test_log()
+{
+	static sylar::Logger::ptr system_log = SYLAR_LOG_NAME("system");
+	SYLAR_LOG_INFO(system_log) << " hello systeem " << std::endl;
+	YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
+    	sylar::Config::LoadFromYaml(root);
+   	std::cout << "=============" << std::endl;
+   	std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+   	std::cout << "=============" << std::endl;
+    	std::cout << root << std::endl;
+    	SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
+
+    	system_log->setFormatter("%d - %m%n");
+    	SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
+}
+
+
+
 
 int main()
 {
 
-	test_class();
-
+	//test_class();
+	test_log();
 	return 0;
 }
 
