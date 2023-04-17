@@ -1,6 +1,8 @@
 
 #ifndef __SYLAR_CONFIG_H__
 #define __SYLAR_CONFIG_H__
+
+
 #include "log.h"
 #include "util.h"
 #include <string>
@@ -22,6 +24,7 @@ namespace sylar
 
     class ConfigVarBase
     {
+
     public:
         typedef std::shared_ptr<ConfigVarBase> ptr;
 

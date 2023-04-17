@@ -24,12 +24,20 @@ public:
     ~Thread();
     
     pid_t getId() const {return m_id;}
-    
+
+	void join();
+
+	static Thread* GetThis();
+
     /**
     * @brief 线程名称
     */
-    const std::string& getName() const { return m_name;}
+	const std::string& getName() const { return m_name;}
     
+	static const std::string& GetName();
+	static void SetName(const std::string& name);
+private:
+	static void* run(void* arg);
 private:
     /// 线程id
     pid_t m_id = -1;
