@@ -303,7 +303,7 @@ namespace sylar
         NameFormatItem(const std::string &str = "") {}
         void format(std::ostream &os, Logger::ptr logger, LogLevel::Level level, LogEvent::ptr event) override
         {
-            os << event->getThreadName();
+            os << event->getLogger()->getName();
         }
     };
 
@@ -560,8 +560,8 @@ namespace sylar
     {
         if (level >= m_level)
     	{
-		m_formatter->format(std::cout, logger,level,event);
-	}
+            m_formatter->format(std::cout, logger,level,event);
+        }
     }
 
     std::string StdoutLogAppender::toYamlString()

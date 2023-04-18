@@ -12,14 +12,13 @@
 #include <yaml-cpp/yaml.h>
 
 #include "singleton.h"
-
-static std::string defName = "main";
+#include "thread.h"
 
 #define SYLAR_LOG_LEVEL(logger, level)                                                                        \
     if (logger->getLevel() <= level)                                                                          \
     sylar::LogEventWrap(sylar::LogEvent::ptr(new sylar::LogEvent(logger, level,                               \
                                                                  __FILE__, __LINE__, 0, sylar::GetThreadId(), \
-                                                                 sylar::GetFiberId(), time(0), defName)))     \
+                                                                 sylar::GetFiberId(), time(0), sylar::Thread::GetName())))     \
         .getSS()
 
 #define SYLAR_LOG_DEBUG(logger) SYLAR_LOG_LEVEL(logger, sylar::LogLevel::DEBUG)
@@ -32,7 +31,7 @@ static std::string defName = "main";
     if (logger->getLevel() <= level)                                                                          \
     sylar::LogEventWrap(sylar::LogEvent::ptr(new sylar::LogEvent(logger, level,                               \
                                                                  __FILE__, __LINE__, 0, sylar::GetThreadId(), \
-                                                                 sylar::GetFiberId(), time(0), defName)))     \
+                                                                 sylar::GetFiberId(), time(0), sylar::Thread::GetName())))     \
         .getEvent()                                                                                           \
         ->format(fmt, __VA_ARGS__)
 

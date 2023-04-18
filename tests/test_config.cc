@@ -167,28 +167,28 @@ public:
 }
 
 
-sylar::ConfigVar<Person>::ptr g_person =
-    sylar::Config::Lookup("class.person", Person(), "system person");
+// sylar::ConfigVar<Person>::ptr g_person =
+//     sylar::Config::Lookup("class.person", Person(), "system person");
 
-void test_class()
-{
+// void test_class()
+// {
 
-	SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "before: " << g_person->getValue().toString() << " - " << g_person->toString();
+// 	SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "before: " << g_person->getValue().toString() << " - " << g_person->toString();
 
 
-	g_person->addListener([](const Person& old_value, const Person& new_value){
+// 	g_person->addListener([](const Person& old_value, const Person& new_value){
         
-		SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "old_value=" << old_value.toString()
-		<< " new_value=" << new_value.toString();
-	});
+// 		SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "old_value=" << old_value.toString()
+// 		<< " new_value=" << new_value.toString();
+// 	});
 
-    YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/test.yml");
-    sylar::Config::LoadFromYaml(root);
+//     YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/test.yml");
+//     sylar::Config::LoadFromYaml(root);
 
-    SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
+//     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
 
 
-}
+// }
 
 
 void test_log()
@@ -205,6 +205,8 @@ void test_log()
     	SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
 
     	system_log->setFormatter("%d - %m%n");
+        std::cout << "set formatter "<<std::endl;
+        std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
     	SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
 }
 

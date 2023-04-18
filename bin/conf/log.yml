@@ -6,7 +6,6 @@ logs:
           - type: FileLogAppender
             file: /home/derek/apps/logs/sylar/root.txt
           - type: StdoutLogAppender
-            formatter: "%d%T%m%n"
     - name: system
       level: info
       formatter: "%d%T%m%n"
@@ -14,4 +13,3 @@ logs:
           - type: FileLogAppender
             file: /home/derek/apps/logs/sylar/system.txt
           - type: StdoutLogAppender
-            formatter: "%d%T%m%n"

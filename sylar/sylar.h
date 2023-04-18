@@ -7,7 +7,7 @@
 #include "sylar/config.h"
 #include "sylar/thread.h"
 #include "sylar/util.h"
-
+#include "sylar/mutex.h"
 
 #endif
 
