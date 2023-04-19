@@ -3,8 +3,12 @@
 
 namespace sylar
 {
+
+	static sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
+
 	ConfigVarBase::ptr Config::LookupBase(const std::string &name)
 	{
+		RWMutexType::ReadLock lock(GetMutex());
 		auto it = GetDatas().find(name);
 		return it == GetDatas().end() ? nullptr : it->second;
 	}
@@ -17,7 +21,7 @@ namespace sylar
 		if (prefix.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") != std::string::npos)
 		{
 
-			SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "Config invalid Name: " << prefix << " : " << node;
+			SYLAR_LOG_ERROR(g_logger) << "Config invalid Name: " << prefix << " : " << node;
 			return;
 		}
 
@@ -65,6 +69,18 @@ namespace sylar
 					var->fromString(ss.str());
 				}
 			}
+		}
+	}
+
+
+	void Config::Visit(std::function<void(ConfigVarBase::ptr)> cb)
+	{
+		RWMutexType::ReadLock lock(GetMutex());
+		ConfigVarMap& m = GetDatas();
+
+		for(auto it = m.begin(); it != m.end(); it++)
+		{
+			cb(it->second);
 		}
 	}
 

@@ -177,6 +177,8 @@ namespace sylar
 
     public:
         typedef std::shared_ptr<LogAppender> ptr;
+        typedef NullMutex MutexType;
+
         virtual ~LogAppender() {}
         virtual void log(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) = 0;
 
@@ -191,6 +193,7 @@ namespace sylar
     protected:
         LogLevel::Level m_level = LogLevel::DEBUG;
         bool m_hasFormatter = false;
+        MutexType m_mutex;
         LogFormatter::ptr m_formatter;
     };
 
@@ -199,6 +202,8 @@ namespace sylar
 	friend class LoggerManager;
     public:
         typedef std::shared_ptr<Logger> ptr;
+        typedef NullMutex MutexType;
+
         Logger(const std::string name = "root");
         void log(LogLevel::Level level, LogEvent::ptr event);
 
@@ -229,6 +234,7 @@ namespace sylar
         std::string m_name;
         LogLevel::Level m_level;
         // mutex
+        MutexType m_mutex;
         std::list<LogAppender::ptr> m_appenders;
         LogFormatter::ptr m_formatter;
         Logger::ptr m_root;
@@ -264,6 +270,8 @@ namespace sylar
     class LoggerManager
     {
     public:
+        typedef NullMutex MutexType;
+
         LoggerManager();
 
         Logger::ptr getLogger(const std::string &name);
@@ -273,6 +281,7 @@ namespace sylar
         std::string toYamlString();
 
     private:
+        MutexType m_mutex;
         std::map<std::string, Logger::ptr> m_loggers;
         Logger::ptr m_root;
     };

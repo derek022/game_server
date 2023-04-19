@@ -66,22 +66,24 @@ void test_config() {
     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "before: " << g_int_value_config->getValue();
     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "before: " << g_float_value_config->toString();
 
-#define XX(g_var, name, prefix) \
-    { \
-        auto& v = g_var->getValue(); \
-        for(auto& i : v) { \
-            SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << #prefix " " #name ": " << i; \
-        } \
+#define XX(g_var, name, prefix)                                                               \
+    {                                                                                         \
+        auto &v = g_var->getValue();                                                          \
+        for (auto &i : v)                                                                     \
+        {                                                                                     \
+            SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << #prefix " " #name ": " << i;                  \
+        }                                                                                     \
         SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << #prefix " " #name " yaml: " << g_var->toString(); \
     }
 
-#define XX_M(g_var, name, prefix) \
-    { \
-        auto& v = g_var->getValue(); \
-        for(auto& i : v) { \
-            SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << #prefix " " #name ": {" \
-                    << i.first << " - " << i.second << "}"; \
-        } \
+#define XX_M(g_var, name, prefix)                                                             \
+    {                                                                                         \
+        auto &v = g_var->getValue();                                                          \
+        for (auto &i : v)                                                                     \
+        {                                                                                     \
+            SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << #prefix " " #name ": {"                       \
+                                             << i.first << " - " << i.second << "}";          \
+        }                                                                                     \
         SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << #prefix " " #name " yaml: " << g_var->toString(); \
     }
 
@@ -111,61 +113,67 @@ void test_config() {
 
 class Person
 {
-	public:
-		std::string m_name;
-		int m_age = 0;
-		bool m_sex = false;;
-	public:
-		Person(){}
-
-		std::string toString() const {
-			std::stringstream ss;
-			ss << "[Person name="<<m_name
-				<< " , age=" << m_age
-				<< " , sex=" << m_sex
-				<< "]";
-
-			return ss.str();
-		}
-
-		bool operator== (const Person& oth)const {
-			return m_name == oth.m_name
-				&& m_age == oth.m_age
-				&& m_sex == oth.m_sex;
-		}
-};
-
-namespace sylar {
-
-template<>
-class LexicalCast<std::string, Person> {
 public:
-    Person operator()(const std::string& v) {
-        YAML::Node node = YAML::Load(v);
-        Person p;
-        p.m_name = node["name"].as<std::string>();
-        p.m_age = node["age"].as<int>();
-        p.m_sex = node["sex"].as<bool>();
-        return p;
-    }
-};
+    std::string m_name;
+    int m_age = 0;
+    bool m_sex = false;
+    ;
 
-template<>
-class LexicalCast<Person, std::string> {
 public:
-    std::string operator()(const Person& p) {
-        YAML::Node node;
-        node["name"] = p.m_name;
-        node["age"] = p.m_age;
-        node["sex"] = p.m_sex;
+    Person() {}
+
+    std::string toString() const
+    {
         std::stringstream ss;
-        ss << node;
+        ss << "[Person name=" << m_name
+           << " , age=" << m_age
+           << " , sex=" << m_sex
+           << "]";
+
         return ss.str();
     }
+
+    bool operator==(const Person &oth) const
+    {
+        return m_name == oth.m_name && m_age == oth.m_age && m_sex == oth.m_sex;
+    }
 };
 
-}
+namespace sylar
+{
 
+    template <>
+    class LexicalCast<std::string, Person>
+    {
+    public:
+        Person operator()(const std::string &v)
+        {
+            YAML::Node node = YAML::Load(v);
+            Person p;
+            p.m_name = node["name"].as<std::string>();
+            p.m_age = node["age"].as<int>();
+            p.m_sex = node["sex"].as<bool>();
+            return p;
+        }
+    };
+
+    template <>
+    class LexicalCast<Person, std::string>
+    {
+    public:
+        std::string operator()(const Person &p)
+        {
+            YAML::Node node;
+            node["name"] = p.m_name;
+            node["age"] = p.m_age;
+            node["sex"] = p.m_sex;
+            std::stringstream ss;
+            ss << node;
+            return ss.str();
+        }
+    };
+
+}
 
 // sylar::ConfigVar<Person>::ptr g_person =
 //     sylar::Config::Lookup("class.person", Person(), "system person");
@@ -175,9 +183,8 @@ public:
 
 // 	SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "before: " << g_person->getValue().toString() << " - " << g_person->toString();
 
-
 // 	g_person->addListener([](const Person& old_value, const Person& new_value){
-        
+
 // 		SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "old_value=" << old_value.toString()
 // 		<< " new_value=" << new_value.toString();
 // 	});
@@ -187,38 +194,42 @@ public:
 
 //     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
 
-
 // }
-
 
 void test_log()
 {
-	static sylar::Logger::ptr system_log = SYLAR_LOG_NAME("system");
-	SYLAR_LOG_INFO(system_log) << " hello systeem " << std::endl;
-	std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
-	YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
-    	sylar::Config::LoadFromYaml(root);
-   	std::cout << "=============" << std::endl;
-   	std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
-   	std::cout << "=============" << std::endl;
-    	std::cout << root << std::endl;
-    	SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
+    static sylar::Logger::ptr system_log = SYLAR_LOG_NAME("system");
+    SYLAR_LOG_INFO(system_log) << " hello systeem " << std::endl;
+    std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+    YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
+    sylar::Config::LoadFromYaml(root);
+    std::cout << "=============" << std::endl;
+    std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+    std::cout << "=============" << std::endl;
+    std::cout << root << std::endl;
+    SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
 
-    	system_log->setFormatter("%d - %m%n");
-        std::cout << "set formatter "<<std::endl;
-        std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
-    	SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
+    system_log->setFormatter("%d - %m%n");
+    std::cout << "set formatter " << std::endl;
+    std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+    SYLAR_LOG_INFO(system_log) << "hello system" << std::endl;
 }
 
-
-
-
-int main()
+int main(int argc,char** argv)
 {
 
-	//test_class();
-	test_log();
-	return 0;
+    // test_class();
+    //  test_log();
+    std::cout << "first "<<std::endl;
+    // YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
+    // std::cout << "second "<<std::endl;
+    // sylar::Config::LoadFromYaml(root);
+    // std::cout << "thrid "<<std::endl;
+    // sylar::Config::Visit([](sylar::ConfigVarBase::ptr var)
+    //                      { SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "name=" << var->getName()
+    //                                                         << " description=" << var->getDescription()
+    //                                                         << " typename=" << var->getTypeName()
+    //                                                         << " value=" << var->toString(); });
+
+    return 0;
 }
-
-
