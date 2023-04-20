@@ -27,27 +27,14 @@ set(LIB_SRC
 add_library(sylar SHARED ${LIB_SRC})
 force_redefine_file_macro_for_sources(sylar)
 
-set(LIB_LIB  sylar pthread ${YAMLCPP})
-
-# test
-add_executable(test tests/test.cc)
-force_redefine_file_macro_for_sources(test)
-add_dependencies(test sylar)
-target_link_libraries(test ${LIB_LIB})
-
-#test_config
-add_executable(test_config tests/test_config.cc)
-force_redefine_file_macro_for_sources(test_config)
-add_dependencies(test_config sylar)
-target_link_libraries(test_config  ${LIB_LIB})
+set(LIBS  sylar pthread ${YAMLCPP})
 
 
-add_executable(test_thread tests/test_thread.cc)
-force_redefine_file_macro_for_sources(test_thread)
-add_dependencies(test_thread sylar)
-target_link_libraries(test_thread  ${LIB_LIB})
+sylar_add_executable(test "tests/test.cc" sylar "${LIBS}")
+sylar_add_executable(test_config "tests/test_config.cc" sylar "${LIBS}")
 
-
+sylar_add_executable(test_thread "tests/test_thread.cc" sylar "${LIBS}")
+sylar_add_executable(test_util "tests/test_util.cc" sylar "${LIBS}")
 
 
 
