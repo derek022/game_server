@@ -15,6 +15,8 @@
 #include <semaphore.h>
 #include <stdint.h>
 #include <atomic>
+#include <iostream>
+
 #include "noncopyable.h"
 
 namespace sylar{
@@ -53,6 +55,10 @@ public:
     {
         m_mutex.lock();
         m_locked = true;
+    }
+
+    ~ScopedLockImpl(){
+        unlock();
     }
     
     void lock()

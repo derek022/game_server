@@ -204,7 +204,7 @@ namespace sylar
         typedef std::shared_ptr<Logger> ptr;
         typedef NullMutex MutexType;
 
-        Logger(const std::string name = "root");
+        Logger(const std::string& name = "root");
         void log(LogLevel::Level level, LogEvent::ptr event);
 
         void debug(LogEvent::ptr event);

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <sys/syscall.h>
+#include <stdarg.h>
 
 namespace sylar{
 

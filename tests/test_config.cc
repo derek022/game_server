@@ -198,11 +198,14 @@ namespace sylar
 
 void test_log()
 {
-    static sylar::Logger::ptr system_log = SYLAR_LOG_NAME("system");
-    SYLAR_LOG_INFO(system_log) << " hello systeem " << std::endl;
-    std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+    // static sylar::Logger::ptr system_log = SYLAR_LOG_NAME("system");
+    // SYLAR_LOG_INFO(system_log) << " hello systeem " << std::endl;
+    // std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
     YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
     sylar::Config::LoadFromYaml(root);
+    static sylar::Logger::ptr system_log = SYLAR_LOG_NAME("system");
+    SYLAR_LOG_INFO(system_log) << " hello systeem " << std::endl;
+
     std::cout << "=============" << std::endl;
     std::cout << sylar::LoggerMgr::GetInstance()->toYamlString() << std::endl;
     std::cout << "=============" << std::endl;
@@ -217,19 +220,16 @@ void test_log()
 
 int main(int argc,char** argv)
 {
-
+    std::cout<<"main"<<std::endl;
     // test_class();
     //  test_log();
-    std::cout << "first "<<std::endl;
-    // YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
-    // std::cout << "second "<<std::endl;
-    // sylar::Config::LoadFromYaml(root);
-    // std::cout << "thrid "<<std::endl;
-    // sylar::Config::Visit([](sylar::ConfigVarBase::ptr var)
-    //                      { SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "name=" << var->getName()
-    //                                                         << " description=" << var->getDescription()
-    //                                                         << " typename=" << var->getTypeName()
-    //                                                         << " value=" << var->toString(); });
+    YAML::Node root = YAML::LoadFile("/home/derek/WorkSpace/game_server/bin/conf/log.yml");
+    sylar::Config::LoadFromYaml(root);
+    sylar::Config::Visit([](sylar::ConfigVarBase::ptr var)
+                         { SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "name=" << var->getName()
+                                                            << " description=" << var->getDescription()
+                                                            << " typename=" << var->getTypeName()
+                                                            << " value=" << var->toString(); });
 
     return 0;
 }
