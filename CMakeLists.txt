@@ -22,6 +22,7 @@ set(LIB_SRC
     sylar/config.cc
     sylar/mutex.cc
     sylar/fiber.cc
+    sylar/scheduler.cc
     )
 
 
