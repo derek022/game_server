@@ -57,7 +57,7 @@ void Backtrace(std::vector<std::string> & bt, int size , int skip )
     free(array);
 }
 
-std::string BacktrackToString(int size , int skip , const std::string& prefix )
+std::string BacktraceToString(int size , int skip , const std::string& prefix )
 {
     std::vector<std::string> bt;
     Backtrace(bt,size,skip);

@@ -19,7 +19,7 @@
 #endif
 
 
-#define SYLAR_ASSET(X)  \
+#define SYLAR_ASSERT(X)  \
     if(SYLAR_UNLIKELY(!(X))){ \
         SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "ASSERTION: " #X \
             << "\n backtrace:\n" \

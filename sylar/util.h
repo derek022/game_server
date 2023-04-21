@@ -38,7 +38,7 @@ void Backtrace(std::vector<std::string> & bt, int size = 64, int skip = 1);
  * @param[in] skip 跳过栈顶的层数
  * @param[in] prefix 栈信息前输出的内容
  */
-std::string BacktrackToString(int size = 64, int skip = 2, const std::string& prefix = "");
+std::string BacktraceToString(int size = 64, int skip = 2, const std::string& prefix = "");
 
 };
 
