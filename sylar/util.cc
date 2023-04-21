@@ -22,7 +22,7 @@ static std::string demangle(const char* str)
     std::string rt;
     rt.resize(256);
     if(1 == sscanf(str, "%*[^(]%*[^_]%255[^)+]", &rt[0])) {
-        char* v = abi::__cxa_demangle(&rt[0], nullptr, &size, &status);
+        char* v = abi::__cxa_demangle(&rt[0], nullptr,& size,& status);
         if(v) {
             std::string result(v);
             free(v);
@@ -36,7 +36,7 @@ static std::string demangle(const char* str)
 }
 
 
-void Backtrace(std::vector<std::string> & bt, int size , int skip )
+void Backtrace(std::vector<std::string>&  bt, int size , int skip )
 {
     void** array = (void**)malloc((sizeof(void*) * size));
     size_t s = ::backtrace(array, size);

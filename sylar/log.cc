@@ -161,9 +161,9 @@ public:
     void format(std::ostream& os, Logger::ptr logger, LogLevel::Level level, LogEvent::ptr event) override {
         struct tm tm;
         time_t time = event->getTime();
-        localtime_r(&time, &tm);
+        localtime_r(&time,& tm);
         char buf[64];
-        strftime(buf, sizeof(buf), m_format.c_str(), &tm);
+        strftime(buf, sizeof(buf), m_format.c_str(),& tm);
         os << buf;
     }
 private:

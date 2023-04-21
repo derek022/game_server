@@ -29,7 +29,7 @@ namespace sylar
     public:
         typedef std::shared_ptr<ConfigVarBase> ptr;
 
-        ConfigVarBase(const std::string &name, const std::string &description = "")
+        ConfigVarBase(const std::string& name, const std::string& description = "")
             : m_name(name), m_description(description)
         {
 
@@ -44,12 +44,12 @@ namespace sylar
         /**
          * @brief 返回配置参数名称
          */
-        const std::string &getName() const { return m_name; }
+        const std::string& getName() const { return m_name; }
 
         /**
          * @brief 返回配置参数的描述
          */
-        const std::string &getDescription() const { return m_description; }
+        const std::string& getDescription() const { return m_description; }
 
         /**
          * @brief 转成字符串
@@ -59,7 +59,7 @@ namespace sylar
         /**
          * @brief 从字符串初始化值
          */
-        virtual bool fromString(const std::string &val) = 0;
+        virtual bool fromString(const std::string& val) = 0;
 
         virtual std::string getTypeName() const = 0;
 
@@ -74,7 +74,7 @@ namespace sylar
     class LexicalCast
     {
     public:
-        T operator()(const F &v)
+        T operator()(const F& v)
         {
             return boost::lexical_cast<T>(v);
         }
@@ -85,7 +85,7 @@ namespace sylar
     class LexicalCast<std::string, std::vector<T>>
     {
     public:
-        std::vector<T> operator()(const std::string &v)
+        std::vector<T> operator()(const std::string& v)
         {
             YAML::Node node = YAML::Load(v);
             typename std::vector<T> vec;
@@ -106,11 +106,11 @@ namespace sylar
     class LexicalCast<std::vector<T>, std::string>
     {
     public:
-        std::string operator()(const std::vector<T> &v)
+        std::string operator()(const std::vector<T>& v)
         {
 
             YAML::Node node(YAML::NodeType::Sequence);
-            for (auto &i : v)
+            for (auto& i : v)
             {
                 node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
             }
@@ -127,7 +127,7 @@ namespace sylar
     class LexicalCast<std::string, std::list<T>>
     {
     public:
-        std::list<T> operator()(const std::string &v)
+        std::list<T> operator()(const std::string& v)
         {
             YAML::Node node = YAML::Load(v);
             typename std::list<T> vec;
@@ -149,10 +149,10 @@ namespace sylar
     class LexicalCast<std::list<T>, std::string>
     {
     public:
-        std::string operator()(const std::list<T> &v)
+        std::string operator()(const std::list<T>& v)
         {
             YAML::Node node(YAML::NodeType::Sequence);
-            for (auto &i : v)
+            for (auto& i : v)
             {
                 node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
             }
@@ -169,7 +169,7 @@ namespace sylar
     class LexicalCast<std::string, std::set<T>>
     {
     public:
-        std::set<T> operator()(const std::string &v)
+        std::set<T> operator()(const std::string& v)
         {
             YAML::Node node = YAML::Load(v);
             typename std::set<T> vec;
@@ -191,10 +191,10 @@ namespace sylar
     class LexicalCast<std::set<T>, std::string>
     {
     public:
-        std::string operator()(const std::set<T> &v)
+        std::string operator()(const std::set<T>& v)
         {
             YAML::Node node(YAML::NodeType::Sequence);
-            for (auto &i : v)
+            for (auto& i : v)
             {
                 node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
             }
@@ -211,7 +211,7 @@ namespace sylar
     class LexicalCast<std::string, std::unordered_set<T>>
     {
     public:
-        std::unordered_set<T> operator()(const std::string &v)
+        std::unordered_set<T> operator()(const std::string& v)
         {
             YAML::Node node = YAML::Load(v);
             typename std::unordered_set<T> vec;
@@ -233,10 +233,10 @@ namespace sylar
     class LexicalCast<std::unordered_set<T>, std::string>
     {
     public:
-        std::string operator()(const std::unordered_set<T> &v)
+        std::string operator()(const std::unordered_set<T>& v)
         {
             YAML::Node node(YAML::NodeType::Sequence);
-            for (auto &i : v)
+            for (auto& i : v)
             {
                 node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
             }
@@ -253,7 +253,7 @@ namespace sylar
     class LexicalCast<std::string, std::map<std::string, T>>
     {
     public:
-        std::map<std::string, T> operator()(const std::string &v)
+        std::map<std::string, T> operator()(const std::string& v)
         {
             YAML::Node node = YAML::Load(v);
             typename std::map<std::string, T> vec;
@@ -277,10 +277,10 @@ namespace sylar
     class LexicalCast<std::map<std::string, T>, std::string>
     {
     public:
-        std::string operator()(const std::map<std::string, T> &v)
+        std::string operator()(const std::map<std::string, T>& v)
         {
             YAML::Node node(YAML::NodeType::Map);
-            for (auto &i : v)
+            for (auto& i : v)
             {
                 node[i.first] = YAML::Load(LexicalCast<T, std::string>()(i.second));
             }
@@ -297,7 +297,7 @@ namespace sylar
     class LexicalCast<std::string, std::unordered_map<std::string, T>>
     {
     public:
-        std::unordered_map<std::string, T> operator()(const std::string &v)
+        std::unordered_map<std::string, T> operator()(const std::string& v)
         {
             YAML::Node node = YAML::Load(v);
             typename std::unordered_map<std::string, T> vec;
@@ -321,10 +321,10 @@ namespace sylar
     class LexicalCast<std::unordered_map<std::string, T>, std::string>
     {
     public:
-        std::string operator()(const std::unordered_map<std::string, T> &v)
+        std::string operator()(const std::unordered_map<std::string, T>& v)
         {
             YAML::Node node(YAML::NodeType::Map);
-            for (auto &i : v)
+            for (auto& i : v)
             {
                 node[i.first] = YAML::Load(LexicalCast<T, std::string>()(i.second));
             }
@@ -341,9 +341,9 @@ namespace sylar
         typedef RWMutex RWMutexType;
         typedef std::shared_ptr<ConfigVar> ptr;
 
-        typedef std::function<void(const T &old_value, const T &new_value)> on_change_cb;
+        typedef std::function<void(const T& old_value, const T& new_value)> on_change_cb;
 
-        ConfigVar(const std::string &name, const T &default_value, const std::string &description = "")
+        ConfigVar(const std::string& name, const T& default_value, const std::string& description = "")
             : ConfigVarBase(name, description), m_val(default_value)
         {
         }
@@ -360,7 +360,7 @@ namespace sylar
                 RWMutexType::ReadLock lock(m_mutex);
                 return ToStr()(m_val);
             }
-            catch (std::exception &e)
+            catch (std::exception& e)
             {
                 SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "ConfigVar::toString exception "
                                                   << e.what() << " convert: " << typeid(m_val).name() << " to string";
@@ -372,7 +372,7 @@ namespace sylar
          * @brief 从YAML String 转成参数的值
          * @exception 当转换失败抛出异常
          */
-        bool fromString(const std::string &val) override
+        bool fromString(const std::string& val) override
         {
             try
             {
@@ -380,7 +380,7 @@ namespace sylar
                 setValue(FromStr()(val));
                 // m_val = boost::lexical_cast<T>(val);
             }
-            catch (std::exception &e)
+            catch (std::exception& e)
             {
                 SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "ConfigVar::fromString exception "
                                                   << e.what() << " convert: string to " << typeid(m_val).name()
@@ -396,7 +396,7 @@ namespace sylar
             return m_val;
         }
 
-        void setValue(const T &val)
+        void setValue(const T& val)
         {
 
             {
@@ -405,7 +405,7 @@ namespace sylar
                 {
                     return;
                 }
-                for (auto &i : m_cbs)
+                for (auto& i : m_cbs)
                 {
                     i.second(m_val, val);
                 }
@@ -459,8 +459,8 @@ namespace sylar
 
 
         template <class T>
-        static typename ConfigVar<T>::ptr Lookup(const std::string &name,
-                                                 const T &default_value, const std::string &description = "")
+        static typename ConfigVar<T>::ptr Lookup(const std::string& name,
+                                                 const T& default_value, const std::string& description = "")
         {
             RWMutexType::WriteLock lock(GetMutex());
             auto it = GetDatas().find(name);
@@ -503,7 +503,7 @@ namespace sylar
         }
 
         template <class T>
-        static typename ConfigVar<T>::ptr Lookup(const std::string &name)
+        static typename ConfigVar<T>::ptr Lookup(const std::string& name)
         {
             RWMutexType::ReadLock lock(GetMutex());
             auto it = GetDatas().find(name);
@@ -515,9 +515,9 @@ namespace sylar
             return std::dynamic_pointer_cast<ConfigVar<T>>(it->second);
         }
 
-        static ConfigVarBase::ptr LookupBase(const std::string &name);
+        static ConfigVarBase::ptr LookupBase(const std::string& name);
 
-        static void LoadFromYaml(const YAML::Node &root);
+        static void LoadFromYaml(const YAML::Node& root);
 
         static void Visit(std::function<void(ConfigVarBase::ptr)> cb);
     private:

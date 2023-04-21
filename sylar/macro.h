@@ -6,6 +6,8 @@
 #include <assert.h>
 #include "log.h"
 #include "util.h"
+#include "fiber.h"
+#include "thread.h"
 
 
 #if defined __GNUC__ || defined __llvm__

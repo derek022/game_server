@@ -6,16 +6,16 @@ namespace sylar
 
 	static sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
 
-	ConfigVarBase::ptr Config::LookupBase(const std::string &name)
+	ConfigVarBase::ptr Config::LookupBase(const std::string& name)
 	{
 		RWMutexType::ReadLock lock(GetMutex());
 		auto it = GetDatas().find(name);
 		return it == GetDatas().end() ? nullptr : it->second;
 	}
 
-	static void ListAllMember(const std::string &prefix,
-							  const YAML::Node &node,
-							  std::list<std::pair<std::string, const YAML::Node>> &output)
+	static void ListAllMember(const std::string& prefix,
+							  const YAML::Node& node,
+							  std::list<std::pair<std::string, const YAML::Node>>& output)
 	{
 
 		if (prefix.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") != std::string::npos)
@@ -38,13 +38,13 @@ namespace sylar
 		}
 	}
 
-	void Config::LoadFromYaml(const YAML::Node &root)
+	void Config::LoadFromYaml(const YAML::Node& root)
 	{
 
 		std::list<std::pair<std::string, const YAML::Node>> all_nodes;
 		ListAllMember("", root, all_nodes);
 
-		for (auto &i : all_nodes)
+		for (auto& i : all_nodes)
 		{
 			std::string key = i.first;
 			if (key.empty())

@@ -79,7 +79,7 @@ namespace sylar
         typedef std::shared_ptr<LogEvent> ptr;
         LogEvent(std::shared_ptr<Logger> logger, LogLevel::Level level, const char *file, int32_t m_line, uint32_t elapse,
                  uint32_t thread_id, uint32_t fiber_id, uint64_t time,
-                 const std::string &thread_name);
+                 const std::string& thread_name);
 
         const char *getFile() const { return m_file; }
         int32_t getLine() const { return m_line; }
@@ -89,13 +89,13 @@ namespace sylar
         uint64_t getTime() const { return m_time; }
         std::shared_ptr<Logger> getLogger() const { return m_logger; }
 
-        const std::string &getThreadName() const { return m_threadName; }
+        const std::string& getThreadName() const { return m_threadName; }
         /**
          * @brief 返回日志内容
          */
         std::string getContent() const { return m_ss.str(); }
 
-        std::stringstream &getSS() { return m_ss; }
+        std::stringstream& getSS() { return m_ss; }
         LogLevel::Level getLevel() const { return m_level; }
         /**
          * @brief 格式化写入日志内容
@@ -133,7 +133,7 @@ namespace sylar
 
         LogEvent::ptr getEvent() const { return m_event; }
 
-        std::stringstream &getSS();
+        std::stringstream& getSS();
 
     private:
         LogEvent::ptr m_event;
@@ -143,10 +143,10 @@ namespace sylar
     {
     public:
         typedef std::shared_ptr<LogFormatter> ptr;
-        LogFormatter(const std::string &pattern);
+        LogFormatter(const std::string& pattern);
 
         std::string format(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
-        std::ostream &format(std::ostream &ofs, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
+        std::ostream& format(std::ostream& ofs, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
 
     public:
         class FormatItem
@@ -154,7 +154,7 @@ namespace sylar
         public:
             typedef std::shared_ptr<FormatItem> ptr;
             virtual ~FormatItem() {}
-            virtual void format(std::ostream &os, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) = 0;
+            virtual void format(std::ostream& os, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) = 0;
         };
 
     public:
@@ -220,11 +220,11 @@ namespace sylar
         LogLevel::Level getLevel() const { return m_level; }
         void setLevel(LogLevel::Level val) { m_level = val; }
 
-        const std::string &getName() const { return m_name; }
+        const std::string& getName() const { return m_name; }
 
         void setFormatter(LogFormatter::ptr val);
 
-        void setFormatter(const std::string &val);
+        void setFormatter(const std::string& val);
 
         LogFormatter::ptr getFormatter();
 
@@ -254,7 +254,7 @@ namespace sylar
     {
     public:
         typedef std::shared_ptr<FileLogAppender> ptr;
-        FileLogAppender(const std::string &fileName);
+        FileLogAppender(const std::string& fileName);
 
         virtual void log(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) override;
         std::string toYamlString() override;
@@ -274,7 +274,7 @@ namespace sylar
 
         LoggerManager();
 
-        Logger::ptr getLogger(const std::string &name);
+        Logger::ptr getLogger(const std::string& name);
         Logger::ptr getRoot() const { return m_root; }
         void init();
 

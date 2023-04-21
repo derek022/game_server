@@ -91,74 +91,130 @@ Fiber::~Fiber(){
 
 void Fiber::reset(std::function<void()> cb)
 {
+    SYLAR_ASSERT(m_stack);
+    SYLAR_ASSERT(m_state == TERM
+        || m_state == EXCEPT
+        || m_state == INIT);
+
+    m_cb = cb;
+    if(getcontext(&m_ctx)){
+        SYLAR_ASSERT2(false,"getcontext");
+    }
+
+    m_ctx.uc_link = nullptr;
+    m_ctx.uc_stack.ss_sp = m_stack;
+    m_ctx.uc_stack.ss_size = m_stacksize;
+
+    makecontext(&m_ctx, &Fiber::MainFunc, 0);
+    m_state = INIT;
 
 }
-            void Fiber::swapIn(){
 
-            }
-            void Fiber::swapOut(){
+void Fiber::swapIn(){
+    SetThis(this);
+    SYLAR_ASSERT( m_state != EXEC);
+    m_state = EXEC;
 
-            }
-            void Fiber::call(){
+    if(swapcontext(&t_threadFiber->m_ctx, &m_ctx)){
+        SYLAR_ASSERT2(false,"swapcontext");
+    }
+}
+void Fiber::swapOut(){
+    SetThis(t_threadFiber.get());
 
-            }
-            void Fiber::back(){
+    if(swapcontext(&m_ctx, &t_threadFiber->m_ctx)){
+        SYLAR_ASSERT2(false, "swapcontext");
+    }
+}
+void Fiber::call(){
 
-            }
+}
+void Fiber::back(){
 
-            void Fiber::SetThis(Fiber* f){
+}
 
-            }
-            /**
-            * @brief 返回当前所在的协程
-            */
-            Fiber::ptr Fiber::GetThis(){
-                if(t_fiber){
-                    return t_fiber->shared_from_this();
-                }
-                Fiber::ptr main_fiber(new Fiber);
-                SYLAR_ASSERT(t_fiber == main_fiber.get());
-                t_threadFiber = main_fiber;
+void Fiber::SetThis(Fiber* f){
+    t_fiber = f;
+}
+/**
+* @brief 返回当前所在的协程
+*/
+Fiber::ptr Fiber::GetThis(){
+    if(t_fiber){
+        return t_fiber->shared_from_this();
+    }
+    Fiber::ptr main_fiber(new Fiber);
+    SYLAR_ASSERT(t_fiber == main_fiber.get());
+    t_threadFiber = main_fiber;
 
-                return t_fiber->shared_from_this();
-            }
+    return t_fiber->shared_from_this();
+}
 
-            /**
-            * @brief 将当前协程切换到后台,并设置为READY状态
-            * @post getState() = READY
-            */
-            void Fiber::YieldToReady(){
+/**
+* @brief 将当前协程切换到后台,并设置为READY状态
+* @post getState() = READY
+*/
+void Fiber::YieldToReady(){
+    Fiber::ptr cur = GetThis();
+    SYLAR_ASSERT(cur->m_state == EXEC);
+    cur->m_state = READY;
+    cur->swapOut();
+}
+/**
+* @brief 将当前协程切换到后台,并设置为HOLD状态
+* @post getState() = HOLD
+*/
+void Fiber::YieldToHold(){
+    Fiber::ptr cur = GetThis();
+    SYLAR_ASSERT(cur->m_state == EXEC);
+    cur->m_state = HOLD;
+    cur->swapOut();
+}
 
-            }
-            /**
-            * @brief 将当前协程切换到后台,并设置为HOLD状态
-            * @post getState() = HOLD
-            */
-            void Fiber::YieldToHold(){
+/**
+* @brief 返回当前协程的总数量
+*/
+uint64_t Fiber::TotalFibers(){
+    return s_fiber_count;
+}
 
-            }
+void Fiber::MainFunc(){
+    Fiber::ptr cur = GetThis();
+    try{
+        cur->m_cb();
+        cur->m_cb = nullptr;
+        cur->m_state = TERM;
+    }catch (std::exception& ex){
+        cur->m_state = EXCEPT;
+        SYLAR_LOG_ERROR(g_logger) << "Fiber Except: " << ex.what()
+            << " fiber_id=" << cur->getId()
+            << std::endl
+            << sylar::BacktraceToString();
+    }catch (...){
+        cur->m_state = EXCEPT;
+        SYLAR_LOG_ERROR(g_logger) << "Fiber Except: " 
+            << " fiber_id=" << cur->getId()
+            << std::endl
+            << sylar::BacktraceToString();
+    }
 
-            /**
-            * @brief 返回当前协程的总数量
-            */
-            uint64_t Fiber::TotalFibers(){
-                return s_fiber_count;
-            }
+    auto raw_ptr = cur.get();
+    cur.reset();
+    raw_ptr->swapOut();
 
-            void Fiber::MainFunc(){
+    SYLAR_ASSERT2(false, "new reach fiber_id=" + std::to_string(raw_ptr->getId()));
+}
 
-            }
+void Fiber::CallerMainFunc(){
 
-            void Fiber::CallerMainFunc(){
+}
 
-            }
-
-            uint64_t Fiber::GetFiberId(){
-                if(t_fiber) {
-                    return t_fiber->getId();
-                }
-                return 0;
-            }
+uint64_t Fiber::GetFiberId(){
+    if(t_fiber) {
+        return t_fiber->getId();
+    }
+    return 0;
+}
 
 }
 
