@@ -1,5 +1,6 @@
 #include"util.h"
 #include "log.h"
+#include "fiber.h"
 #include <execinfo.h>
 
 namespace sylar {
@@ -11,8 +12,7 @@ pid_t GetThreadId() {
 }
 
 uint32_t GetFiberId() {
-    // return sylar::Fiber::GetFiberId();
-    return 1;
+    return sylar::Fiber::GetFiberId();
 }
 
 static std::string demangle(const char* str)

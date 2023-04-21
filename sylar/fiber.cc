@@ -15,7 +15,7 @@ static thread_local Fiber* t_fiber = nullptr;
 static thread_local Fiber::ptr t_threadFiber = nullptr;
 
 static ConfigVar<uint32_t>::ptr g_fiber_stack_size = 
-    Config::Lookup<uint32_t>("fiber,stack_size", 128*1024, "fiber stack size");
+    Config::Lookup<uint32_t>("fiber.stack_size", 128*1024, "fiber stack size");
 
 class MallocStackAllocator{
 public:
@@ -54,8 +54,8 @@ Fiber::Fiber(std::function<void()> cb,size_t stacksize, bool use_caller)
         SYLAR_ASSERT2(false,"getcontext");
     }
     m_ctx.uc_link = nullptr;
-    m_ctx.uc_stack_ss_sp = m_stack;
-    m_ctx.uc_stack_ss_size = m_stacksize;
+    m_ctx.uc_stack.ss_sp = m_stack;
+    m_ctx.uc_stack.ss_size = m_stacksize;
 
     if(!use_caller){
         makecontext(&m_ctx, &Fiber::MainFunc, 0);
@@ -87,6 +87,78 @@ Fiber::~Fiber(){
                               << " total=" << s_fiber_count;
 
 }
+
+
+void Fiber::reset(std::function<void()> cb)
+{
+
+}
+            void Fiber::swapIn(){
+
+            }
+            void Fiber::swapOut(){
+
+            }
+            void Fiber::call(){
+
+            }
+            void Fiber::back(){
+
+            }
+
+            void Fiber::SetThis(Fiber* f){
+
+            }
+            /**
+            * @brief 返回当前所在的协程
+            */
+            Fiber::ptr Fiber::GetThis(){
+                if(t_fiber){
+                    return t_fiber->shared_from_this();
+                }
+                Fiber::ptr main_fiber(new Fiber);
+                SYLAR_ASSERT(t_fiber == main_fiber.get());
+                t_threadFiber = main_fiber;
+
+                return t_fiber->shared_from_this();
+            }
+
+            /**
+            * @brief 将当前协程切换到后台,并设置为READY状态
+            * @post getState() = READY
+            */
+            void Fiber::YieldToReady(){
+
+            }
+            /**
+            * @brief 将当前协程切换到后台,并设置为HOLD状态
+            * @post getState() = HOLD
+            */
+            void Fiber::YieldToHold(){
+
+            }
+
+            /**
+            * @brief 返回当前协程的总数量
+            */
+            uint64_t Fiber::TotalFibers(){
+                return s_fiber_count;
+            }
+
+            void Fiber::MainFunc(){
+
+            }
+
+            void Fiber::CallerMainFunc(){
+
+            }
+
+            uint64_t Fiber::GetFiberId(){
+                if(t_fiber) {
+                    return t_fiber->getId();
+                }
+                return 0;
+            }
 
 }
 

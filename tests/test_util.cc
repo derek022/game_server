@@ -4,11 +4,12 @@
 
 void asset_test()
 {
-    assert(0);
+    SYLAR_ASSERT2( 0 == 1 ,"abcdef xx");
 }
 
 
 int main()
 {
+    asset_test();
     return 0;
 }
