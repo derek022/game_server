@@ -8,6 +8,7 @@
 #include "util.h"
 #include "fiber.h"
 #include "thread.h"
+#include "scheduler.h"
 
 
 #if defined __GNUC__ || defined __llvm__

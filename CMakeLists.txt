@@ -4,8 +4,8 @@ project(sylar)
 include (cmake/utils.cmake)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function  -Wno-builtin-macro-redefined -Wno-deprecated-declarationas")
-
+set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function  -Wno-builtin-macro-redefined -Wno-deprecated-declarationas -Wno-bool-compare")
+set(CMAKE_C_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations ")
 include_directories(.)
 
 find_package(Boost REQUIRED)
@@ -40,6 +40,7 @@ sylar_add_executable(test_util "tests/test_util.cc" sylar "${LIBS}")
 
 sylar_add_executable(test_fiber "tests/test_fiber.cc" sylar "${LIBS}")
 
+sylar_add_executable(test_scheduler "tests/test_scheduler.cc" sylar "${LIBS}")
 
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
