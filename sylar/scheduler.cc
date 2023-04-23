@@ -79,9 +79,9 @@ namespace sylar
         lock.unlock();
 
 
-        if(m_rootFiber){
-            m_rootFiber->call();
-        }
+        // if(m_rootFiber){
+        //     m_rootFiber->call();
+        // }
     }
 
     void Scheduler::stop()
@@ -151,6 +151,9 @@ namespace sylar
     {
         SYLAR_LOG_DEBUG(g_logger) << m_name << " run";
         setThis();
+        if(sylar::GetThreadId() != m_rootThread) {
+            t_scheduler_fiber = Fiber::GetThis().get();
+        }
 
         Fiber::ptr idle_fiber(new Fiber(std::bind(&Scheduler::idle, this)));
         Fiber::ptr cb_fiber;

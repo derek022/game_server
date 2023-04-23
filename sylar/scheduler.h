@@ -156,7 +156,7 @@ namespace sylar
 
         bool m_stopping = true;
         bool m_autoStop = false;
-        bool m_rootThread = 0;
+        int m_rootThread = 0;
     };
 
 }
