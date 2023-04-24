@@ -48,6 +48,8 @@ public:
     bool cancelEvent(int fd, Event event);
 
     bool cancelAll(int fd); 
+
+    static IOManager* GetThis();
 protected:
     void tickle() override;
     bool stopping() override;
@@ -58,6 +60,8 @@ protected:
      * @param[in] size 容量大小
      */
     void contextResize(size_t size);
+
+    bool stopping(uint64_t& timeout);
 
 private:
     int m_epfd = 0;
