@@ -23,6 +23,7 @@ set(LIB_SRC
     sylar/mutex.cc
     sylar/fiber.cc
     sylar/scheduler.cc
+    sylar/iomanager.cc
     )
 
 
