@@ -18,7 +18,7 @@ namespace sylar
 							  std::list<std::pair<std::string, const YAML::Node>>& output)
 	{
 
-		if (prefix.find_first_not_of("abcdefghikjlmnopqrstuvwxyz._0123456789") != std::string::npos)
+		if (prefix.find_first_not_of("abcdefghijklmnopqrstuvwxyz._0123456789") != std::string::npos)
 		{
 
 			SYLAR_LOG_ERROR(g_logger) << "Config invalid Name: " << prefix << " : " << node;
