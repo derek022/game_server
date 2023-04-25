@@ -52,8 +52,8 @@ IOManager::IOManager(size_t threads, bool use_caller, const std::string& name)
     :Scheduler(threads,use_caller,name)
 {
     m_epfd = epoll_create(5000);
-
     SYLAR_ASSERT(m_epfd > 0);
+
     int rt = pipe(m_tickleFds);
     SYLAR_ASSERT(!rt);
 
@@ -269,7 +269,7 @@ void IOManager::contextResize(size_t size)
 
 void IOManager::tickle()
 {
-    if(!hasIdleThreads()){
+    if(hasIdleThreads()){
         return;
     }
     int rt = write(m_tickleFds[1], "T", 1);
@@ -337,7 +337,7 @@ void IOManager::idle()
         }while(true);
 
         std::vector<std::function<void()> > cbs;
-        
+        listExpiredCb(cbs);
         if(!cbs.empty()){
             schedule(cbs.begin(),cbs.end());
             cbs.clear();

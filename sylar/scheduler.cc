@@ -21,6 +21,7 @@ namespace sylar
             --threads;
 
             SYLAR_ASSERT(GetThis() == nullptr);
+            t_scheduler = this;
 
             m_rootFiber.reset(new Fiber(std::bind(&Scheduler::run, this), 0, true));
             sylar::Thread::SetName(m_name);
