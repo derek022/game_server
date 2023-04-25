@@ -24,6 +24,7 @@ set(LIB_SRC
     sylar/fiber.cc
     sylar/scheduler.cc
     sylar/iomanager.cc
+    sylar/timer.cc
     )
 
 
