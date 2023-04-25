@@ -29,7 +29,8 @@ stamp-h1
 depcomp
 *.xcodeproj
 .vscode/
-
+bin/te*
+lib/
 
 CMakeLists.txt.user
 CMakeCache.txt
