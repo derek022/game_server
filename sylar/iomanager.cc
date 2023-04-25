@@ -278,17 +278,21 @@ void IOManager::tickle()
 
 bool IOManager::stopping() 
 {
-    // uint64_t timeout = 0;
-    // return stopping(timeout);
-    return m_pendingEventCount == 0 && Scheduler::stopping();
+    uint64_t timeout = 0;
+    return stopping(timeout);
 }
 
 bool IOManager::stopping(uint64_t& timeout)
 {
-    // timeout = g
+    timeout = getNextTime();
     return timeout == ~0ull 
         && m_pendingEventCount == 0
         && Scheduler::stopping();
+}
+
+void IOManager::onTimerInsertedAtFront()
+{
+    tickle();
 }
 
 void IOManager::idle()
@@ -301,23 +305,30 @@ void IOManager::idle()
     });
 
     while(true){
-        // uint64_t next_timeout = 0;
-        // if(SYLAR_UNLIKELY(stopping(next_timeout))){
-        //     SYLAR_LOG_INFO(g_logger) << "name=" << getName()
-        //         << " idle stopping exit";
-        //     break;
-        // }
-        if(stopping()){
+        uint64_t next_timeout = 0;
+        if(SYLAR_UNLIKELY(stopping(next_timeout))){
             SYLAR_LOG_INFO(g_logger) << "name=" << getName()
                 << " idle stopping exit";
             break;
         }
+        // if(stopping()){
+        //     SYLAR_LOG_INFO(g_logger) << "name=" << getName()
+        //         << " idle stopping exit";
+        //     break;
+        // }
 
         int rt = 0;
         do{
             static const int MAX_TIMEOUT = 3000;
 
-            rt = epoll_wait(m_epfd, events, MAX_EVENTS, MAX_TIMEOUT);
+            if(next_timeout != ~0ull){
+                next_timeout =  (int)next_timeout > MAX_TIMEOUT
+                                ? MAX_TIMEOUT : next_timeout;
+            }else{
+                next_timeout = MAX_TIMEOUT;
+            }
+
+            rt = epoll_wait(m_epfd, events, MAX_EVENTS, next_timeout);
             if(rt < 0 && errno == EINTR){
             }else{
                 break;
