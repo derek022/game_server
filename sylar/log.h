@@ -13,6 +13,7 @@
 
 #include "singleton.h"
 #include "thread.h"
+#include "util.h"
 
 #define SYLAR_LOG_LEVEL(logger, level)                                                                        \
     if (logger->getLevel() <= level)                                                                          \

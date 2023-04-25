@@ -8,6 +8,7 @@
 #include <iostream>
 #include "fiber.h"
 #include "thread.h"
+#include "hook.h"
 
 namespace sylar
 {

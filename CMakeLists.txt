@@ -25,26 +25,28 @@ set(LIB_SRC
     sylar/scheduler.cc
     sylar/iomanager.cc
     sylar/timer.cc
+    sylar/hook.cc
     )
 
 
 add_library(sylar SHARED ${LIB_SRC})
 force_redefine_file_macro_for_sources(sylar)
 
-set(LIBS  sylar pthread ${YAMLCPP})
+set(LIBS  
+        sylar 
+        dl 
+        pthread 
+        ${YAMLCPP})
 
 
 sylar_add_executable(test "tests/test.cc" sylar "${LIBS}")
 sylar_add_executable(test_config "tests/test_config.cc" sylar "${LIBS}")
-
 sylar_add_executable(test_thread "tests/test_thread.cc" sylar "${LIBS}")
 sylar_add_executable(test_util "tests/test_util.cc" sylar "${LIBS}")
-
 sylar_add_executable(test_fiber "tests/test_fiber.cc" sylar "${LIBS}")
-
 sylar_add_executable(test_scheduler "tests/test_scheduler.cc" sylar "${LIBS}")
-
 sylar_add_executable(test_iomanager "tests/test_iomanager.cc" sylar "${LIBS}")
+sylar_add_executable(test_hook "tests/test_hook.cc" sylar "${LIBS}")
 
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

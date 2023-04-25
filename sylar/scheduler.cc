@@ -151,6 +151,7 @@ namespace sylar
     void Scheduler::run()
     {
         SYLAR_LOG_DEBUG(g_logger) << m_name << " run";
+        set_hook_enable(true);
         setThis();
         if(sylar::GetThreadId() != m_rootThread) {
             t_scheduler_fiber = Fiber::GetThis().get();
