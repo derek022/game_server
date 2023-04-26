@@ -9,20 +9,38 @@ namespace sylar{
 
 static thread_local bool t_hook_enable = false;
 
-#define HOOK_FUN(XX)    \
-    XX(sleep)           \
-    XX(usleep)          \
+#define HOOK_FUN(XX) \
+    XX(sleep) \
+    XX(usleep) \
+    XX(nanosleep) \
+    XX(socket) \
+    XX(connect) \
+    XX(accept) \
+    XX(read) \
+    XX(readv) \
+    XX(recv) \
+    XX(recvfrom) \
+    XX(recvmsg) \
+    XX(write) \
+    XX(writev) \
+    XX(send) \
+    XX(sendto) \
+    XX(sendmsg) \
+    XX(close) \
+    XX(fcntl) \
+    XX(ioctl) \
+    XX(getsockopt) \
+    XX(setsockopt)
 
-
-void hook_init(){
+void hook_init() {
     static bool is_inited = false;
-    if(is_inited)
+    if(is_inited) {
         return;
-#define XX(name) name ## _f = (name ## _fun) dlsym(RTLD_NEXT, #name);
+    }
+#define XX(name) name ## _f = (name ## _fun)dlsym(RTLD_NEXT, #name);
     HOOK_FUN(XX);
 #undef XX
 }
-
 
 struct _HookIniter{
     _HookIniter(){
@@ -46,9 +64,9 @@ void set_hook_enable(bool flag)
     t_hook_enable = flag;
 }
 
-}
+}  // end namespace sylar
 
-extern "C"{
+extern "C" {
 
 #define XX(name) name ## _fun name ## _f = nullptr;
     HOOK_FUN(XX);
@@ -57,7 +75,7 @@ extern "C"{
 
 unsigned int sleep(unsigned int seconds)
 {
-    if(sylar::t_hook_enable){
+    if(!sylar::t_hook_enable){
         return sleep_f(seconds);
     }
 
@@ -70,6 +88,24 @@ unsigned int sleep(unsigned int seconds)
     sylar::Fiber::YieldToHold();
     return 0;
 }
+
+
+int usleep(useconds_t usec)
+{
+    if(!sylar::t_hook_enable){
+        return usleep_f(usec);
+    }
+
+    sylar::Fiber::ptr fiber = sylar::Fiber::GetThis();
+    sylar::IOManager* iom = sylar::IOManager::GetThis();
+    iom->addTimer(usec * 1000, std::bind((void(sylar::Scheduler::*)
+            (sylar::Fiber::ptr, int thread))&sylar::IOManager::schedule,
+            iom,fiber,-1));
+
+    sylar::Fiber::YieldToHold();
+    return 0;
+}
+
 
 
 
