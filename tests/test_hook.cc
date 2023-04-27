@@ -14,6 +14,7 @@ void test_hook()
     sylar::IOManager iom(1);
 
     iom.schedule([](){
+        SYLAR_LOG_INFO(g_logger) << "start sleep 2";
         sleep(2);
         SYLAR_LOG_INFO(g_logger) << " sleep 2";
     });

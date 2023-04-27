@@ -97,6 +97,10 @@ static size_t do_io(int fd,OriginFun fun,const char* hook_fun_name,
     }
 
     sylar::FdCtx::ptr ctx = sylar::FdMgr::GetInstance()->get(fd);
+    if(!ctx){
+        return fun(fd, std::forward<Args>(args)...);
+    }
+
     if(ctx->isClose()){
         errno = EBADF;
         return -1;
@@ -299,13 +303,11 @@ int connect_with_timeout(int fd,const sockaddr* addr, socklen_t addrlen, uint64_
         errno = error;
         return -1;
     }
-
-    
 }
 
 int connect(int sockfd,const struct sockaddr* addr, socklen_t addrlen)
 {
-    return connect_with_timeout(sockfd,addr,addrlen, sylar::s_connect_timeout);
+    return connect_f(sockfd,addr,addrlen);
 }
 
 int accept(int s,struct sockaddr* addr, socklen_t * addrlen)
