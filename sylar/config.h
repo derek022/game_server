@@ -470,20 +470,18 @@ namespace sylar
                 auto tmp = std::dynamic_pointer_cast<ConfigVar<T>>(it->second);
                 if (tmp)
                 {
-
                     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << "LOOKUP NAME = " << name << "exists";
                     return tmp;
                 }
                 else
                 {
-
                     SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "LOOKUP NAME = " << name << "exists but type not "
                                                       << typeid(name).name() << "real_type = " << it->second->getTypeName()
                                                       << " " << it->second->toString();
                     return nullptr;
                 }
             }
-
+            lock.unlock();
             auto tmp = Lookup<T>(name);
             if (tmp)
             {
@@ -492,11 +490,10 @@ namespace sylar
             }
             if (name.find_first_not_of("abcdefghijklmnopqrstuvwxyz._0123456789") != std::string::npos)
             {
-
                 SYLAR_LOG_ERROR(SYLAR_LOG_ROOT()) << "loopup name invalid " << name;
                 throw std::invalid_argument(name);
             }
-
+            lock.lock();
             typename ConfigVar<T>::ptr v(new ConfigVar<T>(name, default_value, description));
             GetDatas()[name] = v;
             return v;
