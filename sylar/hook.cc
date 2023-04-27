@@ -3,12 +3,16 @@
 #include "iomanager.h"
 #include "log.h"
 #include "fd_manager.h"
+#include "config.h"
 #include <dlfcn.h>
 
 
 sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
 
 namespace sylar{
+
+static sylar::ConfigVar<int>::ptr g_tcp_connect_timeout = 
+    sylar::Config::Lookup("tcp.connect.timeout", 5000, "tcp connect timeout");
 
 static thread_local bool t_hook_enable = false;
 
@@ -56,9 +60,19 @@ void hook_init() {
 #undef XX
 }
 
+static uint64_t s_connect_timeout = -1;
 struct _HookIniter{
     _HookIniter(){
         hook_init();
+
+        s_connect_timeout = g_tcp_connect_timeout->getValue();
+        g_tcp_connect_timeout->addListener([](const int& old_value,const int& new_value){
+
+            SYLAR_LOG_INFO(g_logger) << "tcp connect timeout changed from "
+                                    << old_value << " to " << new_value;
+            
+            s_connect_timeout = new_value;
+        });
     }
 
 };
@@ -184,6 +198,21 @@ int usleep(useconds_t usec)
     return 0;
 }
 
+int nanosleep(const struct timespec* req, struct timespec* rem){
+    if(!sylar::t_hook_enable){
+        return nanosleep_f(req,rem);
+    }
+
+    int timeout_ms = req->tv_sec * 1000 + req->tv_nsec / 1000 /1000;
+    sylar::Fiber::ptr fiber = sylar::Fiber::GetThis();
+    sylar::IOManager* iom = sylar::IOManager::GetThis();
+    iom->addTimer(timeout_ms, std::bind((void(sylar::Scheduler::*)
+            (sylar::Fiber::ptr, int thread))&sylar::IOManager::schedule
+            ,iom, fiber, -1));
+    sylar::Fiber::YieldToHold();
+    return 0;
+}
+
 // io 
 int socket(int domain, int type, int protocol)
 {
@@ -198,7 +227,7 @@ int socket(int domain, int type, int protocol)
     return fd;
 }
 
-int connext_with_timeout(int fd,const sockaddr* addr, socklen_t addrlen, uint64_t timeout_ms)
+int connect_with_timeout(int fd,const sockaddr* addr, socklen_t addrlen, uint64_t timeout_ms)
 {
     if(!sylar::t_hook_enable){
         return connect_f(fd,addr,addrlen);
@@ -276,7 +305,7 @@ int connext_with_timeout(int fd,const sockaddr* addr, socklen_t addrlen, uint64_
 
 int connect(int sockfd,const struct sockaddr* addr, socklen_t addrlen)
 {
-    return connect_f(sockfd,addr,addrlen);
+    return connect_with_timeout(sockfd,addr,addrlen, sylar::s_connect_timeout);
 }
 
 int accept(int s,struct sockaddr* addr, socklen_t * addrlen)
