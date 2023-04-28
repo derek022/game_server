@@ -13,6 +13,7 @@
 
 namespace sylar{
 
+class IPAddress;
 class Address{
 public:
     typedef std::shared_ptr<Address> ptr;
@@ -22,6 +23,15 @@ public:
             int family = AF_INET, int type = 0, int protocol = 0);
     static Address::ptr LookupAny(const std::string& host,
             int family = AF_INET, int type = 0, int protocol = 0);
+    static std::shared_ptr<IPAddress> LookupAnyIPAddress(const std::string& host,
+            int family = AF_INET, int type = 0, int protocol = 0);
+
+    static bool GetInterfaceAddress(std::multimap<std::string, 
+            std::pair<Address::ptr, uint32_t> > & result,
+            int family = AF_INET);
+    static bool GetInterfaceAddress(std::vector<std::pair<Address::ptr, uint32_t> >& result,
+            const std::string& iface, int family = AF_INET);
+
 
     virtual ~Address() {}
     int getFamily() const;
