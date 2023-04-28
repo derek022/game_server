@@ -126,7 +126,7 @@ std::shared_ptr<IPAddress> Address::LookupAnyIPAddress(const std::string& host,
     return nullptr;
 }
 
-bool Address::GetInterfaceAddress(std::multimap<std::string, 
+bool Address::GetInterfaceAddresses(std::multimap<std::string, 
             std::pair<Address::ptr, uint32_t> > & result,
             int family )
 {
@@ -179,7 +179,7 @@ bool Address::GetInterfaceAddress(std::multimap<std::string,
     freeifaddrs(results);
     return true;
 }
-bool Address::GetInterfaceAddress(std::vector<std::pair<Address::ptr, uint32_t> >& result,
+bool Address::GetInterfaceAddresses(std::vector<std::pair<Address::ptr, uint32_t> >& result,
             const std::string& iface, int family )
 {
     if(iface.empty() || iface == "*")
@@ -196,7 +196,7 @@ bool Address::GetInterfaceAddress(std::vector<std::pair<Address::ptr, uint32_t> 
     }
 
     std::multimap<std::string, std::pair<Address::ptr, uint32_t> > results;
-    if(!GetInterfaceAddress(results,family))
+    if(!GetInterfaceAddresses(results,family))
     {
         return false;
     }
