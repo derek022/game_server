@@ -28,6 +28,7 @@ set(LIB_SRC
     sylar/hook.cc
     sylar/fd_manager.cc
     sylar/address.cc
+    sylar/socket.cc
     )
 
 
@@ -51,6 +52,7 @@ sylar_add_executable(test_iomanager "tests/test_iomanager.cc" sylar "${LIBS}")
 sylar_add_executable(test_hook "tests/test_hook.cc" sylar "${LIBS}")
 
 sylar_add_executable(test_address "tests/test_address.cc" sylar "${LIBS}")
+sylar_add_executable(test_socket "tests/test_socket.cc" sylar "${LIBS}")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
