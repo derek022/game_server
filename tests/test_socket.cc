@@ -2,7 +2,7 @@
 #include "sylar/sylar.h"
 #include "sylar/iomanager.h"
 
-static sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
+static sylar::Logger::ptr g_logger = SYLAR_LOG_ROOT();
 
 void test_sock()
 {
