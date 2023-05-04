@@ -29,6 +29,24 @@ private:
 };
 
 
+class HttpResponseParser{
+public:
+    typedef std::shared_ptr<HttpResponseParser> ptr;
+    HttpResponseParser();
+    size_t execute(char* data, size_t len);
+    int isFinished();
+    int hasError(); 
+
+    HttpResponse::ptr getData() const { return m_data;}
+    void setError(int v) { m_error = v;}
+
+    uint64_t getContentLength();
+private:
+    httpclient_parser m_parser;
+    HttpResponse::ptr m_data;
+
+    int m_error;
+};
 
 
 
