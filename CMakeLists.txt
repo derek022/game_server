@@ -16,6 +16,7 @@ endif()
 find_library(YAMLCPP yaml-cpp)
 
 set(LIB_SRC 
+    sylar/http/http.cc
     sylar/log.cc
     sylar/util.cc
     sylar/thread.cc
