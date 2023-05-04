@@ -111,6 +111,8 @@ private:
 
 };
 
+std::ostream& operator<<(std::ostream& os, const Socket& addr);
+
 
 }
 
