@@ -142,7 +142,7 @@ struct CaseInsensitiveLess {
     bool operator()(const std::string& lhs, const std::string& rhs) const;
 };
 
-template<class T>
+template<class MapType, class T>
 bool checkGetAs(const MapType& m, const std::string& key, T& val, const T& def = T()) {
     auto it = m.find(key);
     if(it == m.end())
@@ -159,7 +159,7 @@ bool checkGetAs(const MapType& m, const std::string& key, T& val, const T& def =
     return false;
 }
 
-template<class T>
+template<class MapType, class T>
 bool getAs(const MapType& m, const std::string& key, const T& def = T()) {
     auto it = m.find(key);
     if(it == m.end()){

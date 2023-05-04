@@ -32,6 +32,8 @@ depcomp
 bin/te*
 lib/
 
+*.rl.cc
+
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
