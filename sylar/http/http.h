@@ -195,6 +195,7 @@ public:
     void setVersion(uint8_t v) { m_version = v; }
     void setPath(const std::string& v) { m_path = v; }
     void setQuery(const std::string& v) { m_query = v; }
+    void setFragment(const std::string& v) { m_fragment = v;}
     void setBody(const std::string& v) { m_body = v; }
     void setHeaders(const MapType& v) { m_headers = v; }
     void setParams(const MapType& v) { m_params = v; }
@@ -223,8 +224,8 @@ public:
     }
 
     template<class T>
-    T getHeaderAs(const std::string& key, T& val, const T& def = T()) {
-        return checkGetAs(m_headers, key, val, def);
+    T getHeaderAs(const std::string& key, const T& def = T()) {
+        return getAs(m_headers, key, def);
     }
 
 
@@ -234,8 +235,8 @@ public:
     }
 
     template<class T>
-    T getParamAs(const std::string& key, T& val, const T& def = T()) {
-        return checkGetAs(m_params, key, val, def);
+    T getParamAs(const std::string& key, const T& def = T()) {
+        return getAs(m_params, key, def);
     }
 
 
@@ -245,8 +246,8 @@ public:
     }
 
     template<class T>
-    T getCookieAs(const std::string& key, T& val, const T& def = T()) {
-        return checkGetAs(m_cookies, key, val, def);
+    T getCookieAs(const std::string& key,  const T& def = T()) {
+        return getAs(m_cookies, key, def);
     }
 
     std::ostream& dump(std::ostream& os) const;
@@ -294,7 +295,7 @@ public:
     void delHeader(const std::string& key);
 
     template<class T>
-    bool checkGetHeaderAs(const std::string& key,T& val, const T& def = T()) {
+    bool checkGetHeaderAs(const std::string& key, T& val, const T& def = T()) {
         return checkGetAs(m_headers, key, val, def);
     }
 
