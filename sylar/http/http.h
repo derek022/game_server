@@ -182,7 +182,6 @@ public:
     
     HttpMethod getMethod() const { return m_method; }
     uint8_t getVersion() const { return m_version; }
-    HttpStatus getStatus() const { return m_status; }
     const std::string& getPath() const { return m_path; }
     const std::string& getQuery() const { return m_query; }
     const std::string& getBody() const { return m_body; }
@@ -191,7 +190,6 @@ public:
     const MapType& getCookies() const { return m_cookies; }
 
     void setMethod(HttpMethod v) { m_method = v; }
-    void setStatus(HttpStatus v) { m_status = v; }
     void setVersion(uint8_t v) { m_version = v; }
     void setPath(const std::string& v) { m_path = v; }
     void setQuery(const std::string& v) { m_query = v; }
@@ -254,7 +252,6 @@ public:
     std::string toString() const;
 private:
     HttpMethod m_method;
-    HttpStatus m_status;
     uint8_t m_version;
     bool m_close;
 
