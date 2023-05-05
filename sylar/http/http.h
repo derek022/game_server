@@ -198,6 +198,8 @@ public:
     void setHeaders(const MapType& v) { m_headers = v; }
     void setParams(const MapType& v) { m_params = v; }
     void setCookies(const MapType& v) { m_cookies = v; }
+    bool isClose() const { return m_close;}
+    void setClose(bool v) { m_close = v;}
 
     std::string getHeader(const std::string& key, const std::string& def = "") const;
     std::string getParam(const std::string& key, const std::string& def = "") const;
