@@ -58,6 +58,7 @@ void hook_init() {
 #define XX(name) name ## _f = (name ## _fun)dlsym(RTLD_NEXT, #name);
     HOOK_FUN(XX);
 #undef XX
+    
 }
 
 static uint64_t s_connect_timeout = -1;
@@ -119,7 +120,7 @@ retry:
         n = fun(fd, std::forward<Args>(args)...);
     }
 
-    if(n == -1 && errno == EINTR){
+    if(n == -1 && errno == EAGAIN){
         sylar::IOManager* iom = sylar::IOManager::GetThis();
         sylar::Timer::ptr timer;
         std::weak_ptr<timer_info> winfo(tinfo);
@@ -127,7 +128,7 @@ retry:
         if(to != (size_t) -1){
             timer = iom->addConditionTimer(to, [winfo,fd, iom, event](){
                 auto t = winfo.lock();
-                if(!t || !t->cancelled){
+                if(!t || t->cancelled){
                     return;
                 }
                 t->cancelled = ETIMEDOUT;
@@ -312,7 +313,7 @@ int connect(int sockfd,const struct sockaddr* addr, socklen_t addrlen)
 
 int accept(int s,struct sockaddr* addr, socklen_t * addrlen)
 {
-    int fd = do_io(s,accept_f,"accept",sylar::IOManager::READ,SO_RCVTIMEO,addr,addrlen);
+    int fd = do_io(s,accept_f,"accept",sylar::IOManager::READ, SO_RCVTIMEO, addr, addrlen);
     if(fd>=0){
         sylar::FdMgr::GetInstance()->get(fd,true);
     }

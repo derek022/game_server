@@ -63,5 +63,7 @@ sylar_add_executable(test_bytearray "tests/test_bytearray.cc" sylar "${LIBS}")
 sylar_add_executable(test_http "tests/test_http.cc" sylar "${LIBS}")
 sylar_add_executable(test_http_parser "tests/test_http_parser.cc" sylar "${LIBS}")
 
+sylar_add_executable(test_echo_server "tests/test_echo_server.cc" sylar "${LIBS}")
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
