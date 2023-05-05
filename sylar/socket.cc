@@ -471,9 +471,9 @@ bool Socket::init(int sock)
 }
 
 
-std::ostream& operator<<(std::ostream& os, const Socket& addr)
+std::ostream& operator<<(std::ostream& os, const Socket& sock)
 {
-    return addr.dump(os);
+    return sock.dump(os);
 }
 
 }

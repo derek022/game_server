@@ -31,12 +31,15 @@ set(LIB_SRC
     sylar/socket.cc
     sylar/bytearray.cc
     sylar/http/http.cc
-    sylar/http/httpclient_parser.rl.cc
-    sylar/http/http11_parser.rl.cc
     sylar/http/http_parser.cc
     sylar/tcp_server.cc
+    sylar/stream.cc
+    sylar/socket_stream.cc
     )
 
+
+ragelmaker(sylar/http/http11_parser.rl LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/sylar/http)
+ragelmaker(sylar/http/httpclient_parser.rl LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/sylar/http)
 
 add_library(sylar SHARED ${LIB_SRC})
 force_redefine_file_macro_for_sources(sylar)
