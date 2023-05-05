@@ -12,7 +12,7 @@ namespace http{
 class HttpRequestParser{
 
 public:
-    typedef std::shared_ptr<HttpRequest> ptr;
+    typedef std::shared_ptr<HttpRequestParser> ptr;
     HttpRequestParser();
     size_t execute(char* data, size_t len);
     int isFinished();
@@ -21,6 +21,9 @@ public:
     HttpRequest::ptr getData() const { return m_data; }
     void setError(int v){ m_error = v; }
     uint64_t getContentLength();
+public:
+    static uint64_t GetHttpRequestBufferSize();
+    static uint64_t GetHttpRequestMaxBodySize();
 private:
     http_parser m_parser;
     HttpRequest::ptr m_data;

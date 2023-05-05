@@ -32,6 +32,7 @@ set(LIB_SRC
     sylar/bytearray.cc
     sylar/http/http.cc
     sylar/http/http_parser.cc
+    sylar/http/http_session.cc
     sylar/tcp_server.cc
     sylar/stream.cc
     sylar/socket_stream.cc
