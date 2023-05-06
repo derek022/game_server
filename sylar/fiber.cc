@@ -188,23 +188,10 @@ uint64_t Fiber::TotalFibers(){
 
 void Fiber::MainFunc(){
     Fiber::ptr cur = GetThis();
-    try{
-        cur->m_cb();
-        cur->m_cb = nullptr;
-        cur->m_state = TERM;
-    }catch (std::exception& ex){
-        cur->m_state = EXCEPT;
-        SYLAR_LOG_ERROR(g_logger) << "Fiber Except: " << ex.what()
-            << " fiber_id=" << cur->getId()
-            << std::endl
-            << sylar::BacktraceToString();
-    }catch (...){
-        cur->m_state = EXCEPT;
-        SYLAR_LOG_ERROR(g_logger) << "Fiber Except: " 
-            << " fiber_id=" << cur->getId()
-            << std::endl
-            << sylar::BacktraceToString();
-    }
+
+    cur->m_cb();
+    cur->m_cb = nullptr;
+    cur->m_state = TERM;
 
     auto raw_ptr = cur.get();
     cur.reset();

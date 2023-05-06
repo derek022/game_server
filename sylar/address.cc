@@ -347,7 +347,7 @@ std::ostream& IPv4Address::insert(std::ostream& os) const
     os << ((addr) >> 24 & 0xff) << "."
         << ((addr) >> 16 & 0xff) << "."
         << ((addr) >> 8 & 0xff) << "."
-        << ((addr) & 0xff) << ".";
+        << ((addr) & 0xff);
     os << ":" << byteswapOnLittleEndian(m_addr.sin_port);
     return os;
 }
