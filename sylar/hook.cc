@@ -311,7 +311,7 @@ int connect_with_timeout(int fd,const sockaddr* addr, socklen_t addrlen, uint64_
 
 int connect(int sockfd,const struct sockaddr* addr, socklen_t addrlen)
 {
-    return connect_f(sockfd,addr,addrlen);
+    return connect_with_timeout(sockfd,addr,addrlen, sylar::s_connect_timeout);
 }
 
 int accept(int s,struct sockaddr* addr, socklen_t * addrlen)
