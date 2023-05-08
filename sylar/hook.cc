@@ -4,6 +4,8 @@
 #include "log.h"
 #include "fd_manager.h"
 #include "config.h"
+#include "macro.h"
+
 #include <dlfcn.h>
 
 
@@ -137,7 +139,7 @@ retry:
         }
 
         int rt = iom->addEvent(fd,(sylar::IOManager::Event)(event));
-        if(rt){
+        if(SYLAR_UNLICKLY(rt)){
             SYLAR_LOG_ERROR(g_logger) << hook_fun_name << " addEvent("
                 << fd << ", " << event << ")";
             
@@ -155,6 +157,7 @@ retry:
                 errno = tinfo->cancelled;
                 return -1;
             }
+            SYLAR_ASSERT(sylar::Fiber::GetThis()->getState() == sylar::Fiber::EXEC);
             goto retry;
         }
     }

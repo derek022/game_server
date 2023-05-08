@@ -79,7 +79,7 @@ bool Address::Lookup(std::vector<Address::ptr>& result, const std::string& host,
     {
         SYLAR_LOG_ERROR(g_logger) << "Address::Lookup getaddress(" << host << ", "
             << family << ", " << type << ") err=" << error << " errstr="
-            << strerror(errno);
+            << gai_strerror(errno);
         return false;
     }
 
@@ -108,10 +108,6 @@ std::shared_ptr<IPAddress> Address::LookupAnyIPAddress(const std::string& host,
     std::vector<Address::ptr> result;
     if(Lookup(result, host, family, type, protocol))
     {
-        for(auto& i : result)
-        {
-            std::cout << i->toString() << std::endl;
-        }
         for(auto& i : result)
         {
             IPAddress::ptr v = std::dynamic_pointer_cast<IPAddress>(i);
