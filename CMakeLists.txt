@@ -30,6 +30,7 @@ set(LIB_SRC
     sylar/address.cc
     sylar/socket.cc
     sylar/daemon.cc
+    sylar/env.cc
     sylar/bytearray.cc
     sylar/http/http.cc
     sylar/http/http_parser.cc
@@ -75,6 +76,8 @@ sylar_add_executable(test_http_parser "tests/test_http_parser.cc" sylar "${LIBS}
 sylar_add_executable(test_echo_server "tests/test_echo_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_http_server "tests/test_http_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_http_connection "tests/test_http_connection.cc" sylar "${LIBS}")
+sylar_add_executable(test_daemon "tests/test_daemon.cc" sylar "${LIBS}")
+sylar_add_executable(test_env "tests/test_env.cc" sylar "${LIBS}")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
