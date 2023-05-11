@@ -51,7 +51,7 @@ static int real_daemon(int argc, char** argv
                 << " errno=" << errno << " errstr=" << strerror(errno);
             return -1;
         } else {
-            //父进程返回
+            //父进程返回, pid  是子进程的 ID 号
             int status = 0;
             waitpid(pid, &status, 0);
             if(status) {

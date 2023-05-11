@@ -269,7 +269,7 @@ void IOManager::contextResize(size_t size)
 
 void IOManager::tickle()
 {
-    if(hasIdleThreads()){
+    if(!hasIdleThreads()){
         return;
     }
     int rt = write(m_tickleFds[1], "T", 1);

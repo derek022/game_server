@@ -31,6 +31,7 @@ set(LIB_SRC
     sylar/socket.cc
     sylar/daemon.cc
     sylar/env.cc
+    sylar/util/hash_util.cc
     sylar/bytearray.cc
     sylar/http/http.cc
     sylar/http/http_parser.cc
