@@ -6,6 +6,7 @@
 #include <string.h>
 #include <openssl/md5.h>
 #include <openssl/sha.h>
+#include <openssl/evp.h>
 
 namespace sylar {
 
@@ -379,6 +380,7 @@ std::string sha1(const std::string &data) {
 
 std::string md5sum(const void *data, size_t len) {
     MD5_CTX ctx;
+    
     MD5_Init(&ctx);
     MD5_Update(&ctx, data, len);
     std::string result;

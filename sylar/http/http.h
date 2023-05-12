@@ -173,12 +173,15 @@ bool getAs(const MapType& m, const std::string& key, const T& def = T()) {
     return def;
 }
 
+class HttpResponse;
 
 class HttpRequest{
 public:
     typedef std::shared_ptr<HttpRequest> ptr;
     typedef std::map<std::string, std::string, CaseInsensitiveLess> MapType;
     HttpRequest(uint8_t version = 0x11, bool close = true);
+
+    std::shared_ptr<HttpResponse> createResponse();
     
     HttpMethod getMethod() const { return m_method; }
     uint8_t getVersion() const { return m_version; }
@@ -200,6 +203,9 @@ public:
     void setCookies(const MapType& v) { m_cookies = v; }
     bool isClose() const { return m_close;}
     void setClose(bool v) { m_close = v;}
+
+    bool isWebsocket() const { return m_websocket; }
+    void setWebsocket(bool v) { m_websocket = v; }
 
     std::string getHeader(const std::string& key, const std::string& def = "") const;
     std::string getParam(const std::string& key, const std::string& def = "") const;
@@ -256,6 +262,7 @@ private:
     HttpMethod m_method;
     uint8_t m_version;
     bool m_close;
+    bool m_websocket;
 
     std::string m_path;
     std::string m_query;
@@ -292,6 +299,9 @@ public:
     std::string getHeader(const std::string& key, const std::string& def = "") const;
     void setHeader(const std::string& key, const std::string& val);
     void delHeader(const std::string& key);
+    
+    bool isWebsocket() const { return m_websocket; }
+    void setWebsocket(bool v) { m_websocket = v; }
 
     template<class T>
     bool checkGetHeaderAs(const std::string& key, T& val, const T& def = T()) {
@@ -309,6 +319,8 @@ private:
     HttpStatus m_status;
     uint8_t m_version;
     bool m_close;
+    bool m_websocket;
+    
     std::string m_body;
     std::string m_reason;
     MapType m_headers;

@@ -102,7 +102,7 @@ int IOManager::addEvent(int fd, Event event, std::function<void()> cb )
     }
 
     FdContext::MutexType::Lock lock2(fd_ctx->mutex);
-    if(SYLAR_UNLICKLY(fd_ctx->events & event))
+    if(SYLAR_UNLIKELY(fd_ctx->events & event))
     {
         SYLAR_LOG_ERROR(g_logger) << "addEvent assert id=" <<  fd
             << " event=" << (EPOLL_EVENTS)event
@@ -155,7 +155,7 @@ bool IOManager::delEvent(int fd, Event event)
     lock.unlock();
 
     FdContext::MutexType::Lock lock2(fd_ctx->mutex);
-    if(SYLAR_UNLICKLY(!(fd_ctx->events & event))){
+    if(SYLAR_UNLIKELY(!(fd_ctx->events & event))){
         return false;
     }
 
@@ -191,7 +191,7 @@ bool IOManager::cancelEvent(int fd, Event event)
     lock.unlock();
 
     FdContext::MutexType::Lock lock2(fd_ctx->mutex);
-    if(SYLAR_UNLICKLY(!(fd_ctx->events & event))){
+    if(SYLAR_UNLIKELY(!(fd_ctx->events & event))){
         return false;
     }
 
@@ -306,7 +306,7 @@ void IOManager::idle()
 
     while(true){
         uint64_t next_timeout = 0;
-        if(SYLAR_UNLICKLY(stopping(next_timeout))){
+        if(SYLAR_UNLIKELY(stopping(next_timeout))){
             SYLAR_LOG_INFO(g_logger) << "name=" << getName()
                 << " idle stopping exit";
             break;
