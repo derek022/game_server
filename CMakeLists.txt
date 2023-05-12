@@ -12,6 +12,10 @@ find_package(Boost REQUIRED)
 if(Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
 endif()
+find_package(OpenSSL REQUIRED)
+if(OPENSSL_FOUND)
+    include_directories(${OPENSSL_INCLUDE_DIR})
+endif()
 
 find_library(YAMLCPP yaml-cpp)
 
@@ -57,6 +61,7 @@ set(LIBS
         sylar 
         dl 
         pthread 
+        ${OPENSSL_LIBRARIES}
         ${YAMLCPP})
 
 
