@@ -1,5 +1,10 @@
 
 #include "sylar/config.h"
+#include "env.h"
+#include "util.h"
+
+#include <sys/types.h>
+#include <sys/stat.h>
 
 namespace sylar
 {
@@ -20,7 +25,6 @@ namespace sylar
 
 		if (prefix.find_first_not_of("abcdefghijklmnopqrstuvwxyz._0123456789") != std::string::npos)
 		{
-
 			SYLAR_LOG_ERROR(g_logger) << "Config invalid Name: " << prefix << " : " << node;
 			return;
 		}
@@ -72,6 +76,35 @@ namespace sylar
 		}
 	}
 
+	static std::map<std::string, uint64_t> s_file2modifytime;
+	static sylar::Mutex s_mutex;
+
+	void Config::LoadFromConfDir(const std::string& path, bool force) {
+		std::string absoulte_path = sylar::EnvMgr::GetInstance()->getAbsolutePath(path);
+		std::vector<std::string> files;
+		FSUtil::ListAllFile(files, absoulte_path, ".yml");
+
+		for(auto& i : files) {
+			{
+				struct stat st;
+				lstat(i.c_str(), &st);
+				sylar::Mutex::Lock lock(s_mutex);
+				if(!force && s_file2modifytime[i] == (uint64_t)st.st_mtime) {
+					continue;
+				}
+				s_file2modifytime[i] = st.st_mtime;
+			}
+			try {
+				YAML::Node root = YAML::LoadFile(i);
+				LoadFromYaml(root);
+				SYLAR_LOG_INFO(g_logger) << "LoadConfFile file="
+					<< i << " ok";
+			} catch (...) {
+				SYLAR_LOG_ERROR(g_logger) << "LoadConfFile file="
+					<< i << " failed";
+			}
+		}
+	}
 
 	void Config::Visit(std::function<void(ConfigVarBase::ptr)> cb)
 	{

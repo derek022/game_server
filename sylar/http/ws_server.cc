@@ -34,6 +34,7 @@ void WSServer::handleClient(Socket::ptr client) {
         while(true) {
             auto msg = session->recvMessage();
             if(!msg) {
+                SYLAR_LOG_DEBUG(g_logger) << "recvMessage error";
                 break;
             }
             rt = servlet->handle(header, msg, session);

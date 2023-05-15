@@ -13,6 +13,7 @@ HttpServer::HttpServer(bool keepalive
     ,m_isKeepAlive(keepalive)
 {
     m_dispatch.reset(new ServletDispatch);
+    m_type = "http";
 }
 
 void HttpServer::handleClient(Socket::ptr client) 

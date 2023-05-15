@@ -512,6 +512,12 @@ namespace sylar
             return std::dynamic_pointer_cast<ConfigVar<T>>(it->second);
         }
 
+        /**
+         * @brief 加载path文件夹里面的配置文件
+         */
+        static void LoadFromConfDir(const std::string& path, bool force = false);
+
+
         static ConfigVarBase::ptr LookupBase(const std::string& name);
 
         static void LoadFromYaml(const YAML::Node& root);
