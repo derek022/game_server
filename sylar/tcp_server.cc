@@ -11,8 +11,10 @@ static sylar::ConfigVar<uint64_t>::ptr g_tcp_server_read_timeout =
 static sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
 
 TcpServer::TcpServer(sylar::IOManager* woker,
+                    sylar::IOManager* io_worker,
                     sylar::IOManager* accept_woker)
     :m_worker(woker)
+    ,m_ioWorker(io_worker)
     ,m_acceptWorker(accept_woker)
     ,m_recvTimeout(g_tcp_server_read_timeout->getValue())
     ,m_name("sylar/1.0.0")
@@ -26,7 +28,7 @@ TcpServer::~TcpServer() {
     m_socks.clear();
 }
 
-bool TcpServer::bind(sylar::Address::ptr addr) {
+bool TcpServer::bind(sylar::Address::ptr addr, bool ssl) {
     std::vector<Address::ptr> addrs;
     std::vector<Address::ptr> fails;
     addrs.push_back(addr);
@@ -34,7 +36,8 @@ bool TcpServer::bind(sylar::Address::ptr addr) {
 }
 
 bool TcpServer::bind(const std::vector<Address::ptr>& addrs
-                        ,std::vector<Address::ptr>& fails) {
+                        ,std::vector<Address::ptr>& fails, bool ssl) {
+    m_ssl = ssl;
     for(auto& addr : addrs) {
         Socket::ptr sock = Socket::CreateTCP(addr);
         if(!sock->bind(addr)) {

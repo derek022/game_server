@@ -37,6 +37,9 @@ set(LIB_SRC
     sylar/env.cc
     sylar/util/hash_util.cc
     sylar/http/ws_session.cc
+    sylar/http/ws_server.cc
+    sylar/http/ws_servlet.cc
+    sylar/http/ws_connection.cc
     sylar/bytearray.cc
     sylar/http/http.cc
     sylar/http/http_parser.cc

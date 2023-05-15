@@ -24,7 +24,7 @@ struct HttpResult{
         OK = 0,
         INVALID_URL = 1,
         INVALID_HOST = 2,
-        INVALID_FAIL = 3,
+        CONNECT_FAIL = 3,
         SEND_CLOSE_BY_PEER = 4,
         SEND_SOCKET_ERROR = 5,
         TIMEOUT = 6,
