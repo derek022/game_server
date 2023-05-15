@@ -290,11 +290,12 @@ std::string sha1sum(const void *data, size_t len) {
     const EVP_MD *md = EVP_get_digestbyname("SHA1");
 
     EVP_DigestInit_ex2(hashctx,md,NULL);
-
     EVP_DigestUpdate(hashctx, data, len);
     std::string result;
     unsigned int outlen;
+    result.resize(SHA_DIGEST_LENGTH);
     EVP_DigestFinal_ex(hashctx, (unsigned char*)&result[0], &outlen);
+    EVP_MD_CTX_free(hashctx);
     return result;
 }
 
@@ -367,208 +368,208 @@ std::string sha1sum(const std::string &data) {
 //         (text, key);
 // }
 
-// void
-// hexstring_from_data(const void *data, size_t len, char *output) {
-//     const unsigned char *buf = (const unsigned char *)data;
-//     size_t i, j;
-//     for (i = j = 0; i < len; ++i) {
-//         char c;
-//         c = (buf[i] >> 4) & 0xf;
-//         c = (c > 9) ? c + 'a' - 10 : c + '0';
-//         output[j++] = c;
-//         c = (buf[i] & 0xf);
-//         c = (c > 9) ? c + 'a' - 10 : c + '0';
-//         output[j++] = c;
-//     }
-// }
+void
+hexstring_from_data(const void *data, size_t len, char *output) {
+    const unsigned char *buf = (const unsigned char *)data;
+    size_t i, j;
+    for (i = j = 0; i < len; ++i) {
+        char c;
+        c = (buf[i] >> 4) & 0xf;
+        c = (c > 9) ? c + 'a' - 10 : c + '0';
+        output[j++] = c;
+        c = (buf[i] & 0xf);
+        c = (c > 9) ? c + 'a' - 10 : c + '0';
+        output[j++] = c;
+    }
+}
 
-// std::string
-// hexstring_from_data(const void *data, size_t len) {
-//     if (len == 0) {
-//         return std::string();
-//     }
-//     std::string result;
-//     result.resize(len * 2);
-//     hexstring_from_data(data, len, &result[0]);
-//     return result;
-// }
+std::string
+hexstring_from_data(const void *data, size_t len) {
+    if (len == 0) {
+        return std::string();
+    }
+    std::string result;
+    result.resize(len * 2);
+    hexstring_from_data(data, len, &result[0]);
+    return result;
+}
 
-// std::string hexstring_from_data(const std::string &data) {
-//     return hexstring_from_data(data.c_str(), data.size());
-// }
+std::string hexstring_from_data(const std::string &data) {
+    return hexstring_from_data(data.c_str(), data.size());
+}
 
-// void data_from_hexstring(const char *hexstring, size_t length, void *output) {
-//     unsigned char *buf = (unsigned char *)output;
-//     unsigned char byte;
-//     if (length % 2 != 0) {
-//         throw std::invalid_argument("data_from_hexstring length % 2 != 0");
-//     }
-//     for (size_t i = 0; i < length; ++i) {
-//         switch (hexstring[i]) {
-//             case 'a':
-//             case 'b':
-//             case 'c':
-//             case 'd':
-//             case 'e':
-//             case 'f':
-//                 byte = (hexstring[i] - 'a' + 10) << 4;
-//                 break;
-//             case 'A':
-//             case 'B':
-//             case 'C':
-//             case 'D':
-//             case 'E':
-//             case 'F':
-//                 byte = (hexstring[i] - 'A' + 10) << 4;
-//                 break;
-//             case '0':
-//             case '1':
-//             case '2':
-//             case '3':
-//             case '4':
-//             case '5':
-//             case '6':
-//             case '7':
-//             case '8':
-//             case '9':
-//                 byte = (hexstring[i] - '0') << 4;
-//                 break;
-//             default:
-//                 throw std::invalid_argument("data_from_hexstring invalid hexstring");
-//         }
-//         ++i;
-//         switch (hexstring[i]) {
-//             case 'a':
-//             case 'b':
-//             case 'c':
-//             case 'd':
-//             case 'e':
-//             case 'f':
-//                 byte |= hexstring[i] - 'a' + 10;
-//                 break;
-//             case 'A':
-//             case 'B':
-//             case 'C':
-//             case 'D':
-//             case 'E':
-//             case 'F':
-//                 byte |= hexstring[i] - 'A' + 10;
-//                 break;
-//             case '0':
-//             case '1':
-//             case '2':
-//             case '3':
-//             case '4':
-//             case '5':
-//             case '6':
-//             case '7':
-//             case '8':
-//             case '9':
-//                 byte |= hexstring[i] - '0';
-//                 break;
-//             default:
-//                 throw std::invalid_argument("data_from_hexstring invalid hexstring");
-//         }
-//         *buf++ = byte;
-//     }
-// }
+void data_from_hexstring(const char *hexstring, size_t length, void *output) {
+    unsigned char *buf = (unsigned char *)output;
+    unsigned char byte;
+    if (length % 2 != 0) {
+        throw std::invalid_argument("data_from_hexstring length % 2 != 0");
+    }
+    for (size_t i = 0; i < length; ++i) {
+        switch (hexstring[i]) {
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+                byte = (hexstring[i] - 'a' + 10) << 4;
+                break;
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+                byte = (hexstring[i] - 'A' + 10) << 4;
+                break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                byte = (hexstring[i] - '0') << 4;
+                break;
+            default:
+                throw std::invalid_argument("data_from_hexstring invalid hexstring");
+        }
+        ++i;
+        switch (hexstring[i]) {
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+                byte |= hexstring[i] - 'a' + 10;
+                break;
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+                byte |= hexstring[i] - 'A' + 10;
+                break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                byte |= hexstring[i] - '0';
+                break;
+            default:
+                throw std::invalid_argument("data_from_hexstring invalid hexstring");
+        }
+        *buf++ = byte;
+    }
+}
 
-// std::string data_from_hexstring(const char *hexstring, size_t length) {
-//     if (length % 2 != 0) {
-//         throw std::invalid_argument("data_from_hexstring length % 2 != 0");
-//     }
-//     if (length == 0) {
-//         return std::string();
-//     }
-//     std::string result;
-//     result.resize(length / 2);
-//     data_from_hexstring(hexstring, length, &result[0]);
-//     return result;
-// }
+std::string data_from_hexstring(const char *hexstring, size_t length) {
+    if (length % 2 != 0) {
+        throw std::invalid_argument("data_from_hexstring length % 2 != 0");
+    }
+    if (length == 0) {
+        return std::string();
+    }
+    std::string result;
+    result.resize(length / 2);
+    data_from_hexstring(hexstring, length, &result[0]);
+    return result;
+}
 
-// std::string data_from_hexstring(const std::string &hexstring) {
-//     return data_from_hexstring(hexstring.c_str(), hexstring.size());
-// }
+std::string data_from_hexstring(const std::string &hexstring) {
+    return data_from_hexstring(hexstring.c_str(), hexstring.size());
+}
 
-// std::string replace(const std::string &str1, char find, char replaceWith) {
-//     auto str = str1;
-//     size_t index = str.find(find);
-//     while (index != std::string::npos) {
-//         str[index] = replaceWith;
-//         index = str.find(find, index + 1);
-//     }
-//     return str;
-// }
+std::string replace(const std::string &str1, char find, char replaceWith) {
+    auto str = str1;
+    size_t index = str.find(find);
+    while (index != std::string::npos) {
+        str[index] = replaceWith;
+        index = str.find(find, index + 1);
+    }
+    return str;
+}
 
-// std::string replace(const std::string &str1, char find, const std::string &replaceWith) {
-//     auto str = str1;
-//     size_t index = str.find(find);
-//     while (index != std::string::npos) {
-//         str = str.substr(0, index) + replaceWith + str.substr(index + 1);
-//         index = str.find(find, index + replaceWith.size());
-//     }
-//     return str;
-// }
+std::string replace(const std::string &str1, char find, const std::string &replaceWith) {
+    auto str = str1;
+    size_t index = str.find(find);
+    while (index != std::string::npos) {
+        str = str.substr(0, index) + replaceWith + str.substr(index + 1);
+        index = str.find(find, index + replaceWith.size());
+    }
+    return str;
+}
 
-// std::string replace(const std::string &str1, const std::string &find, const std::string &replaceWith) {
-//     auto str = str1;
-//     size_t index = str.find(find);
-//     while (index != std::string::npos) {
-//         str = str.substr(0, index) + replaceWith + str.substr(index + find.size());
-//         index = str.find(find, index + replaceWith.size());
-//     }
-//     return str;
-// }
+std::string replace(const std::string &str1, const std::string &find, const std::string &replaceWith) {
+    auto str = str1;
+    size_t index = str.find(find);
+    while (index != std::string::npos) {
+        str = str.substr(0, index) + replaceWith + str.substr(index + find.size());
+        index = str.find(find, index + replaceWith.size());
+    }
+    return str;
+}
 
-// std::vector<std::string> split(const std::string &str, char delim, size_t max) {
-//     std::vector<std::string> result;
-//     if (str.empty()) {
-//         return result;
-//     }
+std::vector<std::string> split(const std::string &str, char delim, size_t max) {
+    std::vector<std::string> result;
+    if (str.empty()) {
+        return result;
+    }
 
-//     size_t last = 0;
-//     size_t pos = str.find(delim);
-//     while (pos != std::string::npos) {
-//         result.push_back(str.substr(last, pos - last));
-//         last = pos + 1;
-//         if (--max == 1)
-//             break;
-//         pos = str.find(delim, last);
-//     }
-//     result.push_back(str.substr(last));
-//     return result;
-// }
+    size_t last = 0;
+    size_t pos = str.find(delim);
+    while (pos != std::string::npos) {
+        result.push_back(str.substr(last, pos - last));
+        last = pos + 1;
+        if (--max == 1)
+            break;
+        pos = str.find(delim, last);
+    }
+    result.push_back(str.substr(last));
+    return result;
+}
 
-// std::vector<std::string> split(const std::string &str, const char *delims, size_t max) {
-//     std::vector<std::string> result;
-//     if (str.empty()) {
-//         return result;
-//     }
+std::vector<std::string> split(const std::string &str, const char *delims, size_t max) {
+    std::vector<std::string> result;
+    if (str.empty()) {
+        return result;
+    }
 
-//     size_t last = 0;
-//     size_t pos = str.find_first_of(delims);
-//     while (pos != std::string::npos) {
-//         result.push_back(str.substr(last, pos - last));
-//         last = pos + 1;
-//         if (--max == 1)
-//             break;
-//         pos = str.find_first_of(delims, last);
-//     }
-//     result.push_back(str.substr(last));
-//     return result;
-// }
+    size_t last = 0;
+    size_t pos = str.find_first_of(delims);
+    while (pos != std::string::npos) {
+        result.push_back(str.substr(last, pos - last));
+        last = pos + 1;
+        if (--max == 1)
+            break;
+        pos = str.find_first_of(delims, last);
+    }
+    result.push_back(str.substr(last));
+    return result;
+}
 
-// std::string random_string(size_t len, const std::string& chars) {
-//     if(len == 0 || chars.empty()) {
-//         return "";
-//     }
-//     std::string rt;
-//     rt.resize(len);
-//     int count = chars.size();
-//     for(size_t i = 0; i < len; ++i) {
-//         rt[i] = chars[rand() % count];
-//     }
-//     return rt;
-// }
+std::string random_string(size_t len, const std::string& chars) {
+    if(len == 0 || chars.empty()) {
+        return "";
+    }
+    std::string rt;
+    rt.resize(len);
+    int count = chars.size();
+    for(size_t i = 0; i < len; ++i) {
+        rt[i] = chars[rand() % count];
+    }
+    return rt;
+}
 
 }

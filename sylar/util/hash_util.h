@@ -33,26 +33,26 @@ std::string sha1sum(const void *data, size_t len);
 // std::string hmac_sha1(const std::string &text, const std::string &key);
 // std::string hmac_sha256(const std::string &text, const std::string &key);
 
-// /// Output must be of size len * 2, and will *not* be null-terminated
-// void hexstring_from_data(const void *data, size_t len, char *output);
-// std::string hexstring_from_data(const void *data, size_t len);
-// std::string hexstring_from_data(const std::string &data);
+/// Output must be of size len * 2, and will *not* be null-terminated
+void hexstring_from_data(const void *data, size_t len, char *output);
+std::string hexstring_from_data(const void *data, size_t len);
+std::string hexstring_from_data(const std::string &data);
 
-// /// Output must be of size length / 2, and will *not* be null-terminated
-// /// std::invalid_argument will be thrown if hexstring is not hex
-// void data_from_hexstring(const char *hexstring, size_t length, void *output);
-// std::string data_from_hexstring(const char *hexstring, size_t length);
-// std::string data_from_hexstring(const std::string &data);
+/// Output must be of size length / 2, and will *not* be null-terminated
+/// std::invalid_argument will be thrown if hexstring is not hex
+void data_from_hexstring(const char *hexstring, size_t length, void *output);
+std::string data_from_hexstring(const char *hexstring, size_t length);
+std::string data_from_hexstring(const std::string &data);
 
-// std::string replace(const std::string &str, char find, char replaceWith);
-// std::string replace(const std::string &str, char find, const std::string &replaceWith);
-// std::string replace(const std::string &str, const std::string &find, const std::string &replaceWith);
+std::string replace(const std::string &str, char find, char replaceWith);
+std::string replace(const std::string &str, char find, const std::string &replaceWith);
+std::string replace(const std::string &str, const std::string &find, const std::string &replaceWith);
 
-// std::vector<std::string> split(const std::string &str, char delim, size_t max = ~0);
-// std::vector<std::string> split(const std::string &str, const char *delims, size_t max = ~0);
+std::vector<std::string> split(const std::string &str, char delim, size_t max = ~0);
+std::vector<std::string> split(const std::string &str, const char *delims, size_t max = ~0);
 
-// std::string random_string(size_t len
-//         ,const std::string& chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+std::string random_string(size_t len
+        ,const std::string& chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 }
 
