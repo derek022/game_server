@@ -1,4 +1,5 @@
 #include "ws_connection.h"
+#include "sylar/util/hash_util.h"
 
 namespace sylar {
 namespace http {

@@ -160,7 +160,7 @@ bool checkGetAs(const MapType& m, const std::string& key, T& val, const T& def =
 }
 
 template<class MapType, class T>
-bool getAs(const MapType& m, const std::string& key, const T& def = T()) {
+T getAs(const MapType& m, const std::string& key, const T& def = T()) {
     auto it = m.find(key);
     if(it == m.end()){
         return def;

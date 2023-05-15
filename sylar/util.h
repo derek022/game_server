@@ -1,6 +1,8 @@
 #ifndef __SYLAR_UTIL_H__
 #define __SYLAR_UTIL_H__
 
+#include "util/hash_util.h"
+
 #include <cxxabi.h>
 #include <pthread.h>
 #include <unistd.h>

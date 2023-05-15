@@ -5,13 +5,11 @@
 #include "iomanager.h"
 #include "address.h"
 #include "socket.h"
+#include "config.h"
 
-#include <functional>
 #include <memory>
-#include <yaml-cpp/yaml.h>
-#include <map>
-#include <string>
-#include <boost/lexical_cast.hpp>
+#include <functional>
+
 
 namespace sylar{
 
