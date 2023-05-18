@@ -135,7 +135,9 @@
 
   pct_encoded   = ( "%" xdigit xdigit ) ;
 
-  pchar         = ( unreserved | pct_encoded | sub_delims | ":" | "@" ) ;
+# pchar         = ( unreserved | pct_encoded | sub_delims | ":" | "@" ) ;
+# add (any -- ascii) support chinese
+  pchar         = ( (any -- ascii) | unreserved | pct_encoded | sub_delims | ":" | "@" ) ;
 
   fragment      = ( ( pchar | "/" | "?" )* ) >mark %fragment ;
 
@@ -282,7 +284,7 @@ size_t http_parser_execute(http_parser *parser, const char *buffer, size_t len, 
   parser->mark = 0;
   parser->field_len = 0;
   parser->field_start = 0;
-  
+ 
   const char *p, *pe;
   int cs = parser->cs;
 
