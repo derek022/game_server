@@ -1,16 +1,13 @@
 logs:
     - name: root
       level: info
-      fomatter: "%d%T%m%n"
       appenders:
           - type: FileLogAppender
-            file: root.txt
+            file: /apps/logs/project_name/root.log
           - type: StdoutLogAppender
     - name: system
       level: info
-      formatter: "%d%T%m%n"
       appenders:
           - type: FileLogAppender
-            file: system.txt
-            formatter: "%d%T%c%T[%p]%T%m%n"
+            file: /apps/logs/project_name/system.log
           - type: StdoutLogAppender

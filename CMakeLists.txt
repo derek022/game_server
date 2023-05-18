@@ -35,6 +35,8 @@ set(LIB_SRC
     sylar/socket.cc
     sylar/worker.cc
     sylar/application.cc
+    sylar/library.cc
+    sylar/module.cc
     sylar/daemon.cc
     sylar/env.cc
     sylar/util/hash_util.cc
@@ -70,6 +72,7 @@ set(LIBS
         ${YAMLCPP})
 
 
+if(BUILD_TEST)
 sylar_add_executable(test "tests/test.cc" sylar "${LIBS}")
 sylar_add_executable(test_config "tests/test_config.cc" sylar "${LIBS}")
 sylar_add_executable(test_thread "tests/test_thread.cc" sylar "${LIBS}")
@@ -95,6 +98,12 @@ sylar_add_executable(test_hash "tests/test_hash.cc" sylar "${LIBS}")
 sylar_add_executable(test_openssl "tests/test_openssl.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_server "tests/test_ws_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
+endif()
+
+
+sylar_add_executable(bin_sylar "sylar/main.cc" sylar "${LIBS}")
+set_target_properties(bin_sylar PROPERTIES OUTPUT_NAME "sylar")
+
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
