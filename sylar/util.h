@@ -1,20 +1,27 @@
+/**
+ * @file util.h
+ * @brief 常用的工具函数
+ * @author sylar.yin
+ * @email 564628276@qq.com
+ * @date 2019-05-27
+ * @copyright Copyright (c) 2019年 sylar.yin All rights reserved (www.sylar.top)
+ */
 #ifndef __SYLAR_UTIL_H__
 #define __SYLAR_UTIL_H__
 
-#include "util/hash_util.h"
-
-#include <cxxabi.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <iostream>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include <stdarg.h>
+#include <stdio.h>
+#include <stdint.h>
 #include <vector>
+#include <string>
+#include <iomanip>
+#include <boost/lexical_cast.hpp>
+#include "sylar/util/hash_util.h"
 
-namespace sylar{
-
-
+namespace sylar {
 
 /**
  * @brief 返回当前线程的ID
@@ -32,7 +39,7 @@ uint32_t GetFiberId();
  * @param[in] size 最多返回层数
  * @param[in] skip 跳过栈顶的层数
  */
-void Backtrace(std::vector<std::string> & bt, int size = 64, int skip = 1);
+void Backtrace(std::vector<std::string>& bt, int size = 64, int skip = 1);
 
 /**
  * @brief 获取当前栈信息的字符串
@@ -53,7 +60,6 @@ uint64_t GetCurrentMS();
 uint64_t GetCurrentUS();
 
 std::string Time2Str(time_t ts = time(0), const std::string& format = "%Y-%m-%d %H:%M:%S");
-time_t Str2Time(const char* str, const char* format = "%Y-%m-%d %H:%M:%S");
 
 class FSUtil {
 public:
@@ -75,6 +81,33 @@ public:
                     ,std::ios_base::openmode mode);
 };
 
-};
+template<class Map, class K, class V>
+V GetParamValue(const Map& m, const K& k, const V& def = V()) {
+    auto it = m.find(k);
+    if(it == m.end()) {
+        return def;
+    }
+    try {
+        return boost::lexical_cast<V>(it->second);
+    } catch (...) {
+    }
+    return def;
+}
+
+template<class Map, class K, class V>
+bool CheckGetParamValue(const Map& m, const K& k, V& v) {
+    auto it = m.find(k);
+    if(it == m.end()) {
+        return false;
+    }
+    try {
+        v = boost::lexical_cast<V>(it->second);
+        return true;
+    } catch (...) {
+    }
+    return false;
+}
+
+}
 
 #endif
