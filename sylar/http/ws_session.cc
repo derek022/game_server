@@ -1,7 +1,6 @@
 #include "ws_session.h"
 #include "sylar/log.h"
 #include "sylar/endian.h"
-#include "sylar/util/hash_util.h"
 #include <string.h>
 
 namespace sylar {

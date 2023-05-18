@@ -1,4 +1,4 @@
-
+#include "log.h"
 #include <map>
 #include <iostream>
 #include <functional>
@@ -6,7 +6,8 @@
 #include <string.h>
 #include "config.h"
 #include "util.h"
-#include "log.h"
+#include "macro.h"
+#include "env.h"
 
 namespace sylar {
 
@@ -161,9 +162,9 @@ public:
     void format(std::ostream& os, Logger::ptr logger, LogLevel::Level level, LogEvent::ptr event) override {
         struct tm tm;
         time_t time = event->getTime();
-        localtime_r(&time,& tm);
+        localtime_r(&time, &tm);
         char buf[64];
-        strftime(buf, sizeof(buf), m_format.c_str(),& tm);
+        strftime(buf, sizeof(buf), m_format.c_str(), &tm);
         os << buf;
     }
 private:
@@ -388,7 +389,7 @@ bool FileLogAppender::reopen() {
     if(m_filestream) {
         m_filestream.close();
     }
-    return !m_filestream;
+    return FSUtil::OpenForWrite(m_filestream, m_filename, std::ios::app);
 }
 
 void StdoutLogAppender::log(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) {
@@ -643,9 +644,6 @@ public:
                     }
                 } else if(type == "StdoutLogAppender") {
                     lad.type = 2;
-                    if(a["formatter"].IsDefined()) {
-                        lad.formatter = a["formatter"].as<std::string>();
-                    }
                 } else {
                     std::cout << "log config error: appender type is invalid, " << a
                               << std::endl;
@@ -668,7 +666,7 @@ public:
         if(i.level != LogLevel::UNKNOW) {
             n["level"] = LogLevel::ToString(i.level);
         }
-        if(!i.formatter.empty()) {
+        if(i.formatter.empty()) {
             n["formatter"] = i.formatter;
         }
 
@@ -714,13 +712,9 @@ struct LogIniter {
                     if(!(i == *it)) {
                         //修改的logger
                         logger = SYLAR_LOG_NAME(i.name);
-                    } else {
-                        continue;
                     }
                 }
                 logger->setLevel(i.level);
-                //std::cout << "** " << i.name << " level=" << i.level
-                //<< "  " << logger << std::endl;
                 if(!i.formatter.empty()) {
                     logger->setFormatter(i.formatter);
                 }
@@ -731,11 +725,11 @@ struct LogIniter {
                     if(a.type == 1) {
                         ap.reset(new FileLogAppender(a.file));
                     } else if(a.type == 2) {
-                        // if(!sylar::EnvMgr::GetInstance()->has("d")) {
+                        if(!sylar::EnvMgr::GetInstance()->has("d")) {
                             ap.reset(new StdoutLogAppender);
-                        // } else {
-                        //     continue;
-                        // }
+                        } else {
+                            continue;
+                        }
                     }
                     ap->setLevel(a.level);
                     if(!a.formatter.empty()) {

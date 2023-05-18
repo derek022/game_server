@@ -3,7 +3,7 @@
 
 #include <ucontext.h>
 #include <memory>
-#include "thread.h"
+#include <functional>
 
 
 namespace sylar {

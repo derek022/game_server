@@ -5,18 +5,23 @@
 #include "sylar/http/http_session.h"
 #include <stdint.h>
 
-namespace sylar{
-namespace http{
+namespace sylar {
+namespace http {
 
 #pragma pack(1)
-
 struct WSFrameHead {
-    enum OPCODE{
+    enum OPCODE {
+        /// 数据分片帧
         CONTINUE = 0,
+        /// 文本帧
         TEXT_FRAME = 1,
+        /// 二进制帧
         BIN_FRAME = 2,
+        /// 断开连接
         CLOSE = 8,
+        /// PING
         PING = 0x9,
+        /// PONG
         PONG = 0xA
     };
     uint32_t opcode: 4;
@@ -36,12 +41,12 @@ public:
     typedef std::shared_ptr<WSFrameMessage> ptr;
     WSFrameMessage(int opcode = 0, const std::string& data = "");
 
-    int getOpcode() const { return m_opcode; }
-    void setOpcode(int v) { m_opcode = v; }
+    int getOpcode() const { return m_opcode;}
+    void setOpcode(int v) { m_opcode = v;}
 
-    const std::string& getData() const { return m_data; }
-    std::string& getData() { return m_data; }
-    void setData(const std::string& v) { m_data = v; }
+    const std::string& getData() const { return m_data;}
+    std::string& getData() { return m_data;}
+    void setData(const std::string& v) { m_data = v;}
 private:
     int m_opcode;
     std::string m_data;
@@ -71,9 +76,7 @@ int32_t WSSendMessage(Stream* stream, WSFrameMessage::ptr msg, bool client, bool
 int32_t WSPing(Stream* stream);
 int32_t WSPong(Stream* stream);
 
-} // namespace http
-    
-} // namespace sylar
-
+}
+}
 
 #endif

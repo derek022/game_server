@@ -11,10 +11,8 @@ static sylar::ConfigVar<uint64_t>::ptr g_tcp_server_read_timeout =
 static sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
 
 TcpServer::TcpServer(sylar::IOManager* woker,
-                    sylar::IOManager* io_worker,
                     sylar::IOManager* accept_woker)
     :m_worker(woker)
-    ,m_ioWorker(io_worker)
     ,m_acceptWorker(accept_woker)
     ,m_recvTimeout(g_tcp_server_read_timeout->getValue())
     ,m_name("sylar/1.0.0")
@@ -32,14 +30,14 @@ bool TcpServer::bind(sylar::Address::ptr addr, bool ssl) {
     std::vector<Address::ptr> addrs;
     std::vector<Address::ptr> fails;
     addrs.push_back(addr);
-    return bind(addrs, fails);
+    return bind(addrs, fails, ssl);
 }
 
 bool TcpServer::bind(const std::vector<Address::ptr>& addrs
-                        ,std::vector<Address::ptr>& fails, bool ssl) {
-    m_ssl = ssl;
+                        ,std::vector<Address::ptr>& fails
+                        ,bool ssl) {
     for(auto& addr : addrs) {
-        Socket::ptr sock = Socket::CreateTCP(addr);
+        Socket::ptr sock = ssl ? SSLSocket::CreateTCP(addr) : Socket::CreateTCP(addr);
         if(!sock->bind(addr)) {
             SYLAR_LOG_ERROR(g_logger) << "bind fail errno="
                 << errno << " errstr=" << strerror(errno)
@@ -111,33 +109,15 @@ void TcpServer::handleClient(Socket::ptr client) {
 }
 
 bool TcpServer::loadCertificates(const std::string& cert_file, const std::string& key_file) {
-    for(auto & i : m_socks) {
+    for(auto& i : m_socks) {
         auto ssl_socket = std::dynamic_pointer_cast<SSLSocket>(i);
         if(ssl_socket) {
-            if(!ssl_socket->loadCertificates(cert_file,key_file)){
+            if(!ssl_socket->loadCertificates(cert_file, key_file)) {
                 return false;
             }
         }
     }
-
     return true;
 }
-
-std::string TcpServer::toString(const std::string& prefix) {
-    std::stringstream ss;
-    ss << prefix << "[type=" << m_type
-       << " name=" << m_name << " ssl=" << m_ssl
-       << " worker=" << (m_worker ? m_worker->getName() : "")
-       << " accept=" << (m_acceptWorker ? m_acceptWorker->getName() : "")
-       << " recv_timeout=" << m_recvTimeout << "]" << std::endl;
-    std::string pfx = prefix.empty() ? "    " : prefix;
-    for(auto & i : m_socks)
-    {
-        ss << pfx << pfx << *i << std::endl;
-    }
-    return ss.str();
-}
-
-
 
 }

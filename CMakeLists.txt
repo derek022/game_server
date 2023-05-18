@@ -33,6 +33,8 @@ set(LIB_SRC
     sylar/fd_manager.cc
     sylar/address.cc
     sylar/socket.cc
+    sylar/worker.cc
+    sylar/application.cc
     sylar/daemon.cc
     sylar/env.cc
     sylar/util/hash_util.cc

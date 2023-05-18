@@ -1,9 +1,11 @@
 #include "fiber.h"
 #include "config.h"
 #include "macro.h"
+#include "scheduler.h"
+#include "thread.h"
 
 #include <atomic>
-#include "scheduler.h"
+#include <functional>
 
 namespace sylar {
 
