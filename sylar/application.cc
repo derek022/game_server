@@ -5,6 +5,8 @@
 #include "sylar/daemon.h"
 #include "sylar/worker.h"
 #include "sylar/module.h"
+#include "sylar/tcp_server.h"
+#include "sylar/http/ws_server.h"
 #include <unistd.h>
 
 namespace sylar {
@@ -21,81 +23,9 @@ static sylar::ConfigVar<std::string>::ptr g_server_pid_file =
             ,std::string("sylar.pid")
             , "server pid file");
 
-struct HttpServerConf {
-    std::vector<std::string> address;
-    int keepalive = 0;
-    int timeout = 1000 * 2 * 60;
-    int ssl = 0;
-    std::string name;
-    std::string cert_file;
-    std::string key_file;
-    std::string accept_worker;
-    std::string process_worker;
 
-    bool isValid() const {
-        return !address.empty();
-    }
-
-    bool operator==(const HttpServerConf& oth) const {
-        return address == oth.address
-            && keepalive == oth.keepalive
-            && timeout == oth.timeout
-            && name == oth.name
-            && ssl == oth.ssl
-            && cert_file == oth.cert_file
-            && key_file == oth.key_file
-            && accept_worker == oth.accept_worker
-            && process_worker == oth.process_worker;
-    }
-};
-
-template<>
-class LexicalCast<std::string, HttpServerConf> {
-public:
-    HttpServerConf operator()(const std::string& v) {
-        YAML::Node node = YAML::Load(v);
-        HttpServerConf conf;
-        conf.keepalive = node["keepalive"].as<int>(conf.keepalive);
-        conf.timeout = node["timeout"].as<int>(conf.timeout);
-        conf.name = node["name"].as<std::string>(conf.name);
-        conf.ssl = node["ssl"].as<int>(conf.ssl);
-        conf.cert_file = node["cert_file"].as<std::string>(conf.cert_file);
-        conf.key_file = node["key_file"].as<std::string>(conf.key_file);
-        conf.accept_worker = node["accept_worker"].as<std::string>();
-        conf.process_worker = node["process_worker"].as<std::string>();
-        if(node["address"].IsDefined()) {
-            for(size_t i = 0; i < node["address"].size(); ++i) {
-                conf.address.push_back(node["address"][i].as<std::string>());
-            }
-        }
-        return conf;
-    }
-};
-
-template<>
-class LexicalCast<HttpServerConf, std::string> {
-public:
-    std::string operator()(const HttpServerConf& conf) {
-        YAML::Node node;
-        node["name"] = conf.name;
-        node["keepalive"] = conf.keepalive;
-        node["timeout"] = conf.timeout;
-        node["ssl"] = conf.ssl;
-        node["cert_file"] = conf.cert_file;
-        node["key_file"] = conf.key_file;
-        node["accept_worker"] = conf.accept_worker;
-        node["process_worker"] = conf.process_worker;
-        for(auto& i : conf.address) {
-            node["address"].push_back(i);
-        }
-        std::stringstream ss;
-        ss << node;
-        return ss.str();
-    }
-};
-
-static sylar::ConfigVar<std::vector<HttpServerConf> >::ptr g_http_servers_conf
-    = sylar::Config::Lookup("http_servers", std::vector<HttpServerConf>(), "http server config");
+static sylar::ConfigVar<std::vector<TcpServerConf> >::ptr g_servers_conf
+    = sylar::Config::Lookup("servers", std::vector<TcpServerConf>(), "http server config");
 
 Application* Application::s_instance = nullptr;
 
@@ -183,6 +113,8 @@ bool Application::run() {
 
 int Application::main(int argc, char** argv) {
     SYLAR_LOG_INFO(g_logger) << "main";
+    std::string conf_path = sylar::EnvMgr::GetInstance()->getConfigPath();
+    sylar::Config::LoadFromConfDir(conf_path, true);
     {
         std::string pidfile = g_server_work_path->getValue()
                                     + "/" + g_server_pid_file->getValue();
@@ -203,10 +135,29 @@ int Application::main(int argc, char** argv) {
 }
 
 int Application::run_fiber() {
+    std::vector<Module::ptr> modules;
+    ModuleMgr::GetInstance()->listAll(modules);
+    bool has_error = false;
+    for(auto & i : modules)
+    {
+        if(!i->onLoad())
+        {
+            SYLAR_LOG_ERROR(g_logger) << "module name="
+                << i->getName() << " version=" << i->getVersion()
+                << " filenanme=" << i->getFilename();
+            has_error = true;
+        }
+    }
+
+    if(has_error)
+    {
+        _exit(0);
+    }
+
     sylar::WorkerMgr::GetInstance()->init();
-    auto http_confs = g_http_servers_conf->getValue();
+    auto http_confs = g_servers_conf->getValue();
     for(auto& i : http_confs) {
-        SYLAR_LOG_INFO(g_logger) << LexicalCast<HttpServerConf, std::string>()(i);
+        SYLAR_LOG_INFO(g_logger) << LexicalCast<TcpServerConf, std::string>()(i);
 
         std::vector<Address::ptr> address;
         for(auto& a : i.address) {
@@ -282,11 +233,28 @@ int Application::run_fiber() {
         if(!i.name.empty()) {
             server->setName(i.name);
         }
+        server->setConf(i);
         server->start();
-        m_httpservers.push_back(server);
+        m_servers[i.type].push_back(server);
 
     }
+
+    for(auto& i : modules)
+    {
+        i->onServerReady();
+    }
     return 0;
+}
+
+bool Application::getServer(const std::string& type, std::vector<TcpServer::ptr>& svrs)
+{
+    auto it = m_servers.find(type);
+    if(it == m_servers.end())
+    {
+        return false;
+    }
+    svrs = it->second;
+    return true;
 }
 
 }

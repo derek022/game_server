@@ -40,6 +40,7 @@ set(LIB_SRC
     sylar/daemon.cc
     sylar/env.cc
     sylar/util/hash_util.cc
+    sylar/util/json_util.cc
     sylar/http/ws_session.cc
     sylar/http/ws_server.cc
     sylar/http/ws_servlet.cc
@@ -68,11 +69,11 @@ set(LIBS
         sylar 
         dl 
         pthread 
+        jsoncpp
         ${OPENSSL_LIBRARIES}
         ${YAMLCPP})
 
 
-if(BUILD_TEST)
 sylar_add_executable(test "tests/test.cc" sylar "${LIBS}")
 sylar_add_executable(test_config "tests/test_config.cc" sylar "${LIBS}")
 sylar_add_executable(test_thread "tests/test_thread.cc" sylar "${LIBS}")
@@ -98,7 +99,6 @@ sylar_add_executable(test_hash "tests/test_hash.cc" sylar "${LIBS}")
 sylar_add_executable(test_openssl "tests/test_openssl.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_server "tests/test_ws_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
-endif()
 
 
 sylar_add_executable(bin_sylar "sylar/main.cc" sylar "${LIBS}")

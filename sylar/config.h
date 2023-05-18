@@ -123,7 +123,7 @@ template<class T>
 class LexicalCast<std::vector<T>, std::string> {
 public:
     std::string operator()(const std::vector<T>& v) {
-        YAML::Node node;
+        YAML::Node node(YAML::NodeType::Sequence);
         for(auto& i : v) {
             node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
         }
@@ -159,7 +159,7 @@ template<class T>
 class LexicalCast<std::list<T>, std::string> {
 public:
     std::string operator()(const std::list<T>& v) {
-        YAML::Node node;
+        YAML::Node node(YAML::NodeType::Sequence);
         for(auto& i : v) {
             node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
         }
@@ -195,7 +195,7 @@ template<class T>
 class LexicalCast<std::set<T>, std::string> {
 public:
     std::string operator()(const std::set<T>& v) {
-        YAML::Node node;
+        YAML::Node node(YAML::NodeType::Sequence);
         for(auto& i : v) {
             node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
         }
@@ -231,7 +231,7 @@ template<class T>
 class LexicalCast<std::unordered_set<T>, std::string> {
 public:
     std::string operator()(const std::unordered_set<T>& v) {
-        YAML::Node node;
+        YAML::Node node(YAML::NodeType::Sequence);
         for(auto& i : v) {
             node.push_back(YAML::Load(LexicalCast<T, std::string>()(i)));
         }
@@ -269,7 +269,7 @@ template<class T>
 class LexicalCast<std::map<std::string, T>, std::string> {
 public:
     std::string operator()(const std::map<std::string, T>& v) {
-        YAML::Node node;
+        YAML::Node node(YAML::NodeType::Map);
         for(auto& i : v) {
             node[i.first] = YAML::Load(LexicalCast<T, std::string>()(i.second));
         }
@@ -307,7 +307,7 @@ template<class T>
 class LexicalCast<std::unordered_map<std::string, T>, std::string> {
 public:
     std::string operator()(const std::unordered_map<std::string, T>& v) {
-        YAML::Node node;
+        YAML::Node node(YAML::NodeType::Map);
         for(auto& i : v) {
             node[i.first] = YAML::Load(LexicalCast<T, std::string>()(i.second));
         }
