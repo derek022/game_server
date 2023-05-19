@@ -8,5 +8,5 @@ else
     unlink bin/module/libproject_name.so
 fi
 
-cp sylar/bin/sylar bin/project_name
+cp game_server/bin/sylar bin/project_name
 cp lib/libproject_name.so bin/module/
