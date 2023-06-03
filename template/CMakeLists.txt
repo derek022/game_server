@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(project_name)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/sylar)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/game_server)
 
 include (sylar/cmake/utils.cmake)
 
@@ -9,9 +9,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined")
 
 include_directories(.)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/sylar)
-
-link_directories(/apps/sylar/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/game_server)
 
 find_package(Boost REQUIRED)
 if(Boost_FOUND)
