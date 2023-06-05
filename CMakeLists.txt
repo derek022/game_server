@@ -52,9 +52,10 @@ set(LIB_SRC
     sylar/http/servlet.cc
     sylar/http/http_server.cc
     sylar/http/http_connection.cc
+    sylar/streams/zlib_stream.cc
+    sylar/streams/socket_stream.cc
     sylar/tcp_server.cc
     sylar/stream.cc
-    sylar/socket_stream.cc
     )
 
 
@@ -68,6 +69,7 @@ force_redefine_file_macro_for_sources(sylar)
 set(LIBS  
         sylar 
         dl 
+        z
         pthread 
         jsoncpp
         ${OPENSSL_LIBRARIES}

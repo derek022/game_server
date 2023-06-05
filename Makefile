@@ -60,10 +60,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/derek/WorkSpace/game_server
+CMAKE_SOURCE_DIR = /home/derek/WorkSpace/chat_proj
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/derek/WorkSpace/game_server
+CMAKE_BINARY_DIR = /home/derek/WorkSpace/chat_proj
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -90,14 +90,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/derek/WorkSpace/game_server/CMakeFiles /home/derek/WorkSpace/game_server//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/derek/WorkSpace/game_server/CMakeFiles 0
+	cd /home/derek/WorkSpace/chat_proj && $(CMAKE_COMMAND) -E cmake_progress_start /home/derek/WorkSpace/chat_proj/CMakeFiles /home/derek/WorkSpace/chat_proj/game_server//CMakeFiles/progress.marks
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/derek/WorkSpace/chat_proj/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/clean
 .PHONY : clean
 
 # The main clean target
@@ -106,329 +106,353 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/derek/WorkSpace/chat_proj && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named sylar
+# Convenience name for target.
+game_server/CMakeFiles/sylar.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/sylar.dir/rule
+.PHONY : game_server/CMakeFiles/sylar.dir/rule
 
-# Build rule for target.
-sylar: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sylar
+# Convenience name for target.
+sylar: game_server/CMakeFiles/sylar.dir/rule
 .PHONY : sylar
 
 # fast build rule for target.
 sylar/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/build
 .PHONY : sylar/fast
 
-#=============================================================================
-# Target rules for targets named test
+# Convenience name for target.
+game_server/CMakeFiles/test.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test.dir/rule
+.PHONY : game_server/CMakeFiles/test.dir/rule
 
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
+# Convenience name for target.
+test: game_server/CMakeFiles/test.dir/rule
 .PHONY : test
 
 # fast build rule for target.
 test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test.dir/build.make game_server/CMakeFiles/test.dir/build
 .PHONY : test/fast
 
-#=============================================================================
-# Target rules for targets named test_config
+# Convenience name for target.
+game_server/CMakeFiles/test_config.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_config.dir/rule
+.PHONY : game_server/CMakeFiles/test_config.dir/rule
 
-# Build rule for target.
-test_config: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_config
+# Convenience name for target.
+test_config: game_server/CMakeFiles/test_config.dir/rule
 .PHONY : test_config
 
 # fast build rule for target.
 test_config/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_config.dir/build.make game_server/CMakeFiles/test_config.dir/build
 .PHONY : test_config/fast
 
-#=============================================================================
-# Target rules for targets named test_thread
+# Convenience name for target.
+game_server/CMakeFiles/test_thread.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_thread.dir/rule
+.PHONY : game_server/CMakeFiles/test_thread.dir/rule
 
-# Build rule for target.
-test_thread: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_thread
+# Convenience name for target.
+test_thread: game_server/CMakeFiles/test_thread.dir/rule
 .PHONY : test_thread
 
 # fast build rule for target.
 test_thread/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_thread.dir/build.make CMakeFiles/test_thread.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_thread.dir/build.make game_server/CMakeFiles/test_thread.dir/build
 .PHONY : test_thread/fast
 
-#=============================================================================
-# Target rules for targets named test_util
+# Convenience name for target.
+game_server/CMakeFiles/test_util.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_util.dir/rule
+.PHONY : game_server/CMakeFiles/test_util.dir/rule
 
-# Build rule for target.
-test_util: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_util
+# Convenience name for target.
+test_util: game_server/CMakeFiles/test_util.dir/rule
 .PHONY : test_util
 
 # fast build rule for target.
 test_util/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_util.dir/build.make CMakeFiles/test_util.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_util.dir/build.make game_server/CMakeFiles/test_util.dir/build
 .PHONY : test_util/fast
 
-#=============================================================================
-# Target rules for targets named test_fiber
+# Convenience name for target.
+game_server/CMakeFiles/test_fiber.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_fiber.dir/rule
+.PHONY : game_server/CMakeFiles/test_fiber.dir/rule
 
-# Build rule for target.
-test_fiber: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_fiber
+# Convenience name for target.
+test_fiber: game_server/CMakeFiles/test_fiber.dir/rule
 .PHONY : test_fiber
 
 # fast build rule for target.
 test_fiber/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fiber.dir/build.make CMakeFiles/test_fiber.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_fiber.dir/build.make game_server/CMakeFiles/test_fiber.dir/build
 .PHONY : test_fiber/fast
 
-#=============================================================================
-# Target rules for targets named test_scheduler
+# Convenience name for target.
+game_server/CMakeFiles/test_scheduler.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_scheduler.dir/rule
+.PHONY : game_server/CMakeFiles/test_scheduler.dir/rule
 
-# Build rule for target.
-test_scheduler: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_scheduler
+# Convenience name for target.
+test_scheduler: game_server/CMakeFiles/test_scheduler.dir/rule
 .PHONY : test_scheduler
 
 # fast build rule for target.
 test_scheduler/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scheduler.dir/build.make CMakeFiles/test_scheduler.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_scheduler.dir/build.make game_server/CMakeFiles/test_scheduler.dir/build
 .PHONY : test_scheduler/fast
 
-#=============================================================================
-# Target rules for targets named test_iomanager
+# Convenience name for target.
+game_server/CMakeFiles/test_iomanager.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_iomanager.dir/rule
+.PHONY : game_server/CMakeFiles/test_iomanager.dir/rule
 
-# Build rule for target.
-test_iomanager: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_iomanager
+# Convenience name for target.
+test_iomanager: game_server/CMakeFiles/test_iomanager.dir/rule
 .PHONY : test_iomanager
 
 # fast build rule for target.
 test_iomanager/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_iomanager.dir/build.make game_server/CMakeFiles/test_iomanager.dir/build
 .PHONY : test_iomanager/fast
 
-#=============================================================================
-# Target rules for targets named test_hook
+# Convenience name for target.
+game_server/CMakeFiles/test_hook.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_hook.dir/rule
+.PHONY : game_server/CMakeFiles/test_hook.dir/rule
 
-# Build rule for target.
-test_hook: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_hook
+# Convenience name for target.
+test_hook: game_server/CMakeFiles/test_hook.dir/rule
 .PHONY : test_hook
 
 # fast build rule for target.
 test_hook/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hook.dir/build.make CMakeFiles/test_hook.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hook.dir/build.make game_server/CMakeFiles/test_hook.dir/build
 .PHONY : test_hook/fast
 
-#=============================================================================
-# Target rules for targets named test_address
+# Convenience name for target.
+game_server/CMakeFiles/test_address.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_address.dir/rule
+.PHONY : game_server/CMakeFiles/test_address.dir/rule
 
-# Build rule for target.
-test_address: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_address
+# Convenience name for target.
+test_address: game_server/CMakeFiles/test_address.dir/rule
 .PHONY : test_address
 
 # fast build rule for target.
 test_address/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_address.dir/build.make CMakeFiles/test_address.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_address.dir/build.make game_server/CMakeFiles/test_address.dir/build
 .PHONY : test_address/fast
 
-#=============================================================================
-# Target rules for targets named test_socket
+# Convenience name for target.
+game_server/CMakeFiles/test_socket.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_socket.dir/rule
+.PHONY : game_server/CMakeFiles/test_socket.dir/rule
 
-# Build rule for target.
-test_socket: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_socket
+# Convenience name for target.
+test_socket: game_server/CMakeFiles/test_socket.dir/rule
 .PHONY : test_socket
 
 # fast build rule for target.
 test_socket/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_socket.dir/build.make game_server/CMakeFiles/test_socket.dir/build
 .PHONY : test_socket/fast
 
-#=============================================================================
-# Target rules for targets named test_bytearray
+# Convenience name for target.
+game_server/CMakeFiles/test_bytearray.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_bytearray.dir/rule
+.PHONY : game_server/CMakeFiles/test_bytearray.dir/rule
 
-# Build rule for target.
-test_bytearray: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_bytearray
+# Convenience name for target.
+test_bytearray: game_server/CMakeFiles/test_bytearray.dir/rule
 .PHONY : test_bytearray
 
 # fast build rule for target.
 test_bytearray/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_bytearray.dir/build.make CMakeFiles/test_bytearray.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_bytearray.dir/build.make game_server/CMakeFiles/test_bytearray.dir/build
 .PHONY : test_bytearray/fast
 
-#=============================================================================
-# Target rules for targets named test_http
+# Convenience name for target.
+game_server/CMakeFiles/test_http.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_http.dir/rule
+.PHONY : game_server/CMakeFiles/test_http.dir/rule
 
-# Build rule for target.
-test_http: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_http
+# Convenience name for target.
+test_http: game_server/CMakeFiles/test_http.dir/rule
 .PHONY : test_http
 
 # fast build rule for target.
 test_http/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http.dir/build.make CMakeFiles/test_http.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http.dir/build.make game_server/CMakeFiles/test_http.dir/build
 .PHONY : test_http/fast
 
-#=============================================================================
-# Target rules for targets named test_http_parser
+# Convenience name for target.
+game_server/CMakeFiles/test_http_parser.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_http_parser.dir/rule
+.PHONY : game_server/CMakeFiles/test_http_parser.dir/rule
 
-# Build rule for target.
-test_http_parser: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_http_parser
+# Convenience name for target.
+test_http_parser: game_server/CMakeFiles/test_http_parser.dir/rule
 .PHONY : test_http_parser
 
 # fast build rule for target.
 test_http_parser/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_parser.dir/build.make CMakeFiles/test_http_parser.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_parser.dir/build.make game_server/CMakeFiles/test_http_parser.dir/build
 .PHONY : test_http_parser/fast
 
-#=============================================================================
-# Target rules for targets named test_echo_server
+# Convenience name for target.
+game_server/CMakeFiles/test_echo_server.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_echo_server.dir/rule
+.PHONY : game_server/CMakeFiles/test_echo_server.dir/rule
 
-# Build rule for target.
-test_echo_server: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_echo_server
+# Convenience name for target.
+test_echo_server: game_server/CMakeFiles/test_echo_server.dir/rule
 .PHONY : test_echo_server
 
 # fast build rule for target.
 test_echo_server/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_echo_server.dir/build.make CMakeFiles/test_echo_server.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_echo_server.dir/build.make game_server/CMakeFiles/test_echo_server.dir/build
 .PHONY : test_echo_server/fast
 
-#=============================================================================
-# Target rules for targets named test_http_server
+# Convenience name for target.
+game_server/CMakeFiles/test_http_server.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_http_server.dir/rule
+.PHONY : game_server/CMakeFiles/test_http_server.dir/rule
 
-# Build rule for target.
-test_http_server: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_http_server
+# Convenience name for target.
+test_http_server: game_server/CMakeFiles/test_http_server.dir/rule
 .PHONY : test_http_server
 
 # fast build rule for target.
 test_http_server/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_server.dir/build.make CMakeFiles/test_http_server.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_server.dir/build.make game_server/CMakeFiles/test_http_server.dir/build
 .PHONY : test_http_server/fast
 
-#=============================================================================
-# Target rules for targets named test_http_connection
+# Convenience name for target.
+game_server/CMakeFiles/test_http_connection.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_http_connection.dir/rule
+.PHONY : game_server/CMakeFiles/test_http_connection.dir/rule
 
-# Build rule for target.
-test_http_connection: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_http_connection
+# Convenience name for target.
+test_http_connection: game_server/CMakeFiles/test_http_connection.dir/rule
 .PHONY : test_http_connection
 
 # fast build rule for target.
 test_http_connection/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_connection.dir/build.make CMakeFiles/test_http_connection.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_connection.dir/build.make game_server/CMakeFiles/test_http_connection.dir/build
 .PHONY : test_http_connection/fast
 
-#=============================================================================
-# Target rules for targets named test_daemon
+# Convenience name for target.
+game_server/CMakeFiles/test_daemon.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_daemon.dir/rule
+.PHONY : game_server/CMakeFiles/test_daemon.dir/rule
 
-# Build rule for target.
-test_daemon: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_daemon
+# Convenience name for target.
+test_daemon: game_server/CMakeFiles/test_daemon.dir/rule
 .PHONY : test_daemon
 
 # fast build rule for target.
 test_daemon/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_daemon.dir/build.make CMakeFiles/test_daemon.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_daemon.dir/build.make game_server/CMakeFiles/test_daemon.dir/build
 .PHONY : test_daemon/fast
 
-#=============================================================================
-# Target rules for targets named test_env
+# Convenience name for target.
+game_server/CMakeFiles/test_env.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_env.dir/rule
+.PHONY : game_server/CMakeFiles/test_env.dir/rule
 
-# Build rule for target.
-test_env: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_env
+# Convenience name for target.
+test_env: game_server/CMakeFiles/test_env.dir/rule
 .PHONY : test_env
 
 # fast build rule for target.
 test_env/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_env.dir/build.make CMakeFiles/test_env.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_env.dir/build.make game_server/CMakeFiles/test_env.dir/build
 .PHONY : test_env/fast
 
-#=============================================================================
-# Target rules for targets named test_hash
+# Convenience name for target.
+game_server/CMakeFiles/test_hash.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_hash.dir/rule
+.PHONY : game_server/CMakeFiles/test_hash.dir/rule
 
-# Build rule for target.
-test_hash: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_hash
+# Convenience name for target.
+test_hash: game_server/CMakeFiles/test_hash.dir/rule
 .PHONY : test_hash
 
 # fast build rule for target.
 test_hash/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hash.dir/build.make CMakeFiles/test_hash.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hash.dir/build.make game_server/CMakeFiles/test_hash.dir/build
 .PHONY : test_hash/fast
 
-#=============================================================================
-# Target rules for targets named test_openssl
+# Convenience name for target.
+game_server/CMakeFiles/test_openssl.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_openssl.dir/rule
+.PHONY : game_server/CMakeFiles/test_openssl.dir/rule
 
-# Build rule for target.
-test_openssl: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_openssl
+# Convenience name for target.
+test_openssl: game_server/CMakeFiles/test_openssl.dir/rule
 .PHONY : test_openssl
 
 # fast build rule for target.
 test_openssl/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_openssl.dir/build.make CMakeFiles/test_openssl.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_openssl.dir/build.make game_server/CMakeFiles/test_openssl.dir/build
 .PHONY : test_openssl/fast
 
-#=============================================================================
-# Target rules for targets named test_ws_server
+# Convenience name for target.
+game_server/CMakeFiles/test_ws_server.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_ws_server.dir/rule
+.PHONY : game_server/CMakeFiles/test_ws_server.dir/rule
 
-# Build rule for target.
-test_ws_server: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_ws_server
+# Convenience name for target.
+test_ws_server: game_server/CMakeFiles/test_ws_server.dir/rule
 .PHONY : test_ws_server
 
 # fast build rule for target.
 test_ws_server/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_server.dir/build.make CMakeFiles/test_ws_server.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_server.dir/build.make game_server/CMakeFiles/test_ws_server.dir/build
 .PHONY : test_ws_server/fast
 
-#=============================================================================
-# Target rules for targets named test_ws_client
+# Convenience name for target.
+game_server/CMakeFiles/test_ws_client.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/test_ws_client.dir/rule
+.PHONY : game_server/CMakeFiles/test_ws_client.dir/rule
 
-# Build rule for target.
-test_ws_client: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_ws_client
+# Convenience name for target.
+test_ws_client: game_server/CMakeFiles/test_ws_client.dir/rule
 .PHONY : test_ws_client
 
 # fast build rule for target.
 test_ws_client/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_client.dir/build.make CMakeFiles/test_ws_client.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_client.dir/build.make game_server/CMakeFiles/test_ws_client.dir/build
 .PHONY : test_ws_client/fast
 
-#=============================================================================
-# Target rules for targets named bin_sylar
+# Convenience name for target.
+game_server/CMakeFiles/bin_sylar.dir/rule:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_server/CMakeFiles/bin_sylar.dir/rule
+.PHONY : game_server/CMakeFiles/bin_sylar.dir/rule
 
-# Build rule for target.
-bin_sylar: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bin_sylar
+# Convenience name for target.
+bin_sylar: game_server/CMakeFiles/bin_sylar.dir/rule
 .PHONY : bin_sylar
 
 # fast build rule for target.
 bin_sylar/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bin_sylar.dir/build.make CMakeFiles/bin_sylar.dir/build
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/bin_sylar.dir/build.make game_server/CMakeFiles/bin_sylar.dir/build
 .PHONY : bin_sylar/fast
 
 sylar/address.o: sylar/address.cc.o
@@ -436,7 +460,7 @@ sylar/address.o: sylar/address.cc.o
 
 # target to build an object file
 sylar/address.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/address.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/address.cc.o
 .PHONY : sylar/address.cc.o
 
 sylar/address.i: sylar/address.cc.i
@@ -444,7 +468,7 @@ sylar/address.i: sylar/address.cc.i
 
 # target to preprocess a source file
 sylar/address.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/address.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/address.cc.i
 .PHONY : sylar/address.cc.i
 
 sylar/address.s: sylar/address.cc.s
@@ -452,7 +476,7 @@ sylar/address.s: sylar/address.cc.s
 
 # target to generate assembly for a file
 sylar/address.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/address.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/address.cc.s
 .PHONY : sylar/address.cc.s
 
 sylar/application.o: sylar/application.cc.o
@@ -460,7 +484,7 @@ sylar/application.o: sylar/application.cc.o
 
 # target to build an object file
 sylar/application.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/application.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/application.cc.o
 .PHONY : sylar/application.cc.o
 
 sylar/application.i: sylar/application.cc.i
@@ -468,7 +492,7 @@ sylar/application.i: sylar/application.cc.i
 
 # target to preprocess a source file
 sylar/application.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/application.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/application.cc.i
 .PHONY : sylar/application.cc.i
 
 sylar/application.s: sylar/application.cc.s
@@ -476,7 +500,7 @@ sylar/application.s: sylar/application.cc.s
 
 # target to generate assembly for a file
 sylar/application.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/application.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/application.cc.s
 .PHONY : sylar/application.cc.s
 
 sylar/bytearray.o: sylar/bytearray.cc.o
@@ -484,7 +508,7 @@ sylar/bytearray.o: sylar/bytearray.cc.o
 
 # target to build an object file
 sylar/bytearray.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/bytearray.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/bytearray.cc.o
 .PHONY : sylar/bytearray.cc.o
 
 sylar/bytearray.i: sylar/bytearray.cc.i
@@ -492,7 +516,7 @@ sylar/bytearray.i: sylar/bytearray.cc.i
 
 # target to preprocess a source file
 sylar/bytearray.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/bytearray.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/bytearray.cc.i
 .PHONY : sylar/bytearray.cc.i
 
 sylar/bytearray.s: sylar/bytearray.cc.s
@@ -500,7 +524,7 @@ sylar/bytearray.s: sylar/bytearray.cc.s
 
 # target to generate assembly for a file
 sylar/bytearray.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/bytearray.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/bytearray.cc.s
 .PHONY : sylar/bytearray.cc.s
 
 sylar/config.o: sylar/config.cc.o
@@ -508,7 +532,7 @@ sylar/config.o: sylar/config.cc.o
 
 # target to build an object file
 sylar/config.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/config.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/config.cc.o
 .PHONY : sylar/config.cc.o
 
 sylar/config.i: sylar/config.cc.i
@@ -516,7 +540,7 @@ sylar/config.i: sylar/config.cc.i
 
 # target to preprocess a source file
 sylar/config.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/config.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/config.cc.i
 .PHONY : sylar/config.cc.i
 
 sylar/config.s: sylar/config.cc.s
@@ -524,7 +548,7 @@ sylar/config.s: sylar/config.cc.s
 
 # target to generate assembly for a file
 sylar/config.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/config.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/config.cc.s
 .PHONY : sylar/config.cc.s
 
 sylar/daemon.o: sylar/daemon.cc.o
@@ -532,7 +556,7 @@ sylar/daemon.o: sylar/daemon.cc.o
 
 # target to build an object file
 sylar/daemon.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/daemon.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/daemon.cc.o
 .PHONY : sylar/daemon.cc.o
 
 sylar/daemon.i: sylar/daemon.cc.i
@@ -540,7 +564,7 @@ sylar/daemon.i: sylar/daemon.cc.i
 
 # target to preprocess a source file
 sylar/daemon.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/daemon.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/daemon.cc.i
 .PHONY : sylar/daemon.cc.i
 
 sylar/daemon.s: sylar/daemon.cc.s
@@ -548,7 +572,7 @@ sylar/daemon.s: sylar/daemon.cc.s
 
 # target to generate assembly for a file
 sylar/daemon.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/daemon.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/daemon.cc.s
 .PHONY : sylar/daemon.cc.s
 
 sylar/env.o: sylar/env.cc.o
@@ -556,7 +580,7 @@ sylar/env.o: sylar/env.cc.o
 
 # target to build an object file
 sylar/env.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/env.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/env.cc.o
 .PHONY : sylar/env.cc.o
 
 sylar/env.i: sylar/env.cc.i
@@ -564,7 +588,7 @@ sylar/env.i: sylar/env.cc.i
 
 # target to preprocess a source file
 sylar/env.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/env.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/env.cc.i
 .PHONY : sylar/env.cc.i
 
 sylar/env.s: sylar/env.cc.s
@@ -572,7 +596,7 @@ sylar/env.s: sylar/env.cc.s
 
 # target to generate assembly for a file
 sylar/env.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/env.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/env.cc.s
 .PHONY : sylar/env.cc.s
 
 sylar/fd_manager.o: sylar/fd_manager.cc.o
@@ -580,7 +604,7 @@ sylar/fd_manager.o: sylar/fd_manager.cc.o
 
 # target to build an object file
 sylar/fd_manager.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/fd_manager.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/fd_manager.cc.o
 .PHONY : sylar/fd_manager.cc.o
 
 sylar/fd_manager.i: sylar/fd_manager.cc.i
@@ -588,7 +612,7 @@ sylar/fd_manager.i: sylar/fd_manager.cc.i
 
 # target to preprocess a source file
 sylar/fd_manager.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/fd_manager.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/fd_manager.cc.i
 .PHONY : sylar/fd_manager.cc.i
 
 sylar/fd_manager.s: sylar/fd_manager.cc.s
@@ -596,7 +620,7 @@ sylar/fd_manager.s: sylar/fd_manager.cc.s
 
 # target to generate assembly for a file
 sylar/fd_manager.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/fd_manager.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/fd_manager.cc.s
 .PHONY : sylar/fd_manager.cc.s
 
 sylar/fiber.o: sylar/fiber.cc.o
@@ -604,7 +628,7 @@ sylar/fiber.o: sylar/fiber.cc.o
 
 # target to build an object file
 sylar/fiber.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/fiber.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/fiber.cc.o
 .PHONY : sylar/fiber.cc.o
 
 sylar/fiber.i: sylar/fiber.cc.i
@@ -612,7 +636,7 @@ sylar/fiber.i: sylar/fiber.cc.i
 
 # target to preprocess a source file
 sylar/fiber.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/fiber.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/fiber.cc.i
 .PHONY : sylar/fiber.cc.i
 
 sylar/fiber.s: sylar/fiber.cc.s
@@ -620,7 +644,7 @@ sylar/fiber.s: sylar/fiber.cc.s
 
 # target to generate assembly for a file
 sylar/fiber.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/fiber.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/fiber.cc.s
 .PHONY : sylar/fiber.cc.s
 
 sylar/hook.o: sylar/hook.cc.o
@@ -628,7 +652,7 @@ sylar/hook.o: sylar/hook.cc.o
 
 # target to build an object file
 sylar/hook.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/hook.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/hook.cc.o
 .PHONY : sylar/hook.cc.o
 
 sylar/hook.i: sylar/hook.cc.i
@@ -636,7 +660,7 @@ sylar/hook.i: sylar/hook.cc.i
 
 # target to preprocess a source file
 sylar/hook.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/hook.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/hook.cc.i
 .PHONY : sylar/hook.cc.i
 
 sylar/hook.s: sylar/hook.cc.s
@@ -644,7 +668,7 @@ sylar/hook.s: sylar/hook.cc.s
 
 # target to generate assembly for a file
 sylar/hook.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/hook.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/hook.cc.s
 .PHONY : sylar/hook.cc.s
 
 sylar/http/http.o: sylar/http/http.cc.o
@@ -652,7 +676,7 @@ sylar/http/http.o: sylar/http/http.cc.o
 
 # target to build an object file
 sylar/http/http.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http.cc.o
 .PHONY : sylar/http/http.cc.o
 
 sylar/http/http.i: sylar/http/http.cc.i
@@ -660,7 +684,7 @@ sylar/http/http.i: sylar/http/http.cc.i
 
 # target to preprocess a source file
 sylar/http/http.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http.cc.i
 .PHONY : sylar/http/http.cc.i
 
 sylar/http/http.s: sylar/http/http.cc.s
@@ -668,7 +692,7 @@ sylar/http/http.s: sylar/http/http.cc.s
 
 # target to generate assembly for a file
 sylar/http/http.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http.cc.s
 .PHONY : sylar/http/http.cc.s
 
 sylar/http/http11_parser.rl.o: sylar/http/http11_parser.rl.cc.o
@@ -676,7 +700,7 @@ sylar/http/http11_parser.rl.o: sylar/http/http11_parser.rl.cc.o
 
 # target to build an object file
 sylar/http/http11_parser.rl.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http11_parser.rl.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http11_parser.rl.cc.o
 .PHONY : sylar/http/http11_parser.rl.cc.o
 
 sylar/http/http11_parser.rl.i: sylar/http/http11_parser.rl.cc.i
@@ -684,7 +708,7 @@ sylar/http/http11_parser.rl.i: sylar/http/http11_parser.rl.cc.i
 
 # target to preprocess a source file
 sylar/http/http11_parser.rl.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http11_parser.rl.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http11_parser.rl.cc.i
 .PHONY : sylar/http/http11_parser.rl.cc.i
 
 sylar/http/http11_parser.rl.s: sylar/http/http11_parser.rl.cc.s
@@ -692,7 +716,7 @@ sylar/http/http11_parser.rl.s: sylar/http/http11_parser.rl.cc.s
 
 # target to generate assembly for a file
 sylar/http/http11_parser.rl.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http11_parser.rl.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http11_parser.rl.cc.s
 .PHONY : sylar/http/http11_parser.rl.cc.s
 
 sylar/http/http_connection.o: sylar/http/http_connection.cc.o
@@ -700,7 +724,7 @@ sylar/http/http_connection.o: sylar/http/http_connection.cc.o
 
 # target to build an object file
 sylar/http/http_connection.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_connection.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_connection.cc.o
 .PHONY : sylar/http/http_connection.cc.o
 
 sylar/http/http_connection.i: sylar/http/http_connection.cc.i
@@ -708,7 +732,7 @@ sylar/http/http_connection.i: sylar/http/http_connection.cc.i
 
 # target to preprocess a source file
 sylar/http/http_connection.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_connection.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_connection.cc.i
 .PHONY : sylar/http/http_connection.cc.i
 
 sylar/http/http_connection.s: sylar/http/http_connection.cc.s
@@ -716,7 +740,7 @@ sylar/http/http_connection.s: sylar/http/http_connection.cc.s
 
 # target to generate assembly for a file
 sylar/http/http_connection.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_connection.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_connection.cc.s
 .PHONY : sylar/http/http_connection.cc.s
 
 sylar/http/http_parser.o: sylar/http/http_parser.cc.o
@@ -724,7 +748,7 @@ sylar/http/http_parser.o: sylar/http/http_parser.cc.o
 
 # target to build an object file
 sylar/http/http_parser.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o
 .PHONY : sylar/http/http_parser.cc.o
 
 sylar/http/http_parser.i: sylar/http/http_parser.cc.i
@@ -732,7 +756,7 @@ sylar/http/http_parser.i: sylar/http/http_parser.cc.i
 
 # target to preprocess a source file
 sylar/http/http_parser.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_parser.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_parser.cc.i
 .PHONY : sylar/http/http_parser.cc.i
 
 sylar/http/http_parser.s: sylar/http/http_parser.cc.s
@@ -740,7 +764,7 @@ sylar/http/http_parser.s: sylar/http/http_parser.cc.s
 
 # target to generate assembly for a file
 sylar/http/http_parser.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_parser.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_parser.cc.s
 .PHONY : sylar/http/http_parser.cc.s
 
 sylar/http/http_server.o: sylar/http/http_server.cc.o
@@ -748,7 +772,7 @@ sylar/http/http_server.o: sylar/http/http_server.cc.o
 
 # target to build an object file
 sylar/http/http_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_server.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_server.cc.o
 .PHONY : sylar/http/http_server.cc.o
 
 sylar/http/http_server.i: sylar/http/http_server.cc.i
@@ -756,7 +780,7 @@ sylar/http/http_server.i: sylar/http/http_server.cc.i
 
 # target to preprocess a source file
 sylar/http/http_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_server.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_server.cc.i
 .PHONY : sylar/http/http_server.cc.i
 
 sylar/http/http_server.s: sylar/http/http_server.cc.s
@@ -764,7 +788,7 @@ sylar/http/http_server.s: sylar/http/http_server.cc.s
 
 # target to generate assembly for a file
 sylar/http/http_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_server.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_server.cc.s
 .PHONY : sylar/http/http_server.cc.s
 
 sylar/http/http_session.o: sylar/http/http_session.cc.o
@@ -772,7 +796,7 @@ sylar/http/http_session.o: sylar/http/http_session.cc.o
 
 # target to build an object file
 sylar/http/http_session.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_session.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_session.cc.o
 .PHONY : sylar/http/http_session.cc.o
 
 sylar/http/http_session.i: sylar/http/http_session.cc.i
@@ -780,7 +804,7 @@ sylar/http/http_session.i: sylar/http/http_session.cc.i
 
 # target to preprocess a source file
 sylar/http/http_session.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_session.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_session.cc.i
 .PHONY : sylar/http/http_session.cc.i
 
 sylar/http/http_session.s: sylar/http/http_session.cc.s
@@ -788,7 +812,7 @@ sylar/http/http_session.s: sylar/http/http_session.cc.s
 
 # target to generate assembly for a file
 sylar/http/http_session.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/http_session.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/http_session.cc.s
 .PHONY : sylar/http/http_session.cc.s
 
 sylar/http/httpclient_parser.rl.o: sylar/http/httpclient_parser.rl.cc.o
@@ -796,7 +820,7 @@ sylar/http/httpclient_parser.rl.o: sylar/http/httpclient_parser.rl.cc.o
 
 # target to build an object file
 sylar/http/httpclient_parser.rl.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o
 .PHONY : sylar/http/httpclient_parser.rl.cc.o
 
 sylar/http/httpclient_parser.rl.i: sylar/http/httpclient_parser.rl.cc.i
@@ -804,7 +828,7 @@ sylar/http/httpclient_parser.rl.i: sylar/http/httpclient_parser.rl.cc.i
 
 # target to preprocess a source file
 sylar/http/httpclient_parser.rl.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.i
 .PHONY : sylar/http/httpclient_parser.rl.cc.i
 
 sylar/http/httpclient_parser.rl.s: sylar/http/httpclient_parser.rl.cc.s
@@ -812,7 +836,7 @@ sylar/http/httpclient_parser.rl.s: sylar/http/httpclient_parser.rl.cc.s
 
 # target to generate assembly for a file
 sylar/http/httpclient_parser.rl.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.s
 .PHONY : sylar/http/httpclient_parser.rl.cc.s
 
 sylar/http/servlet.o: sylar/http/servlet.cc.o
@@ -820,7 +844,7 @@ sylar/http/servlet.o: sylar/http/servlet.cc.o
 
 # target to build an object file
 sylar/http/servlet.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/servlet.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/servlet.cc.o
 .PHONY : sylar/http/servlet.cc.o
 
 sylar/http/servlet.i: sylar/http/servlet.cc.i
@@ -828,7 +852,7 @@ sylar/http/servlet.i: sylar/http/servlet.cc.i
 
 # target to preprocess a source file
 sylar/http/servlet.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/servlet.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/servlet.cc.i
 .PHONY : sylar/http/servlet.cc.i
 
 sylar/http/servlet.s: sylar/http/servlet.cc.s
@@ -836,7 +860,7 @@ sylar/http/servlet.s: sylar/http/servlet.cc.s
 
 # target to generate assembly for a file
 sylar/http/servlet.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/servlet.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/servlet.cc.s
 .PHONY : sylar/http/servlet.cc.s
 
 sylar/http/ws_connection.o: sylar/http/ws_connection.cc.o
@@ -844,7 +868,7 @@ sylar/http/ws_connection.o: sylar/http/ws_connection.cc.o
 
 # target to build an object file
 sylar/http/ws_connection.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_connection.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_connection.cc.o
 .PHONY : sylar/http/ws_connection.cc.o
 
 sylar/http/ws_connection.i: sylar/http/ws_connection.cc.i
@@ -852,7 +876,7 @@ sylar/http/ws_connection.i: sylar/http/ws_connection.cc.i
 
 # target to preprocess a source file
 sylar/http/ws_connection.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_connection.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_connection.cc.i
 .PHONY : sylar/http/ws_connection.cc.i
 
 sylar/http/ws_connection.s: sylar/http/ws_connection.cc.s
@@ -860,7 +884,7 @@ sylar/http/ws_connection.s: sylar/http/ws_connection.cc.s
 
 # target to generate assembly for a file
 sylar/http/ws_connection.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_connection.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_connection.cc.s
 .PHONY : sylar/http/ws_connection.cc.s
 
 sylar/http/ws_server.o: sylar/http/ws_server.cc.o
@@ -868,7 +892,7 @@ sylar/http/ws_server.o: sylar/http/ws_server.cc.o
 
 # target to build an object file
 sylar/http/ws_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_server.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_server.cc.o
 .PHONY : sylar/http/ws_server.cc.o
 
 sylar/http/ws_server.i: sylar/http/ws_server.cc.i
@@ -876,7 +900,7 @@ sylar/http/ws_server.i: sylar/http/ws_server.cc.i
 
 # target to preprocess a source file
 sylar/http/ws_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_server.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_server.cc.i
 .PHONY : sylar/http/ws_server.cc.i
 
 sylar/http/ws_server.s: sylar/http/ws_server.cc.s
@@ -884,7 +908,7 @@ sylar/http/ws_server.s: sylar/http/ws_server.cc.s
 
 # target to generate assembly for a file
 sylar/http/ws_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_server.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_server.cc.s
 .PHONY : sylar/http/ws_server.cc.s
 
 sylar/http/ws_servlet.o: sylar/http/ws_servlet.cc.o
@@ -892,7 +916,7 @@ sylar/http/ws_servlet.o: sylar/http/ws_servlet.cc.o
 
 # target to build an object file
 sylar/http/ws_servlet.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_servlet.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_servlet.cc.o
 .PHONY : sylar/http/ws_servlet.cc.o
 
 sylar/http/ws_servlet.i: sylar/http/ws_servlet.cc.i
@@ -900,7 +924,7 @@ sylar/http/ws_servlet.i: sylar/http/ws_servlet.cc.i
 
 # target to preprocess a source file
 sylar/http/ws_servlet.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_servlet.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_servlet.cc.i
 .PHONY : sylar/http/ws_servlet.cc.i
 
 sylar/http/ws_servlet.s: sylar/http/ws_servlet.cc.s
@@ -908,7 +932,7 @@ sylar/http/ws_servlet.s: sylar/http/ws_servlet.cc.s
 
 # target to generate assembly for a file
 sylar/http/ws_servlet.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_servlet.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_servlet.cc.s
 .PHONY : sylar/http/ws_servlet.cc.s
 
 sylar/http/ws_session.o: sylar/http/ws_session.cc.o
@@ -916,7 +940,7 @@ sylar/http/ws_session.o: sylar/http/ws_session.cc.o
 
 # target to build an object file
 sylar/http/ws_session.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_session.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_session.cc.o
 .PHONY : sylar/http/ws_session.cc.o
 
 sylar/http/ws_session.i: sylar/http/ws_session.cc.i
@@ -924,7 +948,7 @@ sylar/http/ws_session.i: sylar/http/ws_session.cc.i
 
 # target to preprocess a source file
 sylar/http/ws_session.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_session.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_session.cc.i
 .PHONY : sylar/http/ws_session.cc.i
 
 sylar/http/ws_session.s: sylar/http/ws_session.cc.s
@@ -932,7 +956,7 @@ sylar/http/ws_session.s: sylar/http/ws_session.cc.s
 
 # target to generate assembly for a file
 sylar/http/ws_session.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/http/ws_session.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/http/ws_session.cc.s
 .PHONY : sylar/http/ws_session.cc.s
 
 sylar/iomanager.o: sylar/iomanager.cc.o
@@ -940,7 +964,7 @@ sylar/iomanager.o: sylar/iomanager.cc.o
 
 # target to build an object file
 sylar/iomanager.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/iomanager.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/iomanager.cc.o
 .PHONY : sylar/iomanager.cc.o
 
 sylar/iomanager.i: sylar/iomanager.cc.i
@@ -948,7 +972,7 @@ sylar/iomanager.i: sylar/iomanager.cc.i
 
 # target to preprocess a source file
 sylar/iomanager.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/iomanager.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/iomanager.cc.i
 .PHONY : sylar/iomanager.cc.i
 
 sylar/iomanager.s: sylar/iomanager.cc.s
@@ -956,7 +980,7 @@ sylar/iomanager.s: sylar/iomanager.cc.s
 
 # target to generate assembly for a file
 sylar/iomanager.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/iomanager.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/iomanager.cc.s
 .PHONY : sylar/iomanager.cc.s
 
 sylar/library.o: sylar/library.cc.o
@@ -964,7 +988,7 @@ sylar/library.o: sylar/library.cc.o
 
 # target to build an object file
 sylar/library.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/library.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/library.cc.o
 .PHONY : sylar/library.cc.o
 
 sylar/library.i: sylar/library.cc.i
@@ -972,7 +996,7 @@ sylar/library.i: sylar/library.cc.i
 
 # target to preprocess a source file
 sylar/library.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/library.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/library.cc.i
 .PHONY : sylar/library.cc.i
 
 sylar/library.s: sylar/library.cc.s
@@ -980,7 +1004,7 @@ sylar/library.s: sylar/library.cc.s
 
 # target to generate assembly for a file
 sylar/library.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/library.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/library.cc.s
 .PHONY : sylar/library.cc.s
 
 sylar/log.o: sylar/log.cc.o
@@ -988,7 +1012,7 @@ sylar/log.o: sylar/log.cc.o
 
 # target to build an object file
 sylar/log.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/log.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/log.cc.o
 .PHONY : sylar/log.cc.o
 
 sylar/log.i: sylar/log.cc.i
@@ -996,7 +1020,7 @@ sylar/log.i: sylar/log.cc.i
 
 # target to preprocess a source file
 sylar/log.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/log.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/log.cc.i
 .PHONY : sylar/log.cc.i
 
 sylar/log.s: sylar/log.cc.s
@@ -1004,7 +1028,7 @@ sylar/log.s: sylar/log.cc.s
 
 # target to generate assembly for a file
 sylar/log.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/log.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/log.cc.s
 .PHONY : sylar/log.cc.s
 
 sylar/main.o: sylar/main.cc.o
@@ -1012,7 +1036,7 @@ sylar/main.o: sylar/main.cc.o
 
 # target to build an object file
 sylar/main.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bin_sylar.dir/build.make CMakeFiles/bin_sylar.dir/sylar/main.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/bin_sylar.dir/build.make game_server/CMakeFiles/bin_sylar.dir/sylar/main.cc.o
 .PHONY : sylar/main.cc.o
 
 sylar/main.i: sylar/main.cc.i
@@ -1020,7 +1044,7 @@ sylar/main.i: sylar/main.cc.i
 
 # target to preprocess a source file
 sylar/main.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bin_sylar.dir/build.make CMakeFiles/bin_sylar.dir/sylar/main.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/bin_sylar.dir/build.make game_server/CMakeFiles/bin_sylar.dir/sylar/main.cc.i
 .PHONY : sylar/main.cc.i
 
 sylar/main.s: sylar/main.cc.s
@@ -1028,7 +1052,7 @@ sylar/main.s: sylar/main.cc.s
 
 # target to generate assembly for a file
 sylar/main.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bin_sylar.dir/build.make CMakeFiles/bin_sylar.dir/sylar/main.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/bin_sylar.dir/build.make game_server/CMakeFiles/bin_sylar.dir/sylar/main.cc.s
 .PHONY : sylar/main.cc.s
 
 sylar/module.o: sylar/module.cc.o
@@ -1036,7 +1060,7 @@ sylar/module.o: sylar/module.cc.o
 
 # target to build an object file
 sylar/module.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/module.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/module.cc.o
 .PHONY : sylar/module.cc.o
 
 sylar/module.i: sylar/module.cc.i
@@ -1044,7 +1068,7 @@ sylar/module.i: sylar/module.cc.i
 
 # target to preprocess a source file
 sylar/module.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/module.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/module.cc.i
 .PHONY : sylar/module.cc.i
 
 sylar/module.s: sylar/module.cc.s
@@ -1052,7 +1076,7 @@ sylar/module.s: sylar/module.cc.s
 
 # target to generate assembly for a file
 sylar/module.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/module.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/module.cc.s
 .PHONY : sylar/module.cc.s
 
 sylar/mutex.o: sylar/mutex.cc.o
@@ -1060,7 +1084,7 @@ sylar/mutex.o: sylar/mutex.cc.o
 
 # target to build an object file
 sylar/mutex.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/mutex.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/mutex.cc.o
 .PHONY : sylar/mutex.cc.o
 
 sylar/mutex.i: sylar/mutex.cc.i
@@ -1068,7 +1092,7 @@ sylar/mutex.i: sylar/mutex.cc.i
 
 # target to preprocess a source file
 sylar/mutex.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/mutex.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/mutex.cc.i
 .PHONY : sylar/mutex.cc.i
 
 sylar/mutex.s: sylar/mutex.cc.s
@@ -1076,7 +1100,7 @@ sylar/mutex.s: sylar/mutex.cc.s
 
 # target to generate assembly for a file
 sylar/mutex.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/mutex.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/mutex.cc.s
 .PHONY : sylar/mutex.cc.s
 
 sylar/scheduler.o: sylar/scheduler.cc.o
@@ -1084,7 +1108,7 @@ sylar/scheduler.o: sylar/scheduler.cc.o
 
 # target to build an object file
 sylar/scheduler.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/scheduler.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/scheduler.cc.o
 .PHONY : sylar/scheduler.cc.o
 
 sylar/scheduler.i: sylar/scheduler.cc.i
@@ -1092,7 +1116,7 @@ sylar/scheduler.i: sylar/scheduler.cc.i
 
 # target to preprocess a source file
 sylar/scheduler.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/scheduler.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/scheduler.cc.i
 .PHONY : sylar/scheduler.cc.i
 
 sylar/scheduler.s: sylar/scheduler.cc.s
@@ -1100,7 +1124,7 @@ sylar/scheduler.s: sylar/scheduler.cc.s
 
 # target to generate assembly for a file
 sylar/scheduler.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/scheduler.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/scheduler.cc.s
 .PHONY : sylar/scheduler.cc.s
 
 sylar/socket.o: sylar/socket.cc.o
@@ -1108,7 +1132,7 @@ sylar/socket.o: sylar/socket.cc.o
 
 # target to build an object file
 sylar/socket.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/socket.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/socket.cc.o
 .PHONY : sylar/socket.cc.o
 
 sylar/socket.i: sylar/socket.cc.i
@@ -1116,7 +1140,7 @@ sylar/socket.i: sylar/socket.cc.i
 
 # target to preprocess a source file
 sylar/socket.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/socket.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/socket.cc.i
 .PHONY : sylar/socket.cc.i
 
 sylar/socket.s: sylar/socket.cc.s
@@ -1124,39 +1148,15 @@ sylar/socket.s: sylar/socket.cc.s
 
 # target to generate assembly for a file
 sylar/socket.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/socket.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/socket.cc.s
 .PHONY : sylar/socket.cc.s
-
-sylar/socket_stream.o: sylar/socket_stream.cc.o
-.PHONY : sylar/socket_stream.o
-
-# target to build an object file
-sylar/socket_stream.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/socket_stream.cc.o
-.PHONY : sylar/socket_stream.cc.o
-
-sylar/socket_stream.i: sylar/socket_stream.cc.i
-.PHONY : sylar/socket_stream.i
-
-# target to preprocess a source file
-sylar/socket_stream.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/socket_stream.cc.i
-.PHONY : sylar/socket_stream.cc.i
-
-sylar/socket_stream.s: sylar/socket_stream.cc.s
-.PHONY : sylar/socket_stream.s
-
-# target to generate assembly for a file
-sylar/socket_stream.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/socket_stream.cc.s
-.PHONY : sylar/socket_stream.cc.s
 
 sylar/stream.o: sylar/stream.cc.o
 .PHONY : sylar/stream.o
 
 # target to build an object file
 sylar/stream.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/stream.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/stream.cc.o
 .PHONY : sylar/stream.cc.o
 
 sylar/stream.i: sylar/stream.cc.i
@@ -1164,7 +1164,7 @@ sylar/stream.i: sylar/stream.cc.i
 
 # target to preprocess a source file
 sylar/stream.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/stream.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/stream.cc.i
 .PHONY : sylar/stream.cc.i
 
 sylar/stream.s: sylar/stream.cc.s
@@ -1172,15 +1172,63 @@ sylar/stream.s: sylar/stream.cc.s
 
 # target to generate assembly for a file
 sylar/stream.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/stream.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/stream.cc.s
 .PHONY : sylar/stream.cc.s
+
+sylar/streams/socket_stream.o: sylar/streams/socket_stream.cc.o
+.PHONY : sylar/streams/socket_stream.o
+
+# target to build an object file
+sylar/streams/socket_stream.cc.o:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/socket_stream.cc.o
+.PHONY : sylar/streams/socket_stream.cc.o
+
+sylar/streams/socket_stream.i: sylar/streams/socket_stream.cc.i
+.PHONY : sylar/streams/socket_stream.i
+
+# target to preprocess a source file
+sylar/streams/socket_stream.cc.i:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/socket_stream.cc.i
+.PHONY : sylar/streams/socket_stream.cc.i
+
+sylar/streams/socket_stream.s: sylar/streams/socket_stream.cc.s
+.PHONY : sylar/streams/socket_stream.s
+
+# target to generate assembly for a file
+sylar/streams/socket_stream.cc.s:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/socket_stream.cc.s
+.PHONY : sylar/streams/socket_stream.cc.s
+
+sylar/streams/zlib_stream.o: sylar/streams/zlib_stream.cc.o
+.PHONY : sylar/streams/zlib_stream.o
+
+# target to build an object file
+sylar/streams/zlib_stream.cc.o:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/zlib_stream.cc.o
+.PHONY : sylar/streams/zlib_stream.cc.o
+
+sylar/streams/zlib_stream.i: sylar/streams/zlib_stream.cc.i
+.PHONY : sylar/streams/zlib_stream.i
+
+# target to preprocess a source file
+sylar/streams/zlib_stream.cc.i:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/zlib_stream.cc.i
+.PHONY : sylar/streams/zlib_stream.cc.i
+
+sylar/streams/zlib_stream.s: sylar/streams/zlib_stream.cc.s
+.PHONY : sylar/streams/zlib_stream.s
+
+# target to generate assembly for a file
+sylar/streams/zlib_stream.cc.s:
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/zlib_stream.cc.s
+.PHONY : sylar/streams/zlib_stream.cc.s
 
 sylar/tcp_server.o: sylar/tcp_server.cc.o
 .PHONY : sylar/tcp_server.o
 
 # target to build an object file
 sylar/tcp_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/tcp_server.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/tcp_server.cc.o
 .PHONY : sylar/tcp_server.cc.o
 
 sylar/tcp_server.i: sylar/tcp_server.cc.i
@@ -1188,7 +1236,7 @@ sylar/tcp_server.i: sylar/tcp_server.cc.i
 
 # target to preprocess a source file
 sylar/tcp_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/tcp_server.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/tcp_server.cc.i
 .PHONY : sylar/tcp_server.cc.i
 
 sylar/tcp_server.s: sylar/tcp_server.cc.s
@@ -1196,7 +1244,7 @@ sylar/tcp_server.s: sylar/tcp_server.cc.s
 
 # target to generate assembly for a file
 sylar/tcp_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/tcp_server.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/tcp_server.cc.s
 .PHONY : sylar/tcp_server.cc.s
 
 sylar/thread.o: sylar/thread.cc.o
@@ -1204,7 +1252,7 @@ sylar/thread.o: sylar/thread.cc.o
 
 # target to build an object file
 sylar/thread.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/thread.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/thread.cc.o
 .PHONY : sylar/thread.cc.o
 
 sylar/thread.i: sylar/thread.cc.i
@@ -1212,7 +1260,7 @@ sylar/thread.i: sylar/thread.cc.i
 
 # target to preprocess a source file
 sylar/thread.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/thread.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/thread.cc.i
 .PHONY : sylar/thread.cc.i
 
 sylar/thread.s: sylar/thread.cc.s
@@ -1220,7 +1268,7 @@ sylar/thread.s: sylar/thread.cc.s
 
 # target to generate assembly for a file
 sylar/thread.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/thread.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/thread.cc.s
 .PHONY : sylar/thread.cc.s
 
 sylar/timer.o: sylar/timer.cc.o
@@ -1228,7 +1276,7 @@ sylar/timer.o: sylar/timer.cc.o
 
 # target to build an object file
 sylar/timer.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/timer.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/timer.cc.o
 .PHONY : sylar/timer.cc.o
 
 sylar/timer.i: sylar/timer.cc.i
@@ -1236,7 +1284,7 @@ sylar/timer.i: sylar/timer.cc.i
 
 # target to preprocess a source file
 sylar/timer.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/timer.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/timer.cc.i
 .PHONY : sylar/timer.cc.i
 
 sylar/timer.s: sylar/timer.cc.s
@@ -1244,7 +1292,7 @@ sylar/timer.s: sylar/timer.cc.s
 
 # target to generate assembly for a file
 sylar/timer.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/timer.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/timer.cc.s
 .PHONY : sylar/timer.cc.s
 
 sylar/uri.rl.o: sylar/uri.rl.cc.o
@@ -1252,7 +1300,7 @@ sylar/uri.rl.o: sylar/uri.rl.cc.o
 
 # target to build an object file
 sylar/uri.rl.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/uri.rl.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/uri.rl.cc.o
 .PHONY : sylar/uri.rl.cc.o
 
 sylar/uri.rl.i: sylar/uri.rl.cc.i
@@ -1260,7 +1308,7 @@ sylar/uri.rl.i: sylar/uri.rl.cc.i
 
 # target to preprocess a source file
 sylar/uri.rl.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/uri.rl.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/uri.rl.cc.i
 .PHONY : sylar/uri.rl.cc.i
 
 sylar/uri.rl.s: sylar/uri.rl.cc.s
@@ -1268,7 +1316,7 @@ sylar/uri.rl.s: sylar/uri.rl.cc.s
 
 # target to generate assembly for a file
 sylar/uri.rl.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/uri.rl.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/uri.rl.cc.s
 .PHONY : sylar/uri.rl.cc.s
 
 sylar/util.o: sylar/util.cc.o
@@ -1276,7 +1324,7 @@ sylar/util.o: sylar/util.cc.o
 
 # target to build an object file
 sylar/util.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util.cc.o
 .PHONY : sylar/util.cc.o
 
 sylar/util.i: sylar/util.cc.i
@@ -1284,7 +1332,7 @@ sylar/util.i: sylar/util.cc.i
 
 # target to preprocess a source file
 sylar/util.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util.cc.i
 .PHONY : sylar/util.cc.i
 
 sylar/util.s: sylar/util.cc.s
@@ -1292,7 +1340,7 @@ sylar/util.s: sylar/util.cc.s
 
 # target to generate assembly for a file
 sylar/util.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util.cc.s
 .PHONY : sylar/util.cc.s
 
 sylar/util/hash_util.o: sylar/util/hash_util.cc.o
@@ -1300,7 +1348,7 @@ sylar/util/hash_util.o: sylar/util/hash_util.cc.o
 
 # target to build an object file
 sylar/util/hash_util.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util/hash_util.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util/hash_util.cc.o
 .PHONY : sylar/util/hash_util.cc.o
 
 sylar/util/hash_util.i: sylar/util/hash_util.cc.i
@@ -1308,7 +1356,7 @@ sylar/util/hash_util.i: sylar/util/hash_util.cc.i
 
 # target to preprocess a source file
 sylar/util/hash_util.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util/hash_util.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util/hash_util.cc.i
 .PHONY : sylar/util/hash_util.cc.i
 
 sylar/util/hash_util.s: sylar/util/hash_util.cc.s
@@ -1316,7 +1364,7 @@ sylar/util/hash_util.s: sylar/util/hash_util.cc.s
 
 # target to generate assembly for a file
 sylar/util/hash_util.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util/hash_util.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util/hash_util.cc.s
 .PHONY : sylar/util/hash_util.cc.s
 
 sylar/util/json_util.o: sylar/util/json_util.cc.o
@@ -1324,7 +1372,7 @@ sylar/util/json_util.o: sylar/util/json_util.cc.o
 
 # target to build an object file
 sylar/util/json_util.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util/json_util.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util/json_util.cc.o
 .PHONY : sylar/util/json_util.cc.o
 
 sylar/util/json_util.i: sylar/util/json_util.cc.i
@@ -1332,7 +1380,7 @@ sylar/util/json_util.i: sylar/util/json_util.cc.i
 
 # target to preprocess a source file
 sylar/util/json_util.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util/json_util.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util/json_util.cc.i
 .PHONY : sylar/util/json_util.cc.i
 
 sylar/util/json_util.s: sylar/util/json_util.cc.s
@@ -1340,7 +1388,7 @@ sylar/util/json_util.s: sylar/util/json_util.cc.s
 
 # target to generate assembly for a file
 sylar/util/json_util.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/util/json_util.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/util/json_util.cc.s
 .PHONY : sylar/util/json_util.cc.s
 
 sylar/worker.o: sylar/worker.cc.o
@@ -1348,7 +1396,7 @@ sylar/worker.o: sylar/worker.cc.o
 
 # target to build an object file
 sylar/worker.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/worker.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/worker.cc.o
 .PHONY : sylar/worker.cc.o
 
 sylar/worker.i: sylar/worker.cc.i
@@ -1356,7 +1404,7 @@ sylar/worker.i: sylar/worker.cc.i
 
 # target to preprocess a source file
 sylar/worker.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/worker.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/worker.cc.i
 .PHONY : sylar/worker.cc.i
 
 sylar/worker.s: sylar/worker.cc.s
@@ -1364,7 +1412,7 @@ sylar/worker.s: sylar/worker.cc.s
 
 # target to generate assembly for a file
 sylar/worker.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/sylar/worker.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/worker.cc.s
 .PHONY : sylar/worker.cc.s
 
 tests/test.o: tests/test.cc.o
@@ -1372,7 +1420,7 @@ tests/test.o: tests/test.cc.o
 
 # target to build an object file
 tests/test.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tests/test.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test.dir/build.make game_server/CMakeFiles/test.dir/tests/test.cc.o
 .PHONY : tests/test.cc.o
 
 tests/test.i: tests/test.cc.i
@@ -1380,7 +1428,7 @@ tests/test.i: tests/test.cc.i
 
 # target to preprocess a source file
 tests/test.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tests/test.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test.dir/build.make game_server/CMakeFiles/test.dir/tests/test.cc.i
 .PHONY : tests/test.cc.i
 
 tests/test.s: tests/test.cc.s
@@ -1388,7 +1436,7 @@ tests/test.s: tests/test.cc.s
 
 # target to generate assembly for a file
 tests/test.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tests/test.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test.dir/build.make game_server/CMakeFiles/test.dir/tests/test.cc.s
 .PHONY : tests/test.cc.s
 
 tests/test_address.o: tests/test_address.cc.o
@@ -1396,7 +1444,7 @@ tests/test_address.o: tests/test_address.cc.o
 
 # target to build an object file
 tests/test_address.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_address.dir/build.make CMakeFiles/test_address.dir/tests/test_address.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_address.dir/build.make game_server/CMakeFiles/test_address.dir/tests/test_address.cc.o
 .PHONY : tests/test_address.cc.o
 
 tests/test_address.i: tests/test_address.cc.i
@@ -1404,7 +1452,7 @@ tests/test_address.i: tests/test_address.cc.i
 
 # target to preprocess a source file
 tests/test_address.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_address.dir/build.make CMakeFiles/test_address.dir/tests/test_address.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_address.dir/build.make game_server/CMakeFiles/test_address.dir/tests/test_address.cc.i
 .PHONY : tests/test_address.cc.i
 
 tests/test_address.s: tests/test_address.cc.s
@@ -1412,7 +1460,7 @@ tests/test_address.s: tests/test_address.cc.s
 
 # target to generate assembly for a file
 tests/test_address.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_address.dir/build.make CMakeFiles/test_address.dir/tests/test_address.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_address.dir/build.make game_server/CMakeFiles/test_address.dir/tests/test_address.cc.s
 .PHONY : tests/test_address.cc.s
 
 tests/test_bytearray.o: tests/test_bytearray.cc.o
@@ -1420,7 +1468,7 @@ tests/test_bytearray.o: tests/test_bytearray.cc.o
 
 # target to build an object file
 tests/test_bytearray.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_bytearray.dir/build.make CMakeFiles/test_bytearray.dir/tests/test_bytearray.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_bytearray.dir/build.make game_server/CMakeFiles/test_bytearray.dir/tests/test_bytearray.cc.o
 .PHONY : tests/test_bytearray.cc.o
 
 tests/test_bytearray.i: tests/test_bytearray.cc.i
@@ -1428,7 +1476,7 @@ tests/test_bytearray.i: tests/test_bytearray.cc.i
 
 # target to preprocess a source file
 tests/test_bytearray.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_bytearray.dir/build.make CMakeFiles/test_bytearray.dir/tests/test_bytearray.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_bytearray.dir/build.make game_server/CMakeFiles/test_bytearray.dir/tests/test_bytearray.cc.i
 .PHONY : tests/test_bytearray.cc.i
 
 tests/test_bytearray.s: tests/test_bytearray.cc.s
@@ -1436,7 +1484,7 @@ tests/test_bytearray.s: tests/test_bytearray.cc.s
 
 # target to generate assembly for a file
 tests/test_bytearray.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_bytearray.dir/build.make CMakeFiles/test_bytearray.dir/tests/test_bytearray.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_bytearray.dir/build.make game_server/CMakeFiles/test_bytearray.dir/tests/test_bytearray.cc.s
 .PHONY : tests/test_bytearray.cc.s
 
 tests/test_config.o: tests/test_config.cc.o
@@ -1444,7 +1492,7 @@ tests/test_config.o: tests/test_config.cc.o
 
 # target to build an object file
 tests/test_config.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/tests/test_config.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_config.dir/build.make game_server/CMakeFiles/test_config.dir/tests/test_config.cc.o
 .PHONY : tests/test_config.cc.o
 
 tests/test_config.i: tests/test_config.cc.i
@@ -1452,7 +1500,7 @@ tests/test_config.i: tests/test_config.cc.i
 
 # target to preprocess a source file
 tests/test_config.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/tests/test_config.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_config.dir/build.make game_server/CMakeFiles/test_config.dir/tests/test_config.cc.i
 .PHONY : tests/test_config.cc.i
 
 tests/test_config.s: tests/test_config.cc.s
@@ -1460,7 +1508,7 @@ tests/test_config.s: tests/test_config.cc.s
 
 # target to generate assembly for a file
 tests/test_config.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/tests/test_config.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_config.dir/build.make game_server/CMakeFiles/test_config.dir/tests/test_config.cc.s
 .PHONY : tests/test_config.cc.s
 
 tests/test_daemon.o: tests/test_daemon.cc.o
@@ -1468,7 +1516,7 @@ tests/test_daemon.o: tests/test_daemon.cc.o
 
 # target to build an object file
 tests/test_daemon.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_daemon.dir/build.make CMakeFiles/test_daemon.dir/tests/test_daemon.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_daemon.dir/build.make game_server/CMakeFiles/test_daemon.dir/tests/test_daemon.cc.o
 .PHONY : tests/test_daemon.cc.o
 
 tests/test_daemon.i: tests/test_daemon.cc.i
@@ -1476,7 +1524,7 @@ tests/test_daemon.i: tests/test_daemon.cc.i
 
 # target to preprocess a source file
 tests/test_daemon.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_daemon.dir/build.make CMakeFiles/test_daemon.dir/tests/test_daemon.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_daemon.dir/build.make game_server/CMakeFiles/test_daemon.dir/tests/test_daemon.cc.i
 .PHONY : tests/test_daemon.cc.i
 
 tests/test_daemon.s: tests/test_daemon.cc.s
@@ -1484,7 +1532,7 @@ tests/test_daemon.s: tests/test_daemon.cc.s
 
 # target to generate assembly for a file
 tests/test_daemon.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_daemon.dir/build.make CMakeFiles/test_daemon.dir/tests/test_daemon.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_daemon.dir/build.make game_server/CMakeFiles/test_daemon.dir/tests/test_daemon.cc.s
 .PHONY : tests/test_daemon.cc.s
 
 tests/test_echo_server.o: tests/test_echo_server.cc.o
@@ -1492,7 +1540,7 @@ tests/test_echo_server.o: tests/test_echo_server.cc.o
 
 # target to build an object file
 tests/test_echo_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_echo_server.dir/build.make CMakeFiles/test_echo_server.dir/tests/test_echo_server.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_echo_server.dir/build.make game_server/CMakeFiles/test_echo_server.dir/tests/test_echo_server.cc.o
 .PHONY : tests/test_echo_server.cc.o
 
 tests/test_echo_server.i: tests/test_echo_server.cc.i
@@ -1500,7 +1548,7 @@ tests/test_echo_server.i: tests/test_echo_server.cc.i
 
 # target to preprocess a source file
 tests/test_echo_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_echo_server.dir/build.make CMakeFiles/test_echo_server.dir/tests/test_echo_server.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_echo_server.dir/build.make game_server/CMakeFiles/test_echo_server.dir/tests/test_echo_server.cc.i
 .PHONY : tests/test_echo_server.cc.i
 
 tests/test_echo_server.s: tests/test_echo_server.cc.s
@@ -1508,7 +1556,7 @@ tests/test_echo_server.s: tests/test_echo_server.cc.s
 
 # target to generate assembly for a file
 tests/test_echo_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_echo_server.dir/build.make CMakeFiles/test_echo_server.dir/tests/test_echo_server.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_echo_server.dir/build.make game_server/CMakeFiles/test_echo_server.dir/tests/test_echo_server.cc.s
 .PHONY : tests/test_echo_server.cc.s
 
 tests/test_env.o: tests/test_env.cc.o
@@ -1516,7 +1564,7 @@ tests/test_env.o: tests/test_env.cc.o
 
 # target to build an object file
 tests/test_env.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_env.dir/build.make CMakeFiles/test_env.dir/tests/test_env.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_env.dir/build.make game_server/CMakeFiles/test_env.dir/tests/test_env.cc.o
 .PHONY : tests/test_env.cc.o
 
 tests/test_env.i: tests/test_env.cc.i
@@ -1524,7 +1572,7 @@ tests/test_env.i: tests/test_env.cc.i
 
 # target to preprocess a source file
 tests/test_env.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_env.dir/build.make CMakeFiles/test_env.dir/tests/test_env.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_env.dir/build.make game_server/CMakeFiles/test_env.dir/tests/test_env.cc.i
 .PHONY : tests/test_env.cc.i
 
 tests/test_env.s: tests/test_env.cc.s
@@ -1532,7 +1580,7 @@ tests/test_env.s: tests/test_env.cc.s
 
 # target to generate assembly for a file
 tests/test_env.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_env.dir/build.make CMakeFiles/test_env.dir/tests/test_env.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_env.dir/build.make game_server/CMakeFiles/test_env.dir/tests/test_env.cc.s
 .PHONY : tests/test_env.cc.s
 
 tests/test_fiber.o: tests/test_fiber.cc.o
@@ -1540,7 +1588,7 @@ tests/test_fiber.o: tests/test_fiber.cc.o
 
 # target to build an object file
 tests/test_fiber.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fiber.dir/build.make CMakeFiles/test_fiber.dir/tests/test_fiber.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_fiber.dir/build.make game_server/CMakeFiles/test_fiber.dir/tests/test_fiber.cc.o
 .PHONY : tests/test_fiber.cc.o
 
 tests/test_fiber.i: tests/test_fiber.cc.i
@@ -1548,7 +1596,7 @@ tests/test_fiber.i: tests/test_fiber.cc.i
 
 # target to preprocess a source file
 tests/test_fiber.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fiber.dir/build.make CMakeFiles/test_fiber.dir/tests/test_fiber.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_fiber.dir/build.make game_server/CMakeFiles/test_fiber.dir/tests/test_fiber.cc.i
 .PHONY : tests/test_fiber.cc.i
 
 tests/test_fiber.s: tests/test_fiber.cc.s
@@ -1556,7 +1604,7 @@ tests/test_fiber.s: tests/test_fiber.cc.s
 
 # target to generate assembly for a file
 tests/test_fiber.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fiber.dir/build.make CMakeFiles/test_fiber.dir/tests/test_fiber.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_fiber.dir/build.make game_server/CMakeFiles/test_fiber.dir/tests/test_fiber.cc.s
 .PHONY : tests/test_fiber.cc.s
 
 tests/test_hash.o: tests/test_hash.cc.o
@@ -1564,7 +1612,7 @@ tests/test_hash.o: tests/test_hash.cc.o
 
 # target to build an object file
 tests/test_hash.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hash.dir/build.make CMakeFiles/test_hash.dir/tests/test_hash.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hash.dir/build.make game_server/CMakeFiles/test_hash.dir/tests/test_hash.cc.o
 .PHONY : tests/test_hash.cc.o
 
 tests/test_hash.i: tests/test_hash.cc.i
@@ -1572,7 +1620,7 @@ tests/test_hash.i: tests/test_hash.cc.i
 
 # target to preprocess a source file
 tests/test_hash.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hash.dir/build.make CMakeFiles/test_hash.dir/tests/test_hash.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hash.dir/build.make game_server/CMakeFiles/test_hash.dir/tests/test_hash.cc.i
 .PHONY : tests/test_hash.cc.i
 
 tests/test_hash.s: tests/test_hash.cc.s
@@ -1580,7 +1628,7 @@ tests/test_hash.s: tests/test_hash.cc.s
 
 # target to generate assembly for a file
 tests/test_hash.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hash.dir/build.make CMakeFiles/test_hash.dir/tests/test_hash.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hash.dir/build.make game_server/CMakeFiles/test_hash.dir/tests/test_hash.cc.s
 .PHONY : tests/test_hash.cc.s
 
 tests/test_hook.o: tests/test_hook.cc.o
@@ -1588,7 +1636,7 @@ tests/test_hook.o: tests/test_hook.cc.o
 
 # target to build an object file
 tests/test_hook.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hook.dir/build.make CMakeFiles/test_hook.dir/tests/test_hook.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hook.dir/build.make game_server/CMakeFiles/test_hook.dir/tests/test_hook.cc.o
 .PHONY : tests/test_hook.cc.o
 
 tests/test_hook.i: tests/test_hook.cc.i
@@ -1596,7 +1644,7 @@ tests/test_hook.i: tests/test_hook.cc.i
 
 # target to preprocess a source file
 tests/test_hook.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hook.dir/build.make CMakeFiles/test_hook.dir/tests/test_hook.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hook.dir/build.make game_server/CMakeFiles/test_hook.dir/tests/test_hook.cc.i
 .PHONY : tests/test_hook.cc.i
 
 tests/test_hook.s: tests/test_hook.cc.s
@@ -1604,7 +1652,7 @@ tests/test_hook.s: tests/test_hook.cc.s
 
 # target to generate assembly for a file
 tests/test_hook.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_hook.dir/build.make CMakeFiles/test_hook.dir/tests/test_hook.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_hook.dir/build.make game_server/CMakeFiles/test_hook.dir/tests/test_hook.cc.s
 .PHONY : tests/test_hook.cc.s
 
 tests/test_http.o: tests/test_http.cc.o
@@ -1612,7 +1660,7 @@ tests/test_http.o: tests/test_http.cc.o
 
 # target to build an object file
 tests/test_http.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http.dir/build.make CMakeFiles/test_http.dir/tests/test_http.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http.dir/build.make game_server/CMakeFiles/test_http.dir/tests/test_http.cc.o
 .PHONY : tests/test_http.cc.o
 
 tests/test_http.i: tests/test_http.cc.i
@@ -1620,7 +1668,7 @@ tests/test_http.i: tests/test_http.cc.i
 
 # target to preprocess a source file
 tests/test_http.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http.dir/build.make CMakeFiles/test_http.dir/tests/test_http.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http.dir/build.make game_server/CMakeFiles/test_http.dir/tests/test_http.cc.i
 .PHONY : tests/test_http.cc.i
 
 tests/test_http.s: tests/test_http.cc.s
@@ -1628,7 +1676,7 @@ tests/test_http.s: tests/test_http.cc.s
 
 # target to generate assembly for a file
 tests/test_http.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http.dir/build.make CMakeFiles/test_http.dir/tests/test_http.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http.dir/build.make game_server/CMakeFiles/test_http.dir/tests/test_http.cc.s
 .PHONY : tests/test_http.cc.s
 
 tests/test_http_connection.o: tests/test_http_connection.cc.o
@@ -1636,7 +1684,7 @@ tests/test_http_connection.o: tests/test_http_connection.cc.o
 
 # target to build an object file
 tests/test_http_connection.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_connection.dir/build.make CMakeFiles/test_http_connection.dir/tests/test_http_connection.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_connection.dir/build.make game_server/CMakeFiles/test_http_connection.dir/tests/test_http_connection.cc.o
 .PHONY : tests/test_http_connection.cc.o
 
 tests/test_http_connection.i: tests/test_http_connection.cc.i
@@ -1644,7 +1692,7 @@ tests/test_http_connection.i: tests/test_http_connection.cc.i
 
 # target to preprocess a source file
 tests/test_http_connection.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_connection.dir/build.make CMakeFiles/test_http_connection.dir/tests/test_http_connection.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_connection.dir/build.make game_server/CMakeFiles/test_http_connection.dir/tests/test_http_connection.cc.i
 .PHONY : tests/test_http_connection.cc.i
 
 tests/test_http_connection.s: tests/test_http_connection.cc.s
@@ -1652,7 +1700,7 @@ tests/test_http_connection.s: tests/test_http_connection.cc.s
 
 # target to generate assembly for a file
 tests/test_http_connection.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_connection.dir/build.make CMakeFiles/test_http_connection.dir/tests/test_http_connection.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_connection.dir/build.make game_server/CMakeFiles/test_http_connection.dir/tests/test_http_connection.cc.s
 .PHONY : tests/test_http_connection.cc.s
 
 tests/test_http_parser.o: tests/test_http_parser.cc.o
@@ -1660,7 +1708,7 @@ tests/test_http_parser.o: tests/test_http_parser.cc.o
 
 # target to build an object file
 tests/test_http_parser.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_parser.dir/build.make CMakeFiles/test_http_parser.dir/tests/test_http_parser.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_parser.dir/build.make game_server/CMakeFiles/test_http_parser.dir/tests/test_http_parser.cc.o
 .PHONY : tests/test_http_parser.cc.o
 
 tests/test_http_parser.i: tests/test_http_parser.cc.i
@@ -1668,7 +1716,7 @@ tests/test_http_parser.i: tests/test_http_parser.cc.i
 
 # target to preprocess a source file
 tests/test_http_parser.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_parser.dir/build.make CMakeFiles/test_http_parser.dir/tests/test_http_parser.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_parser.dir/build.make game_server/CMakeFiles/test_http_parser.dir/tests/test_http_parser.cc.i
 .PHONY : tests/test_http_parser.cc.i
 
 tests/test_http_parser.s: tests/test_http_parser.cc.s
@@ -1676,7 +1724,7 @@ tests/test_http_parser.s: tests/test_http_parser.cc.s
 
 # target to generate assembly for a file
 tests/test_http_parser.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_parser.dir/build.make CMakeFiles/test_http_parser.dir/tests/test_http_parser.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_parser.dir/build.make game_server/CMakeFiles/test_http_parser.dir/tests/test_http_parser.cc.s
 .PHONY : tests/test_http_parser.cc.s
 
 tests/test_http_server.o: tests/test_http_server.cc.o
@@ -1684,7 +1732,7 @@ tests/test_http_server.o: tests/test_http_server.cc.o
 
 # target to build an object file
 tests/test_http_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_server.dir/build.make CMakeFiles/test_http_server.dir/tests/test_http_server.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_server.dir/build.make game_server/CMakeFiles/test_http_server.dir/tests/test_http_server.cc.o
 .PHONY : tests/test_http_server.cc.o
 
 tests/test_http_server.i: tests/test_http_server.cc.i
@@ -1692,7 +1740,7 @@ tests/test_http_server.i: tests/test_http_server.cc.i
 
 # target to preprocess a source file
 tests/test_http_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_server.dir/build.make CMakeFiles/test_http_server.dir/tests/test_http_server.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_server.dir/build.make game_server/CMakeFiles/test_http_server.dir/tests/test_http_server.cc.i
 .PHONY : tests/test_http_server.cc.i
 
 tests/test_http_server.s: tests/test_http_server.cc.s
@@ -1700,7 +1748,7 @@ tests/test_http_server.s: tests/test_http_server.cc.s
 
 # target to generate assembly for a file
 tests/test_http_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_http_server.dir/build.make CMakeFiles/test_http_server.dir/tests/test_http_server.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_http_server.dir/build.make game_server/CMakeFiles/test_http_server.dir/tests/test_http_server.cc.s
 .PHONY : tests/test_http_server.cc.s
 
 tests/test_iomanager.o: tests/test_iomanager.cc.o
@@ -1708,7 +1756,7 @@ tests/test_iomanager.o: tests/test_iomanager.cc.o
 
 # target to build an object file
 tests/test_iomanager.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/tests/test_iomanager.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_iomanager.dir/build.make game_server/CMakeFiles/test_iomanager.dir/tests/test_iomanager.cc.o
 .PHONY : tests/test_iomanager.cc.o
 
 tests/test_iomanager.i: tests/test_iomanager.cc.i
@@ -1716,7 +1764,7 @@ tests/test_iomanager.i: tests/test_iomanager.cc.i
 
 # target to preprocess a source file
 tests/test_iomanager.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/tests/test_iomanager.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_iomanager.dir/build.make game_server/CMakeFiles/test_iomanager.dir/tests/test_iomanager.cc.i
 .PHONY : tests/test_iomanager.cc.i
 
 tests/test_iomanager.s: tests/test_iomanager.cc.s
@@ -1724,7 +1772,7 @@ tests/test_iomanager.s: tests/test_iomanager.cc.s
 
 # target to generate assembly for a file
 tests/test_iomanager.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/tests/test_iomanager.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_iomanager.dir/build.make game_server/CMakeFiles/test_iomanager.dir/tests/test_iomanager.cc.s
 .PHONY : tests/test_iomanager.cc.s
 
 tests/test_openssl.o: tests/test_openssl.cc.o
@@ -1732,7 +1780,7 @@ tests/test_openssl.o: tests/test_openssl.cc.o
 
 # target to build an object file
 tests/test_openssl.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_openssl.dir/build.make CMakeFiles/test_openssl.dir/tests/test_openssl.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_openssl.dir/build.make game_server/CMakeFiles/test_openssl.dir/tests/test_openssl.cc.o
 .PHONY : tests/test_openssl.cc.o
 
 tests/test_openssl.i: tests/test_openssl.cc.i
@@ -1740,7 +1788,7 @@ tests/test_openssl.i: tests/test_openssl.cc.i
 
 # target to preprocess a source file
 tests/test_openssl.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_openssl.dir/build.make CMakeFiles/test_openssl.dir/tests/test_openssl.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_openssl.dir/build.make game_server/CMakeFiles/test_openssl.dir/tests/test_openssl.cc.i
 .PHONY : tests/test_openssl.cc.i
 
 tests/test_openssl.s: tests/test_openssl.cc.s
@@ -1748,7 +1796,7 @@ tests/test_openssl.s: tests/test_openssl.cc.s
 
 # target to generate assembly for a file
 tests/test_openssl.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_openssl.dir/build.make CMakeFiles/test_openssl.dir/tests/test_openssl.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_openssl.dir/build.make game_server/CMakeFiles/test_openssl.dir/tests/test_openssl.cc.s
 .PHONY : tests/test_openssl.cc.s
 
 tests/test_scheduler.o: tests/test_scheduler.cc.o
@@ -1756,7 +1804,7 @@ tests/test_scheduler.o: tests/test_scheduler.cc.o
 
 # target to build an object file
 tests/test_scheduler.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scheduler.dir/build.make CMakeFiles/test_scheduler.dir/tests/test_scheduler.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_scheduler.dir/build.make game_server/CMakeFiles/test_scheduler.dir/tests/test_scheduler.cc.o
 .PHONY : tests/test_scheduler.cc.o
 
 tests/test_scheduler.i: tests/test_scheduler.cc.i
@@ -1764,7 +1812,7 @@ tests/test_scheduler.i: tests/test_scheduler.cc.i
 
 # target to preprocess a source file
 tests/test_scheduler.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scheduler.dir/build.make CMakeFiles/test_scheduler.dir/tests/test_scheduler.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_scheduler.dir/build.make game_server/CMakeFiles/test_scheduler.dir/tests/test_scheduler.cc.i
 .PHONY : tests/test_scheduler.cc.i
 
 tests/test_scheduler.s: tests/test_scheduler.cc.s
@@ -1772,7 +1820,7 @@ tests/test_scheduler.s: tests/test_scheduler.cc.s
 
 # target to generate assembly for a file
 tests/test_scheduler.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scheduler.dir/build.make CMakeFiles/test_scheduler.dir/tests/test_scheduler.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_scheduler.dir/build.make game_server/CMakeFiles/test_scheduler.dir/tests/test_scheduler.cc.s
 .PHONY : tests/test_scheduler.cc.s
 
 tests/test_socket.o: tests/test_socket.cc.o
@@ -1780,7 +1828,7 @@ tests/test_socket.o: tests/test_socket.cc.o
 
 # target to build an object file
 tests/test_socket.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/tests/test_socket.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_socket.dir/build.make game_server/CMakeFiles/test_socket.dir/tests/test_socket.cc.o
 .PHONY : tests/test_socket.cc.o
 
 tests/test_socket.i: tests/test_socket.cc.i
@@ -1788,7 +1836,7 @@ tests/test_socket.i: tests/test_socket.cc.i
 
 # target to preprocess a source file
 tests/test_socket.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/tests/test_socket.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_socket.dir/build.make game_server/CMakeFiles/test_socket.dir/tests/test_socket.cc.i
 .PHONY : tests/test_socket.cc.i
 
 tests/test_socket.s: tests/test_socket.cc.s
@@ -1796,7 +1844,7 @@ tests/test_socket.s: tests/test_socket.cc.s
 
 # target to generate assembly for a file
 tests/test_socket.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/tests/test_socket.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_socket.dir/build.make game_server/CMakeFiles/test_socket.dir/tests/test_socket.cc.s
 .PHONY : tests/test_socket.cc.s
 
 tests/test_thread.o: tests/test_thread.cc.o
@@ -1804,7 +1852,7 @@ tests/test_thread.o: tests/test_thread.cc.o
 
 # target to build an object file
 tests/test_thread.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_thread.dir/build.make CMakeFiles/test_thread.dir/tests/test_thread.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_thread.dir/build.make game_server/CMakeFiles/test_thread.dir/tests/test_thread.cc.o
 .PHONY : tests/test_thread.cc.o
 
 tests/test_thread.i: tests/test_thread.cc.i
@@ -1812,7 +1860,7 @@ tests/test_thread.i: tests/test_thread.cc.i
 
 # target to preprocess a source file
 tests/test_thread.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_thread.dir/build.make CMakeFiles/test_thread.dir/tests/test_thread.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_thread.dir/build.make game_server/CMakeFiles/test_thread.dir/tests/test_thread.cc.i
 .PHONY : tests/test_thread.cc.i
 
 tests/test_thread.s: tests/test_thread.cc.s
@@ -1820,7 +1868,7 @@ tests/test_thread.s: tests/test_thread.cc.s
 
 # target to generate assembly for a file
 tests/test_thread.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_thread.dir/build.make CMakeFiles/test_thread.dir/tests/test_thread.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_thread.dir/build.make game_server/CMakeFiles/test_thread.dir/tests/test_thread.cc.s
 .PHONY : tests/test_thread.cc.s
 
 tests/test_util.o: tests/test_util.cc.o
@@ -1828,7 +1876,7 @@ tests/test_util.o: tests/test_util.cc.o
 
 # target to build an object file
 tests/test_util.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_util.dir/build.make CMakeFiles/test_util.dir/tests/test_util.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_util.dir/build.make game_server/CMakeFiles/test_util.dir/tests/test_util.cc.o
 .PHONY : tests/test_util.cc.o
 
 tests/test_util.i: tests/test_util.cc.i
@@ -1836,7 +1884,7 @@ tests/test_util.i: tests/test_util.cc.i
 
 # target to preprocess a source file
 tests/test_util.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_util.dir/build.make CMakeFiles/test_util.dir/tests/test_util.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_util.dir/build.make game_server/CMakeFiles/test_util.dir/tests/test_util.cc.i
 .PHONY : tests/test_util.cc.i
 
 tests/test_util.s: tests/test_util.cc.s
@@ -1844,7 +1892,7 @@ tests/test_util.s: tests/test_util.cc.s
 
 # target to generate assembly for a file
 tests/test_util.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_util.dir/build.make CMakeFiles/test_util.dir/tests/test_util.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_util.dir/build.make game_server/CMakeFiles/test_util.dir/tests/test_util.cc.s
 .PHONY : tests/test_util.cc.s
 
 tests/test_ws_client.o: tests/test_ws_client.cc.o
@@ -1852,7 +1900,7 @@ tests/test_ws_client.o: tests/test_ws_client.cc.o
 
 # target to build an object file
 tests/test_ws_client.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_client.dir/build.make CMakeFiles/test_ws_client.dir/tests/test_ws_client.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_client.dir/build.make game_server/CMakeFiles/test_ws_client.dir/tests/test_ws_client.cc.o
 .PHONY : tests/test_ws_client.cc.o
 
 tests/test_ws_client.i: tests/test_ws_client.cc.i
@@ -1860,7 +1908,7 @@ tests/test_ws_client.i: tests/test_ws_client.cc.i
 
 # target to preprocess a source file
 tests/test_ws_client.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_client.dir/build.make CMakeFiles/test_ws_client.dir/tests/test_ws_client.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_client.dir/build.make game_server/CMakeFiles/test_ws_client.dir/tests/test_ws_client.cc.i
 .PHONY : tests/test_ws_client.cc.i
 
 tests/test_ws_client.s: tests/test_ws_client.cc.s
@@ -1868,7 +1916,7 @@ tests/test_ws_client.s: tests/test_ws_client.cc.s
 
 # target to generate assembly for a file
 tests/test_ws_client.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_client.dir/build.make CMakeFiles/test_ws_client.dir/tests/test_ws_client.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_client.dir/build.make game_server/CMakeFiles/test_ws_client.dir/tests/test_ws_client.cc.s
 .PHONY : tests/test_ws_client.cc.s
 
 tests/test_ws_server.o: tests/test_ws_server.cc.o
@@ -1876,7 +1924,7 @@ tests/test_ws_server.o: tests/test_ws_server.cc.o
 
 # target to build an object file
 tests/test_ws_server.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_server.dir/build.make CMakeFiles/test_ws_server.dir/tests/test_ws_server.cc.o
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_server.dir/build.make game_server/CMakeFiles/test_ws_server.dir/tests/test_ws_server.cc.o
 .PHONY : tests/test_ws_server.cc.o
 
 tests/test_ws_server.i: tests/test_ws_server.cc.i
@@ -1884,7 +1932,7 @@ tests/test_ws_server.i: tests/test_ws_server.cc.i
 
 # target to preprocess a source file
 tests/test_ws_server.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_server.dir/build.make CMakeFiles/test_ws_server.dir/tests/test_ws_server.cc.i
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_server.dir/build.make game_server/CMakeFiles/test_ws_server.dir/tests/test_ws_server.cc.i
 .PHONY : tests/test_ws_server.cc.i
 
 tests/test_ws_server.s: tests/test_ws_server.cc.s
@@ -1892,7 +1940,7 @@ tests/test_ws_server.s: tests/test_ws_server.cc.s
 
 # target to generate assembly for a file
 tests/test_ws_server.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_ws_server.dir/build.make CMakeFiles/test_ws_server.dir/tests/test_ws_server.cc.s
+	cd /home/derek/WorkSpace/chat_proj && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/test_ws_server.dir/build.make game_server/CMakeFiles/test_ws_server.dir/tests/test_ws_server.cc.s
 .PHONY : tests/test_ws_server.cc.s
 
 # Help Target
@@ -2014,12 +2062,15 @@ help:
 	@echo "... sylar/socket.o"
 	@echo "... sylar/socket.i"
 	@echo "... sylar/socket.s"
-	@echo "... sylar/socket_stream.o"
-	@echo "... sylar/socket_stream.i"
-	@echo "... sylar/socket_stream.s"
 	@echo "... sylar/stream.o"
 	@echo "... sylar/stream.i"
 	@echo "... sylar/stream.s"
+	@echo "... sylar/streams/socket_stream.o"
+	@echo "... sylar/streams/socket_stream.i"
+	@echo "... sylar/streams/socket_stream.s"
+	@echo "... sylar/streams/zlib_stream.o"
+	@echo "... sylar/streams/zlib_stream.i"
+	@echo "... sylar/streams/zlib_stream.s"
 	@echo "... sylar/tcp_server.o"
 	@echo "... sylar/tcp_server.i"
 	@echo "... sylar/tcp_server.s"
@@ -2121,6 +2172,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/derek/WorkSpace/chat_proj && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

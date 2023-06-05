@@ -1,13 +1,15 @@
 #include "application.h"
+
+#include <unistd.h>
+
+#include "sylar/tcp_server.h"
+#include "sylar/daemon.h"
 #include "sylar/config.h"
 #include "sylar/env.h"
 #include "sylar/log.h"
-#include "sylar/daemon.h"
-#include "sylar/worker.h"
 #include "sylar/module.h"
-#include "sylar/tcp_server.h"
+#include "sylar/worker.h"
 #include "sylar/http/ws_server.h"
-#include <unistd.h>
 
 namespace sylar {
 
@@ -22,7 +24,6 @@ static sylar::ConfigVar<std::string>::ptr g_server_pid_file =
     sylar::Config::Lookup("server.pid_file"
             ,std::string("sylar.pid")
             , "server pid file");
-
 
 static sylar::ConfigVar<std::vector<TcpServerConf> >::ptr g_servers_conf
     = sylar::Config::Lookup("servers", std::vector<TcpServerConf>(), "http server config");
@@ -51,6 +52,28 @@ bool Application::init(int argc, char** argv) {
         is_print_help = true;
     }
 
+    std::string conf_path = sylar::EnvMgr::GetInstance()->getConfigPath();
+    SYLAR_LOG_INFO(g_logger) << "load conf path:" << conf_path;
+    sylar::Config::LoadFromConfDir(conf_path);
+
+    ModuleMgr::GetInstance()->init();
+    std::vector<Module::ptr> modules;
+    ModuleMgr::GetInstance()->listAll(modules);
+
+    for(auto i : modules) {
+        i->onBeforeArgsParse(argc, argv);
+    }
+
+    if(is_print_help) {
+        sylar::EnvMgr::GetInstance()->printHelp();
+        return false;
+    }
+
+    for(auto i : modules) {
+        i->onAfterArgsParse(argc, argv);
+    }
+    modules.clear();
+
     int run_type = 0;
     if(sylar::EnvMgr::GetInstance()->has("s")) {
         run_type = 1;
@@ -63,31 +86,6 @@ bool Application::init(int argc, char** argv) {
         sylar::EnvMgr::GetInstance()->printHelp();
         return false;
     }
-
-    std::string conf_path = sylar::EnvMgr::GetInstance()->getConfigPath();
-    SYLAR_LOG_INFO(g_logger) << "load conf path:" << conf_path;
-    sylar::Config::LoadFromConfDir(conf_path);
-
-    ModuleMgr::GetInstance()->init();
-    std::vector<Module::ptr> modules;
-    ModuleMgr::GetInstance()->listAll(modules);
-
-    for(auto i : modules)
-    {
-        i->onBeforeArgsParse(argc, argv);
-    }
-
-    if(is_print_help) {
-        sylar::EnvMgr::GetInstance()->printHelp();
-        return false;
-    }
-
-    for(auto i : modules)
-    {
-        i->onAfterArgsParse(argc, argv);
-    }
-    modules.clear();
-
 
     std::string pidfile = g_server_work_path->getValue()
                                 + "/" + g_server_pid_file->getValue();
@@ -129,7 +127,8 @@ int Application::main(int argc, char** argv) {
     m_mainIOManager.reset(new sylar::IOManager(1, true, "main"));
     m_mainIOManager->schedule(std::bind(&Application::run_fiber, this));
     m_mainIOManager->addTimer(2000, [](){
-        }, true);
+            //SYLAR_LOG_INFO(g_logger) << "hello";
+    }, true);
     m_mainIOManager->stop();
     return 0;
 }
@@ -138,26 +137,21 @@ int Application::run_fiber() {
     std::vector<Module::ptr> modules;
     ModuleMgr::GetInstance()->listAll(modules);
     bool has_error = false;
-    for(auto & i : modules)
-    {
-        if(!i->onLoad())
-        {
+    for(auto& i : modules) {
+        if(!i->onLoad()) {
             SYLAR_LOG_ERROR(g_logger) << "module name="
                 << i->getName() << " version=" << i->getVersion()
-                << " filenanme=" << i->getFilename();
+                << " filename=" << i->getFilename();
             has_error = true;
         }
     }
-
-    if(has_error)
-    {
+    if(has_error) {
         _exit(0);
     }
-
     sylar::WorkerMgr::GetInstance()->init();
     auto http_confs = g_servers_conf->getValue();
     for(auto& i : http_confs) {
-        SYLAR_LOG_INFO(g_logger) << LexicalCast<TcpServerConf, std::string>()(i);
+        SYLAR_LOG_DEBUG(g_logger) << std::endl << LexicalCast<TcpServerConf, std::string>()(i);
 
         std::vector<Address::ptr> address;
         for(auto& a : i.address) {
@@ -214,8 +208,18 @@ int Application::run_fiber() {
             }
         }
 
-        sylar::http::HttpServer::ptr server(new sylar::http::HttpServer(i.keepalive,
-                    process_worker, accept_worker));
+        TcpServer::ptr server;
+        if(i.type == "http") {
+            server.reset(new sylar::http::HttpServer(i.keepalive,
+                            process_worker, accept_worker));
+        } else if(i.type == "ws") {
+            server.reset(new sylar::http::WSServer(
+                            process_worker, accept_worker));
+        } else {
+            SYLAR_LOG_ERROR(g_logger) << "invalid server type=" << i.type
+                << LexicalCast<TcpServerConf, std::string>()(i);
+            _exit(0);
+        }
         std::vector<Address::ptr> fails;
         if(!server->bind(address, fails, i.ssl)) {
             for(auto& x : fails) {
@@ -236,21 +240,17 @@ int Application::run_fiber() {
         server->setConf(i);
         server->start();
         m_servers[i.type].push_back(server);
-
     }
 
-    for(auto& i : modules)
-    {
+    for(auto& i : modules) {
         i->onServerReady();
     }
     return 0;
 }
 
-bool Application::getServer(const std::string& type, std::vector<TcpServer::ptr>& svrs)
-{
+bool Application::getServer(const std::string& type, std::vector<TcpServer::ptr>& svrs) {
     auto it = m_servers.find(type);
-    if(it == m_servers.end())
-    {
+    if(it == m_servers.end()) {
         return false;
     }
     svrs = it->second;
