@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! d bin/module ]
+if [ ! -d bin/module ]
 then
     mkdir bin/module
 else
