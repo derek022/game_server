@@ -3,7 +3,7 @@ project(project_name)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/game_server)
 
-include (sylar/cmake/utils.cmake)
+include (game_server/cmake/utils.cmake)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O0 -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined")
