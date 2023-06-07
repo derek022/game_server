@@ -1175,6 +1175,30 @@ sylar/stream.cc.s:
 	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/stream.cc.s
 .PHONY : sylar/stream.cc.s
 
+sylar/streams/async_socket_stream.o: sylar/streams/async_socket_stream.cc.o
+.PHONY : sylar/streams/async_socket_stream.o
+
+# target to build an object file
+sylar/streams/async_socket_stream.cc.o:
+	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/async_socket_stream.cc.o
+.PHONY : sylar/streams/async_socket_stream.cc.o
+
+sylar/streams/async_socket_stream.i: sylar/streams/async_socket_stream.cc.i
+.PHONY : sylar/streams/async_socket_stream.i
+
+# target to preprocess a source file
+sylar/streams/async_socket_stream.cc.i:
+	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/async_socket_stream.cc.i
+.PHONY : sylar/streams/async_socket_stream.cc.i
+
+sylar/streams/async_socket_stream.s: sylar/streams/async_socket_stream.cc.s
+.PHONY : sylar/streams/async_socket_stream.s
+
+# target to generate assembly for a file
+sylar/streams/async_socket_stream.cc.s:
+	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/streams/async_socket_stream.cc.s
+.PHONY : sylar/streams/async_socket_stream.cc.s
+
 sylar/streams/socket_stream.o: sylar/streams/socket_stream.cc.o
 .PHONY : sylar/streams/socket_stream.o
 
@@ -2065,6 +2089,9 @@ help:
 	@echo "... sylar/stream.o"
 	@echo "... sylar/stream.i"
 	@echo "... sylar/stream.s"
+	@echo "... sylar/streams/async_socket_stream.o"
+	@echo "... sylar/streams/async_socket_stream.i"
+	@echo "... sylar/streams/async_socket_stream.s"
 	@echo "... sylar/streams/socket_stream.o"
 	@echo "... sylar/streams/socket_stream.i"
 	@echo "... sylar/streams/socket_stream.s"

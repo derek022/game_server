@@ -12,9 +12,15 @@ find_package(Boost REQUIRED)
 if(Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
 endif()
+
 find_package(OpenSSL REQUIRED)
 if(OPENSSL_FOUND)
     include_directories(${OPENSSL_INCLUDE_DIR})
+endif()
+
+find_package(ZLIB REQUIRED)
+if(ZLIB_FOUND)
+    include_directories(${ZLIB_INCLUDE_DIR})
 endif()
 
 find_library(YAMLCPP yaml-cpp)
@@ -54,6 +60,7 @@ set(LIB_SRC
     sylar/http/http_connection.cc
     sylar/streams/zlib_stream.cc
     sylar/streams/socket_stream.cc
+    sylar/streams/async_socket_stream.cc
     sylar/tcp_server.cc
     sylar/stream.cc
     )
@@ -69,7 +76,7 @@ force_redefine_file_macro_for_sources(sylar)
 set(LIBS  
         sylar 
         dl 
-        z
+        ${ZLIB_LIBRARIES}
         pthread 
         jsoncpp
         ${OPENSSL_LIBRARIES}
