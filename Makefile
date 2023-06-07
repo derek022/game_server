@@ -1103,6 +1103,30 @@ sylar/mutex.cc.s:
 	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/mutex.cc.s
 .PHONY : sylar/mutex.cc.s
 
+sylar/protocol.o: sylar/protocol.cc.o
+.PHONY : sylar/protocol.o
+
+# target to build an object file
+sylar/protocol.cc.o:
+	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/protocol.cc.o
+.PHONY : sylar/protocol.cc.o
+
+sylar/protocol.i: sylar/protocol.cc.i
+.PHONY : sylar/protocol.i
+
+# target to preprocess a source file
+sylar/protocol.cc.i:
+	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/protocol.cc.i
+.PHONY : sylar/protocol.cc.i
+
+sylar/protocol.s: sylar/protocol.cc.s
+.PHONY : sylar/protocol.s
+
+# target to generate assembly for a file
+sylar/protocol.cc.s:
+	cd /home/derek/WorkSpace/sblog && $(MAKE) $(MAKESILENT) -f game_server/CMakeFiles/sylar.dir/build.make game_server/CMakeFiles/sylar.dir/sylar/protocol.cc.s
+.PHONY : sylar/protocol.cc.s
+
 sylar/scheduler.o: sylar/scheduler.cc.o
 .PHONY : sylar/scheduler.o
 
@@ -2080,6 +2104,9 @@ help:
 	@echo "... sylar/mutex.o"
 	@echo "... sylar/mutex.i"
 	@echo "... sylar/mutex.s"
+	@echo "... sylar/protocol.o"
+	@echo "... sylar/protocol.i"
+	@echo "... sylar/protocol.s"
 	@echo "... sylar/scheduler.o"
 	@echo "... sylar/scheduler.i"
 	@echo "... sylar/scheduler.s"

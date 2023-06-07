@@ -63,6 +63,7 @@ set(LIB_SRC
     sylar/streams/async_socket_stream.cc
     sylar/tcp_server.cc
     sylar/stream.cc
+    sylar/protocol.cc
     )
 
 
