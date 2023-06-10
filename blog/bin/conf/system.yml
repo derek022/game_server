@@ -1,3 +1,0 @@
-server:
-    work_path: /apps/work/blog
-    pid_file: blog.pid
