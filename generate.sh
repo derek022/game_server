@@ -20,7 +20,6 @@ namespace=$2
 command_error_exit mkdir $project_name
 command_error_exit cd $project_name
 command_error_exit git clone https://github.com/derek022/game_server.git
-command_error_exit cp game_server/Makefile .
 command_error_exit cp -rf game_server/template/* .
 command_error_exit cp -rf game_server/template/* .
 command_error_exit mv template ${namespace}
