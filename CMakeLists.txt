@@ -23,6 +23,11 @@ if(ZLIB_FOUND)
     include_directories(${ZLIB_INCLUDE_DIR})
 endif()
 
+find_package(Protobuf REQUIRED)
+if(Protobuf_FOUND)
+    include_directories(${Protobuf_INCLUDE_DIRS})
+endif()
+
 find_library(YAMLCPP yaml-cpp)
 
 set(LIB_SRC 
@@ -47,6 +52,7 @@ set(LIB_SRC
     sylar/env.cc
     sylar/util/hash_util.cc
     sylar/util/json_util.cc
+    sylar/util/crypto_util.cc
     sylar/http/ws_session.cc
     sylar/http/ws_server.cc
     sylar/http/ws_servlet.cc
@@ -64,6 +70,7 @@ set(LIB_SRC
     sylar/tcp_server.cc
     sylar/stream.cc
     sylar/protocol.cc
+    sylar/rock/rock_protocol.cc
     )
 
 
@@ -81,6 +88,7 @@ set(LIBS
         pthread 
         jsoncpp
         ${OPENSSL_LIBRARIES}
+        ${PROTOBUF_LIBRARIES}
         ${YAMLCPP})
 
 
@@ -109,6 +117,7 @@ sylar_add_executable(test_hash "tests/test_hash.cc" sylar "${LIBS}")
 sylar_add_executable(test_openssl "tests/test_openssl.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_server "tests/test_ws_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
+sylar_add_executable(test_crypto "tests/test_crypto.cc" sylar "${LIBS}")
 
 
 sylar_add_executable(bin_sylar "sylar/main.cc" sylar "${LIBS}")
