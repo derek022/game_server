@@ -67,6 +67,7 @@ set(LIB_SRC
     sylar/streams/zlib_stream.cc
     sylar/streams/socket_stream.cc
     sylar/streams/async_socket_stream.cc
+    sylar/streams/load_balance.cc
     sylar/tcp_server.cc
     sylar/stream.cc
     sylar/protocol.cc
@@ -124,6 +125,7 @@ sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
 sylar_add_executable(test_crypto "tests/test_crypto.cc" sylar "${LIBS}")
 
 sylar_add_executable(test_sqlite "tests/test_sqlite3.cc" sylar "${LIBS}")
+sylar_add_executable(test_rock "tests/test_rock.cc" sylar "${LIBS}")
 
 sylar_add_executable(bin_sylar "sylar/main.cc" sylar "${LIBS}")
 set_target_properties(bin_sylar PROPERTIES OUTPUT_NAME "sylar")
