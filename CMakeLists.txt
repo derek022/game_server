@@ -75,6 +75,8 @@ set(LIB_SRC
     sylar/rock/rock_stream.cc
     sylar/rock/rock_server.cc
     sylar/db/sqlite3.cc
+    sylar/email/email.cc
+    sylar/email/smtp.cc
     )
 
 
@@ -92,6 +94,7 @@ set(LIBS
         pthread 
         jsoncpp
         sqlite3
+        tinyxml2
         ${OPENSSL_LIBRARIES}
         ${PROTOBUF_LIBRARIES}
         ${YAMLCPP})
@@ -127,9 +130,23 @@ sylar_add_executable(test_crypto "tests/test_crypto.cc" sylar "${LIBS}")
 sylar_add_executable(test_sqlite "tests/test_sqlite3.cc" sylar "${LIBS}")
 sylar_add_executable(test_rock "tests/test_rock.cc" sylar "${LIBS}")
 
+set(ORM_SRCS
+    sylar/orm/table.cc
+    sylar/orm/column.cc
+    sylar/orm/index.cc
+    sylar/orm/orm.cc
+    sylar/orm/util.cc
+    )
+sylar_add_executable(orm "${ORM_SRCS}" sylar "${LIBS}")
+
 sylar_add_executable(bin_sylar "sylar/main.cc" sylar "${LIBS}")
 set_target_properties(bin_sylar PROPERTIES OUTPUT_NAME "sylar")
 
+
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/orm_out)
+# set(OLIBS ${LIBS})
+# set(OLIBS ${OLIBS} orm_data)
+# sylar_add_executable(test_orm "tests/test_orm.cc" orm_data "${OLIBS}")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)

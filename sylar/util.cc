@@ -70,6 +70,26 @@ std::string Time2Str(time_t ts, const std::string& format) {
     return buf;
 }
 
+time_t Str2Time(const char* str, const char* format) {
+    struct tm t;
+    memset(&t, 0, sizeof(t));
+    if(!strptime(str, format, &t)) {
+        return 0;
+    }
+    return mktime(&t);
+}
+
+std::string ToUpper(const std::string& name) {
+    std::string rt = name;
+    std::transform(rt.begin(), rt.end(), rt.begin(), ::toupper);
+    return rt;
+}
+
+std::string ToLower(const std::string& name) {
+    std::string rt = name;
+    std::transform(rt.begin(), rt.end(), rt.begin(), ::tolower);
+    return rt;
+}
 
 void FSUtil::ListAllFile(std::vector<std::string>& files
                             ,const std::string& path
@@ -320,6 +340,23 @@ double  TypeUtil::Atof(const char* str) {
     return atof(str);
 }
 
+std::string StringUtil::Format(const char* fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    auto v = Formatv(fmt, ap);
+    va_end(ap);
+    return v;
+}
 
+std::string StringUtil::Formatv(const char* fmt, va_list ap) {
+    char* buf = nullptr;
+    auto len = vasprintf(&buf, fmt, ap);
+    if(len == -1) {
+        return "";
+    }
+    std::string ret(buf, len);
+    free(buf);
+    return ret;
+}
 
 }

@@ -61,6 +61,12 @@ uint64_t GetCurrentMS();
  */
 uint64_t GetCurrentUS();
 
+time_t Str2Time(const char* str, const char* format = "%Y-%m-%d %H:%M:%S");
+
+std::string ToUpper(const std::string& name);
+
+std::string ToLower(const std::string& name);
+
 std::string Time2Str(time_t ts = time(0), const std::string& format = "%Y-%m-%d %H:%M:%S");
 
 class FSUtil {
@@ -83,7 +89,7 @@ public:
                     ,std::ios_base::openmode mode);
 };
 
-template<class Map, class K, class V>
+template<class V, class Map, class K>
 V GetParamValue(const Map& m, const K& k, const V& def = V()) {
     auto it = m.find(k);
     if(it == m.end()) {
@@ -96,7 +102,7 @@ V GetParamValue(const Map& m, const K& k, const V& def = V()) {
     return def;
 }
 
-template<class Map, class K, class V>
+template<class V, class Map, class K>
 bool CheckGetParamValue(const Map& m, const K& k, V& v) {
     auto it = m.find(k);
     if(it == m.end()) {
@@ -196,6 +202,23 @@ public:
         return __sync_bool_compare_and_swap(&t, (T)old_val, (T)new_val);
     }
 };
+
+template<class T>
+void nop(T*) {}
+
+template<class T>
+void delete_array(T* v) {
+    if(v) {
+        delete[] v;
+    }
+}
+
+class StringUtil {
+public:
+    static std::string Format(const char* fmt, ...);
+    static std::string Formatv(const char* fmt, va_list ap);
+};
+
 
 }
 

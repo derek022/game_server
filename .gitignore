@@ -46,3 +46,6 @@ _deps
 Makefile
 
 bin/sylar
+bin/orm
+orm_out/
+
