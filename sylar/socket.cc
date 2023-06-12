@@ -216,11 +216,12 @@ bool Socket::connect(const Address::ptr addr, uint64_t timeout_ms) {
 }
 
 bool Socket::reconnect(uint64_t timeout_ms) {
-    if(!m_localAddress) {
-        SYLAR_LOG_ERROR(g_logger) << "reconnect m_localAddress is null";
+    if(!m_remoteAddress) {
+        SYLAR_LOG_ERROR(g_logger) << "reconnect m_remoteAddress is null";
         return false;
     }
-    return connect(m_localAddress, timeout_ms);
+    m_localAddress.reset();
+    return connect(m_remoteAddress, timeout_ms);
 }
 
 bool Socket::listen(int backlog) {

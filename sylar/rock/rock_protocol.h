@@ -41,10 +41,11 @@ protected:
     std::string m_body;
 };
 
+class RockResponse;
 class RockRequest : public Request, public RockBody {
 public:
     typedef std::shared_ptr<RockRequest> ptr;
-
+    std::shared_ptr<RockResponse> createResponse();
     virtual std::string toString() const override;
     virtual const std::string& getName() const override;
     virtual int32_t getType() const override;
@@ -55,7 +56,7 @@ public:
 
 class RockResponse : public Response, public RockBody {
 public:
-    typedef std::shared_ptr<RockRequest> ptr;
+    typedef std::shared_ptr<RockResponse> ptr;
 
     virtual std::string toString() const override;
     virtual const std::string& getName() const override;
@@ -67,7 +68,7 @@ public:
 
 class RockNotify : public Notify, public RockBody {
 public:
-    typedef std::shared_ptr<RockRequest> ptr;
+    typedef std::shared_ptr<RockNotify> ptr;
 
     virtual std::string toString() const override;
     virtual const std::string& getName() const override;

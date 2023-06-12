@@ -71,6 +71,8 @@ set(LIB_SRC
     sylar/stream.cc
     sylar/protocol.cc
     sylar/rock/rock_protocol.cc
+    sylar/rock/rock_stream.cc
+    sylar/rock/rock_server.cc
     )
 
 
