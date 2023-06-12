@@ -644,6 +644,9 @@ public:
                     }
                 } else if(type == "StdoutLogAppender") {
                     lad.type = 2;
+                    if(a["formatter"].IsDefined()){
+                        lad.formatter = a["formatter"].as<std::string>();
+                    }
                 } else {
                     std::cout << "log config error: appender type is invalid, " << a
                               << std::endl;
@@ -666,7 +669,7 @@ public:
         if(i.level != LogLevel::UNKNOW) {
             n["level"] = LogLevel::ToString(i.level);
         }
-        if(i.formatter.empty()) {
+        if(!i.formatter.empty()) {
             n["formatter"] = i.formatter;
         }
 
@@ -712,6 +715,8 @@ struct LogIniter {
                     if(!(i == *it)) {
                         //修改的logger
                         logger = SYLAR_LOG_NAME(i.name);
+                    }else{
+                        continue;
                     }
                 }
                 logger->setLevel(i.level);

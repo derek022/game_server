@@ -99,7 +99,7 @@ set(LIBS
         ${PROTOBUF_LIBRARIES}
         ${YAMLCPP})
 
-
+if(TEST)
 sylar_add_executable(test "tests/test.cc" sylar "${LIBS}")
 sylar_add_executable(test_config "tests/test_config.cc" sylar "${LIBS}")
 sylar_add_executable(test_thread "tests/test_thread.cc" sylar "${LIBS}")
@@ -126,6 +126,7 @@ sylar_add_executable(test_openssl "tests/test_openssl.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_server "tests/test_ws_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
 sylar_add_executable(test_crypto "tests/test_crypto.cc" sylar "${LIBS}")
+endif()
 
 sylar_add_executable(test_sqlite "tests/test_sqlite3.cc" sylar "${LIBS}")
 sylar_add_executable(test_rock "tests/test_rock.cc" sylar "${LIBS}")

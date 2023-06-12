@@ -49,7 +49,7 @@ XX(create table user (
 
         if(rt != SQLITE_OK) {
             SYLAR_LOG_ERROR(g_logger) << "create table error "
-                << db->getErrorCode() << " - " << db->getErrorMsg();
+                << db->getErrno() << " - " << db->getErrStr();
             return 0;
         }
     }
@@ -58,7 +58,7 @@ XX(create table user (
         if(db->execute("insert into user(name, age) values(\"name_%d\",%d)", i, i)
                 != SQLITE_OK) {
             SYLAR_LOG_ERROR(g_logger) << "insert into error " << i << " "
-                << db->getErrorCode() << " - " << db->getErrorMsg();
+                << db->getErrno() << " - " << db->getErrStr();
         }
     }
 
@@ -66,7 +66,7 @@ XX(create table user (
                 "insert into user(name, age, create_time) values(?, ?, ?)");
     if(!stmt) {
         SYLAR_LOG_ERROR(g_logger) << "create statement error "
-            << db->getErrorCode() << " - " << db->getErrorMsg();
+            << db->getErrno() << " - " << db->getErrStr();
         return 0;
     }
     int64_t now = time(0);
@@ -79,7 +79,7 @@ XX(create table user (
 
         if(stmt->execute() != SQLITE_OK) {
             SYLAR_LOG_ERROR(g_logger) << "execute statment error " << i << " "
-                << db->getErrorCode() << " - " << db->getErrorMsg();
+                << db->getErrno() << " - " << db->getErrStr();
         }
         stmt->reset();
     }
@@ -88,31 +88,31 @@ XX(create table user (
             "select * from user");
     if(!query) {
         SYLAR_LOG_ERROR(g_logger) << "create statement error "
-            << db->getErrorCode() << " - " << db->getErrorMsg();
+            << db->getErrno() << " - " << db->getErrStr();
         return 0;
     }
     auto ds = query->query();
     if(!ds) {
         SYLAR_LOG_ERROR(g_logger) << "query error "
-            << db->getErrorCode() << " - " << db->getErrorMsg();
+            << db->getErrno() << " - " << db->getErrStr();
         return 0;
     }
 
-    do {
+    while(ds->next()) {
         // SYLAR_LOG_INFO(g_logger) << "query ";
-    } while(ds->next());
+    };
 
     const std::string v = "hello ' world";
     db->execStmt("insert into user(name) values (?)", v);
 
     auto dd = std::dynamic_pointer_cast<sylar::SQLite3Data>(db->queryStmt("select * from user"));
-    do {
+    while(dd->next()) {
         SYLAR_LOG_INFO(g_logger) << "ds.data_count=" << dd->getDataCount()
             << " ds.column_count=" << dd->getColumnCount()
-            << " 0=" << dd->getInt(0) << " 1=" << dd->getText(1)
-            << " 2=" << dd->getText(2)
-            << " 3=" << dd->getText(3);
-    } while(dd->next());
+            << " 0=" << dd->getInt32(0) << " 1=" << dd->getString(1)
+            << " 2=" << dd->getString(2)
+            << " 3=" << dd->getString(3);
+    } ;
 
     test_batch(db);
 

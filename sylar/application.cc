@@ -1,7 +1,4 @@
 #include "application.h"
-
-#include <unistd.h>
-
 #include "sylar/tcp_server.h"
 #include "sylar/daemon.h"
 #include "sylar/config.h"
@@ -11,6 +8,9 @@
 #include "sylar/worker.h"
 #include "sylar/http/ws_server.h"
 #include "sylar/rock/rock_server.h"
+
+#include <unistd.h>
+#include <signal.h>
 
 namespace sylar {
 
@@ -111,6 +111,7 @@ bool Application::run() {
 }
 
 int Application::main(int argc, char** argv) {
+    signal(SIGPIPE, SIG_IGN);
     SYLAR_LOG_INFO(g_logger) << "main";
     std::string conf_path = sylar::EnvMgr::GetInstance()->getConfigPath();
     sylar::Config::LoadFromConfDir(conf_path, true);
