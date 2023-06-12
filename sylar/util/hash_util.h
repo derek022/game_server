@@ -20,11 +20,11 @@ std::string base64encode(const std::string &data);
 std::string base64encode(const void *data, size_t len);
 
 // // Returns result in hex
-// std::string md5(const std::string &data);
+std::string md5(const std::string &data);
 // std::string sha1(const std::string &data);
 // // Returns result in blob
-// std::string md5sum(const std::string &data);
-// std::string md5sum(const void *data, size_t len);
+std::string md5sum(const std::string &data);
+std::string md5sum(const void *data, size_t len);
 // std::string sha0sum(const std::string &data);
 // std::string sha0sum(const void *data, size_t len);
 std::string sha1sum(const std::string &data);

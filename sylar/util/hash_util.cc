@@ -239,27 +239,27 @@ std::string base64encode(const void* data, size_t len) {
     return ret;
 }
 
-// std::string md5(const std::string &data) {
-//     return hexstring_from_data(md5sum(data).c_str(), MD5_DIGEST_LENGTH);
-// }
+std::string md5(const std::string &data) {
+    return hexstring_from_data(md5sum(data).c_str(), MD5_DIGEST_LENGTH);
+}
 
 // std::string sha1(const std::string &data) {
 //     return hexstring_from_data(sha1sum(data).c_str(), SHA_DIGEST_LENGTH);
 // }
 
-// std::string md5sum(const void *data, size_t len) {
-//     MD5_CTX ctx;
-//     MD5_Init(&ctx);
-//     MD5_Update(&ctx, data, len);
-//     std::string result;
-//     result.resize(MD5_DIGEST_LENGTH);
-//     MD5_Final((unsigned char*)&result[0], &ctx);
-//     return result;
-// }
+std::string md5sum(const void *data, size_t len) {
+    // MD5_CTX ctx;
+    // MD5_Init(&ctx);
+    // MD5_Update(&ctx, data, len);
+    std::string result;
+    // result.resize(MD5_DIGEST_LENGTH);
+    // MD5_Final((unsigned char*)&result[0], &ctx);
+    return result;
+}
 
-// std::string md5sum(const std::string &data) {
-//     return md5sum(data.c_str(), data.size());
-// }
+std::string md5sum(const std::string &data) {
+    return md5sum(data.c_str(), data.size());
+}
 
 // std::string sha0sum(const void *data, size_t len) {
 //     SHA_CTX ctx;

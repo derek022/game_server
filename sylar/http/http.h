@@ -721,6 +721,11 @@ public:
      * @brief 转成字符串
      */
     std::string toString() const;
+
+    void setRedirect(const std::string& uri);
+    void setCookie(const std::string& key, const std::string& val,
+                   time_t expired = 0, const std::string& domain = "",
+                   const std::string& path = "", bool secure = false);
 private:
     /// 响应状态
     HttpStatus m_status;
@@ -736,6 +741,8 @@ private:
     std::string m_reason;
     /// 响应头部MAP
     MapType m_headers;
+
+    std::vector<std::string> m_cookies;
 };
 
 /**
