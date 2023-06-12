@@ -95,69 +95,68 @@ void test_one() {
     std::cout << " ==== " << std::endl;
 
     {
-        EVP_CIPHER_CTX ctx;
-        EVP_CIPHER_CTX_init(&ctx);
-        EVP_EncryptInit(&ctx, EVP_aes_256_cbc(), (const uint8_t*)key.c_str(), (const uint8_t*)iv.c_str());
+        EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+        EVP_CIPHER_CTX_init(ctx);
+        EVP_EncryptInit(ctx, EVP_aes_256_cbc(), (const uint8_t*)key.c_str(), (const uint8_t*)iv.c_str());
 
         std::string encode;
         encode.resize(str.size() + 30);
         int olen = 0;
-        EVP_EncryptUpdate(&ctx, (uint8_t*)&encode[0], &olen, (const uint8_t*)str.c_str(), str.length());
+        EVP_EncryptUpdate(ctx, (uint8_t*)&encode[0], &olen, (const uint8_t*)str.c_str(), str.length());
         int llen = 0;
-        EVP_EncryptFinal(&ctx, (uint8_t*)(&encode[0] + olen), &llen);
+        EVP_EncryptFinal(ctx, (uint8_t*)(&encode[0] + olen), &llen);
         encode.resize(olen + llen);
         std::cout << "encode: " << sylar::base64encode(encode) << " - len=" << encode.size() << std::endl;
         std::cout << "encode: " << to_hex(encode) << " - len=" << encode.size() << std::endl;
+        EVP_CIPHER_CTX_free(ctx);
     }
 }
 
-void test_rsa() {
-    std::string pubkey_path = "/tmp/rsa.pub";
-    std::string prikey_path = "/tmp/rsa.pri";
+// void test_rsa() {
+//     std::string pubkey_path = "/tmp/rsa.pub";
+//     std::string prikey_path = "/tmp/rsa.pri";
 
-    //std::cout << "generate: " << sylar::RSACipher::GenerateKey(pubkey_path, prikey_path) << std::endl;
-    sylar::RSACipher::ptr rsa = sylar::RSACipher::Create(pubkey_path, prikey_path);
-    if(!rsa) {
-        std::cout << "Create RSACipher error" << std::endl;
-        return;
-    }
-    std::cout << "Public: " << std::endl;
-    std::cout << rsa->getPubkeyStr() << std::endl;
-    std::cout << "Private: " << std::endl;
-    std::cout << rsa->getPrikeyStr() << std::endl;
+//     //std::cout << "generate: " << sylar::RSACipher::GenerateKey(pubkey_path, prikey_path) << std::endl;
+//     sylar::RSACipher::ptr rsa = sylar::RSACipher::Create(pubkey_path, prikey_path);
+//     if(!rsa) {
+//         std::cout << "Create RSACipher error" << std::endl;
+//         return;
+//     }
+//     std::cout << "Public: " << std::endl;
+//     std::cout << rsa->getPubkeyStr() << std::endl;
+//     std::cout << "Private: " << std::endl;
+//     std::cout << rsa->getPrikeyStr() << std::endl;
 
-    //std::string str = "hello, world!";
-    std::string str = "hello, world!";
-    std::string out;
-    out.resize(rsa->getPubRSASize() + 1);
-    std::string out2;
-    out2.resize(rsa->getPriRSASize() + 1);
+//     //std::string str = "hello, world!";
+//     std::string str = "hello, world!";
+//     std::string out;
+//     out.resize(rsa->getPubRSASize() + 1);
+//     std::string out2;
+//     out2.resize(rsa->getPriRSASize() + 1);
 
-    std::cout << "rsa pubsize: " << rsa->getPubRSASize()
-              << " prisize: " << rsa->getPriRSASize()
-              << std::endl;
+//     std::cout << "rsa pubsize: " << rsa->getPubRSASize()
+//               << " prisize: " << rsa->getPriRSASize()
+//               << std::endl;
 
-    int size = rsa->publicEncrypt(str.c_str(), rsa->getPubRSASize(), &out[0]);
-    if(size > 0) {
-        out.resize(size);
-    } else {
-        ERR_print_errors_fp(stdout);
-    }
+//     int size = rsa->publicEncrypt(str.c_str(), rsa->getPubRSASize(), &out[0]);
+//     if(size > 0) {
+//         out.resize(size);
+//     } else {
+//         ERR_print_errors_fp(stdout);
+//     }
 
-    std::cout << "origin: " << str << " - size=" << str.size() << std::endl;
-    std::cout << "encrypt: " << to_hex(out) << " - size=" << out.size() << std::endl;
+//     std::cout << "origin: " << str << " - size=" << str.size() << std::endl;
+//     std::cout << "encrypt: " << to_hex(out) << " - size=" << out.size() << std::endl;
 
-    size = rsa->privateDecrypt(out.c_str(), rsa->getPriRSASize(), &out2[0]);
-    if(size > 0) {
-        out2.resize(size);
-    }
-        ERR_print_errors_fp(stdout);
-    std::cout << "decrypt: " << to_hex(out2) << " - size=" << out2.size() << std::endl;
-    std::cout << " size: " << size << std::endl;
-    std::cout << "decrypt: " << out2 << std::endl;
-
-
-}
+//     size = rsa->privateDecrypt(out.c_str(), rsa->getPriRSASize(), &out2[0]);
+//     if(size > 0) {
+//         out2.resize(size);
+//     }
+//         ERR_print_errors_fp(stdout);
+//     std::cout << "decrypt: " << to_hex(out2) << " - size=" << out2.size() << std::endl;
+//     std::cout << " size: " << size << std::endl;
+//     std::cout << "decrypt: " << out2 << std::endl;
+// }
 
 int main(int argc, char** argv) {
     //OpenSSL_add_all_ciphers();
@@ -165,6 +164,6 @@ int main(int argc, char** argv) {
     //test_aes256ecb();
     //test_aes256cbc();
     //test_one();
-    test_rsa();
+    // test_rsa();
     return 0;
 }

@@ -52,49 +52,49 @@ public:
 };
 
 
-class RSACipher {
-public:
-    typedef std::shared_ptr<RSACipher> ptr;
+// class RSACipher {
+// public:
+//     typedef std::shared_ptr<RSACipher> ptr;
 
-    static int32_t GenerateKey(const std::string& pubkey_file
-                               ,const std::string& prikey_file
-                               ,uint32_t length = 1024);
+//     static int32_t GenerateKey(const std::string& pubkey_file
+//                                ,const std::string& prikey_file
+//                                ,uint32_t length = 1024);
 
-    static RSACipher::ptr Create(const std::string& pubkey_file
-                                ,const std::string& prikey_file);
+//     static RSACipher::ptr Create(const std::string& pubkey_file
+//                                 ,const std::string& prikey_file);
 
-    RSACipher();
-    ~RSACipher();
+//     RSACipher();
+//     ~RSACipher();
 
-    int32_t privateEncrypt(const void* from, int flen,
-                           void* to, int padding = RSA_NO_PADDING);
-    int32_t publicEncrypt(const void* from, int flen,
-                           void* to, int padding = RSA_NO_PADDING);
-    int32_t privateDecrypt(const void* from, int flen,
-                           void* to, int padding = RSA_NO_PADDING);
-    int32_t publicDecrypt(const void* from, int flen,
-                           void* to, int padding = RSA_NO_PADDING);
-    int32_t privateEncrypt(const void* from, int flen,
-                           std::string& to, int padding = RSA_NO_PADDING);
-    int32_t publicEncrypt(const void* from, int flen,
-                           std::string& to, int padding = RSA_NO_PADDING);
-    int32_t privateDecrypt(const void* from, int flen,
-                           std::string& to, int padding = RSA_NO_PADDING);
-    int32_t publicDecrypt(const void* from, int flen,
-                           std::string& to, int padding = RSA_NO_PADDING);
+//     int32_t privateEncrypt(const void* from, int flen,
+//                            void* to, int padding = RSA_NO_PADDING);
+//     int32_t publicEncrypt(const void* from, int flen,
+//                            void* to, int padding = RSA_NO_PADDING);
+//     int32_t privateDecrypt(const void* from, int flen,
+//                            void* to, int padding = RSA_NO_PADDING);
+//     int32_t publicDecrypt(const void* from, int flen,
+//                            void* to, int padding = RSA_NO_PADDING);
+//     int32_t privateEncrypt(const void* from, int flen,
+//                            std::string& to, int padding = RSA_NO_PADDING);
+//     int32_t publicEncrypt(const void* from, int flen,
+//                            std::string& to, int padding = RSA_NO_PADDING);
+//     int32_t privateDecrypt(const void* from, int flen,
+//                            std::string& to, int padding = RSA_NO_PADDING);
+//     int32_t publicDecrypt(const void* from, int flen,
+//                            std::string& to, int padding = RSA_NO_PADDING);
 
 
-    const std::string& getPubkeyStr() const { return m_pubkeyStr;}
-    const std::string& getPrikeyStr() const { return m_prikeyStr;}
+//     const std::string& getPubkeyStr() const { return m_pubkeyStr;}
+//     const std::string& getPrikeyStr() const { return m_prikeyStr;}
 
-    int32_t getPubRSASize();
-    int32_t getPriRSASize();
-private:
-    RSA* m_pubkey;
-    RSA* m_prikey;
-    std::string m_pubkeyStr;
-    std::string m_prikeyStr;
-};
+//     int32_t getPubRSASize();
+//     int32_t getPriRSASize();
+// private:
+//     RSA* m_pubkey;
+//     RSA* m_prikey;
+//     std::string m_pubkeyStr;
+//     std::string m_prikeyStr;
+// };
 
 
 }
