@@ -485,7 +485,9 @@ public:
      */
     template<class T>
     bool checkGetParamAs(const std::string& key, T& val, const T& def = T()) {
-        return checkGetAs(m_headers, key, val, def);
+        initQueryParam();
+        initBodyParam();
+        return checkGetAs(m_params, key, val, def);
     }
 
     /**
@@ -497,7 +499,9 @@ public:
      */
     template<class T>
     T getParamAs(const std::string& key, const T& def = T()) {
-        return getAs(m_headers, key, def);
+        initQueryParam();
+        initBodyParam();
+        return getAs(m_params, key, def);
     }
 
     /**
@@ -510,7 +514,8 @@ public:
      */
     template<class T>
     bool checkGetCookieAs(const std::string& key, T& val, const T& def = T()) {
-        return checkGetAs(m_headers, key, val, def);
+        initCookies();
+        return checkGetAs(m_cookies, key, val, def);
     }
 
     /**
@@ -522,7 +527,8 @@ public:
      */
     template<class T>
     T getCookieAs(const std::string& key, const T& def = T()) {
-        return getAs(m_headers, key, def);
+        initCookies();
+        return getAs(m_cookies, key, def);
     }
 
     /**
@@ -724,8 +730,8 @@ public:
 
     void setRedirect(const std::string& uri);
     void setCookie(const std::string& key, const std::string& val,
-                   time_t expired = 0, const std::string& domain = "",
-                   const std::string& path = "", bool secure = false);
+                   time_t expired = 0, const std::string& path = "",
+                   const std::string& domain = "", bool secure = false);
 private:
     /// 响应状态
     HttpStatus m_status;
