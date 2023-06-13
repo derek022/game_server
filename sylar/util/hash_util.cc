@@ -239,6 +239,26 @@ std::string base64encode(const void* data, size_t len) {
     return ret;
 }
 
+/// @brief openssl 3.x 版本数字签名通用方法
+/// @param data 
+/// @param len 
+/// @param digest_name 
+/// @param digest_len 
+/// @return 
+static std::string openssl_digest(const void *data, size_t len, std::string digest_name, uint32_t digest_len)
+{
+    EVP_MD_CTX* hashctx = EVP_MD_CTX_new();
+    const EVP_MD *md = EVP_get_digestbyname(digest_name.c_str());
+    EVP_DigestInit_ex2(hashctx,md,NULL);
+    EVP_DigestUpdate(hashctx, data, len);
+    std::string result;
+    unsigned int outlen;
+    result.resize(digest_len);
+    EVP_DigestFinal_ex(hashctx, (unsigned char*)&result[0], &outlen);
+    EVP_MD_CTX_free(hashctx);
+    return result;
+}
+
 std::string md5(const std::string &data) {
     return hexstring_from_data(md5sum(data).c_str(), MD5_DIGEST_LENGTH);
 }
@@ -248,13 +268,7 @@ std::string md5(const std::string &data) {
 // }
 
 std::string md5sum(const void *data, size_t len) {
-    // MD5_CTX ctx;
-    // MD5_Init(&ctx);
-    // MD5_Update(&ctx, data, len);
-    std::string result;
-    // result.resize(MD5_DIGEST_LENGTH);
-    // MD5_Final((unsigned char*)&result[0], &ctx);
-    return result;
+    return openssl_digest(data,len,"MD5", MD5_DIGEST_LENGTH);
 }
 
 std::string md5sum(const std::string &data) {
@@ -286,17 +300,7 @@ std::string md5sum(const std::string &data) {
 // }
 
 std::string sha1sum(const void *data, size_t len) {
-    EVP_MD_CTX* hashctx = EVP_MD_CTX_new();
-    const EVP_MD *md = EVP_get_digestbyname("SHA1");
-
-    EVP_DigestInit_ex2(hashctx,md,NULL);
-    EVP_DigestUpdate(hashctx, data, len);
-    std::string result;
-    unsigned int outlen;
-    result.resize(SHA_DIGEST_LENGTH);
-    EVP_DigestFinal_ex(hashctx, (unsigned char*)&result[0], &outlen);
-    EVP_MD_CTX_free(hashctx);
-    return result;
+    return openssl_digest(data,len,"SHA1",SHA_DIGEST_LENGTH);
 }
 
 std::string sha1sum(const std::string &data) {
