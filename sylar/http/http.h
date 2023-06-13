@@ -15,7 +15,7 @@
 #include <iostream>
 #include <sstream>
 #include <boost/lexical_cast.hpp>
-
+#include <vector>
 namespace sylar {
 namespace http {
 
