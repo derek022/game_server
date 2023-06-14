@@ -17,6 +17,7 @@
 #include "http.h"
 #include "http_session.h"
 #include "sylar/thread.h"
+#include "sylar/util.h"
 
 namespace sylar {
 namespace http {
@@ -222,6 +223,9 @@ public:
      * @return 优先精准匹配,其次模糊匹配,最后返回默认
      */
     Servlet::ptr getMatchedServlet(const std::string& uri);
+
+    void listAllServletCreator(std::map<std::string, IServletCreator::ptr>& infos);
+    void listAllGlobServletCreator(std::map<std::string, IServletCreator::ptr>& infos);
 private:
     /// 读写互斥量
     RWMutexType m_mutex;

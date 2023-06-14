@@ -262,4 +262,8 @@ bool Application::getServer(const std::string& type, std::vector<TcpServer::ptr>
     return true;
 }
 
+void Application::listAllServer(std::map<std::string, std::vector<TcpServer::ptr> >& servers) {
+    servers = m_servers;
+}
+
 }

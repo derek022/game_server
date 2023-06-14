@@ -8,6 +8,8 @@ set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -
 set(CMAKE_C_FLAGS "$ENV{CXXFLAGS} -rdynamic -O3 -fPIC -ggdb -std=c11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-unused-result")
 include_directories(.)
 
+option(BUILD_TEST "ON for complile test" OFF)
+
 find_package(Boost REQUIRED)
 if(Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
@@ -65,6 +67,8 @@ set(LIB_SRC
     sylar/http/servlet.cc
     sylar/http/http_server.cc
     sylar/http/http_connection.cc
+    sylar/http/servlets/config_servlet.cc
+    sylar/http/servlets/status_servlet.cc
     sylar/streams/zlib_stream.cc
     sylar/streams/socket_stream.cc
     sylar/streams/async_socket_stream.cc
@@ -102,7 +106,8 @@ set(LIBS
 
 
 
-# if(TEST)
+if(BUILD_TEST)
+
 sylar_add_executable(test "tests/test.cc" sylar "${LIBS}")
 sylar_add_executable(test_config "tests/test_config.cc" sylar "${LIBS}")
 sylar_add_executable(test_thread "tests/test_thread.cc" sylar "${LIBS}")
@@ -129,7 +134,7 @@ sylar_add_executable(test_openssl "tests/test_openssl.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_server "tests/test_ws_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
 sylar_add_executable(test_crypto "tests/test_crypto.cc" sylar "${LIBS}")
-# endif()
+endif()
 
 sylar_add_executable(test_sqlite "tests/test_sqlite3.cc" sylar "${LIBS}")
 sylar_add_executable(test_rock "tests/test_rock.cc" sylar "${LIBS}")

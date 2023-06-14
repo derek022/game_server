@@ -145,6 +145,19 @@ int32_t NotFoundServlet::handle(sylar::http::HttpRequest::ptr request
     return 0;
 }
 
+void ServletDispatch::listAllServletCreator(std::map<std::string, IServletCreator::ptr>& infos) {
+    RWMutexType::ReadLock lock(m_mutex);
+    for(auto& i : m_datas) {
+        infos[i.first] = i.second;
+    }
+}
+
+void ServletDispatch::listAllGlobServletCreator(std::map<std::string, IServletCreator::ptr>& infos) {
+    RWMutexType::ReadLock lock(m_mutex);
+    for(auto& i : m_globs) {
+        infos[i.first] = i.second;
+    }
+}
 
 }
 }
