@@ -93,6 +93,7 @@ public:
     typedef std::shared_ptr<IServletCreator> ptr;
     virtual ~IServletCreator() {}
     virtual Servlet::ptr get() const = 0;
+    virtual std::string getName() const = 0;
 };
 
 class HoldServletCreator : public IServletCreator {
@@ -104,6 +105,10 @@ public:
 
     Servlet::ptr get() const override {
         return m_servlet;
+    }
+
+    std::string getName() const override {
+        return m_servlet->getName();
     }
 private:
     Servlet::ptr m_servlet;
@@ -117,6 +122,10 @@ public:
     }
     Servlet::ptr get() const override {
         return Servlet::ptr(new T);
+    }
+
+    std::string getName() const override {
+        return TypeToName<T>();
     }
 };
 

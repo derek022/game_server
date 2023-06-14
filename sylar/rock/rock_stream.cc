@@ -9,13 +9,13 @@ RockStream::RockStream(Socket::ptr sock)
     :AsyncSocketStream(sock, true)
     ,m_decoder(new RockMessageDecoder) {
     
-    SYLAR_LOG_INFO(g_logger) << "RockStream::RockStream "
+    SYLAR_LOG_DEBUG(g_logger) << "RockStream::RockStream "
         << this << " "
         << (sock ? sock->toString() : "");
 }
 
 RockStream::~RockStream() {
-    SYLAR_LOG_INFO(g_logger) << "RockStream::~RockStream "
+    SYLAR_LOG_DEBUG(g_logger) << "RockStream::~RockStream "
         << this << " "
         << (m_socket ? m_socket->toString() : "");
 }
@@ -80,7 +80,7 @@ AsyncSocketStream::Ctx::ptr RockStream::doRecv() {
         }
         RockCtx::ptr ctx = getAndDelCtxAs<RockCtx>(rsp->getSn());
         if(!ctx) {
-            SYLAR_LOG_INFO(g_logger) << "RockStream request timeout reponse="
+            SYLAR_LOG_WARN(g_logger) << "RockStream request timeout reponse="
                 << rsp->toString() << " - request=" << ctx->request->toString();
             return nullptr;
         }
@@ -95,9 +95,11 @@ AsyncSocketStream::Ctx::ptr RockStream::doRecv() {
             return nullptr;
         }
         if(m_requestHandler) {
-            m_iomanager->schedule(std::bind(&RockStream::handleRequest,
+            m_worker->schedule(std::bind(&RockStream::handleRequest,
                         std::dynamic_pointer_cast<RockStream>(shared_from_this()),
                         req));
+        }else{
+            SYLAR_LOG_WARN(g_logger) << "unhandle request " << req->toString();
         }
     } else if(type == Message::NOTIFY) {
         auto nty = std::dynamic_pointer_cast<RockNotify>(msg);
@@ -108,9 +110,11 @@ AsyncSocketStream::Ctx::ptr RockStream::doRecv() {
         }
 
         if(m_notifyHandler) {
-            m_iomanager->schedule(std::bind(&RockStream::handleNotify,
+            m_worker->schedule(std::bind(&RockStream::handleNotify,
                         std::dynamic_pointer_cast<RockStream>(shared_from_this()),
                         nty));
+        } else {
+            SYLAR_LOG_WARN(g_logger) << "unhandle notify " << nty->toString();
         }
     } else {
         SYLAR_LOG_WARN(g_logger) << "RockStream recv unknow type=" << type
@@ -125,7 +129,8 @@ void RockStream::handleRequest(sylar::RockRequest::ptr req) {
         ,std::dynamic_pointer_cast<RockStream>(shared_from_this()))) {
 
         sendMessage(rsp);
-        innerClose();
+        // innerClose();
+        close();
     }else {
         sendMessage(rsp);
     }
@@ -134,7 +139,8 @@ void RockStream::handleRequest(sylar::RockRequest::ptr req) {
 void RockStream::handleNotify(sylar::RockNotify::ptr nty) {
     if(!m_notifyHandler(nty
         ,std::dynamic_pointer_cast<RockStream>(shared_from_this()))) {
-        innerClose();
+        // innerClose();
+        close();
     }
 }
 

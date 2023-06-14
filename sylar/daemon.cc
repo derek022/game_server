@@ -83,6 +83,8 @@ int start_daemon(int argc, char** argv
 {
     if(!is_daemon)
     {
+        ProcessInfoMgr::GetInstance()->parent_id = getpid();
+        ProcessInfoMgr::GetInstance()->parent_start_time = time(0);
         return real_start(argc, argv, main_cb);
     }
 

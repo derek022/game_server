@@ -82,12 +82,17 @@ set(LIB_SRC
     sylar/db/sqlite3.cc
     sylar/email/email.cc
     sylar/email/smtp.cc
+    sylar/ns/name_server_module.cc
+    sylar/ns/ns_client.cc
+    sylar/ns/ns_protocol.cc
     )
 
 
 ragelmaker(sylar/http/http11_parser.rl LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/sylar/http)
 ragelmaker(sylar/http/httpclient_parser.rl LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/sylar/http)
 ragelmaker(sylar/uri.rl LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/sylar)
+
+protobufmaker(sylar/ns/ns_protobuf.proto LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(sylar SHARED ${LIB_SRC})
 force_redefine_file_macro_for_sources(sylar)
@@ -138,6 +143,7 @@ endif()
 
 sylar_add_executable(test_sqlite "tests/test_sqlite3.cc" sylar "${LIBS}")
 sylar_add_executable(test_rock "tests/test_rock.cc" sylar "${LIBS}")
+sylar_add_executable(test_nameserver "tests/test_nameserver.cc" sylar "${LIBS}")
 
 set(ORM_SRCS
     sylar/orm/table.cc
