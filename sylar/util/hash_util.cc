@@ -23,113 +23,113 @@ static inline uint32_t fmix32(uint32_t h)
   return h;
 }
 
-// uint32_t murmur3_hash(const void* data, const uint32_t& size, const uint32_t & seed) {
-//   if (!data) return 0;
+uint32_t murmur3_hash(const void* data, const uint32_t& size, const uint32_t & seed) {
+  if (!data) return 0;
   
-//   const char* str = (const char*)data;
-//   uint32_t s, h = seed,
-//           seed1 = 0xcc9e2d51,
-//           seed2 = 0x1b873593,
-//           * ptr = (uint32_t *)str;
+  const char* str = (const char*)data;
+  uint32_t s, h = seed,
+          seed1 = 0xcc9e2d51,
+          seed2 = 0x1b873593,
+          * ptr = (uint32_t *)str;
   
-//   // handle begin blocks
-//   int len = size;
-//   int blk = len / 4;
-//   for (int i = 0; i < blk; i++) {
-//     s  = ptr[i];
-//     s *= seed1;
-//     s  = ROTL(s, 15);
-//     s *= seed2;
+  // handle begin blocks
+  int len = size;
+  int blk = len / 4;
+  for (int i = 0; i < blk; i++) {
+    s  = ptr[i];
+    s *= seed1;
+    s  = ROTL(s, 15);
+    s *= seed2;
     
-//     h ^= s;
-//     h  = ROTL(h, 13);
-//     h *= 5;
-//     h += 0xe6546b64;
-//   }
+    h ^= s;
+    h  = ROTL(h, 13);
+    h *= 5;
+    h += 0xe6546b64;
+  }
 
-//   // handle tail
-//   s = 0;
-//   uint8_t * tail = (uint8_t *)(str + blk * 4);
-//   switch(len & 3)
-//   {
-//     case 3: s |= tail[2] << 16;
-//     case 2: s |= tail[1] << 8;
-//     case 1: s |= tail[0];
+  // handle tail
+  s = 0;
+  uint8_t * tail = (uint8_t *)(str + blk * 4);
+  switch(len & 3)
+  {
+    case 3: s |= tail[2] << 16;
+    case 2: s |= tail[1] << 8;
+    case 1: s |= tail[0];
       
-//       s *= seed1;
-//       s  = ROTL(s, 15);
-//       s *= seed2;
-//       h ^= s;
-//   };
+      s *= seed1;
+      s  = ROTL(s, 15);
+      s *= seed2;
+      h ^= s;
+  };
   
-//   return fmix32(h ^ len);
-// }
+  return fmix32(h ^ len);
+}
 
 
-// uint32_t murmur3_hash(const char * str, const uint32_t & seed) {
-//   if (!str) return 0;
+uint32_t murmur3_hash(const char * str, const uint32_t & seed) {
+  if (!str) return 0;
   
-//   uint32_t s, h = seed,
-//           seed1 = 0xcc9e2d51,
-//           seed2 = 0x1b873593,
-//           * ptr = (uint32_t *)str;
+  uint32_t s, h = seed,
+          seed1 = 0xcc9e2d51,
+          seed2 = 0x1b873593,
+          * ptr = (uint32_t *)str;
   
-//   // handle begin blocks
-//   int len = (int)strlen(str);
-//   int blk = len / 4;
-//   for (int i = 0; i < blk; i++) {
-//     s  = ptr[i];
-//     s *= seed1;
-//     s  = ROTL(s, 15);
-//     s *= seed2;
+  // handle begin blocks
+  int len = (int)strlen(str);
+  int blk = len / 4;
+  for (int i = 0; i < blk; i++) {
+    s  = ptr[i];
+    s *= seed1;
+    s  = ROTL(s, 15);
+    s *= seed2;
     
-//     h ^= s;
-//     h  = ROTL(h, 13);
-//     h *= 5;
-//     h += 0xe6546b64;
-//   }
+    h ^= s;
+    h  = ROTL(h, 13);
+    h *= 5;
+    h += 0xe6546b64;
+  }
 
-//   // handle tail
-//   s = 0;
-//   uint8_t * tail = (uint8_t *)(str + blk * 4);
-//   switch(len & 3)
-//   {
-//     case 3: s |= tail[2] << 16;
-//     case 2: s |= tail[1] << 8;
-//     case 1: s |= tail[0];
+  // handle tail
+  s = 0;
+  uint8_t * tail = (uint8_t *)(str + blk * 4);
+  switch(len & 3)
+  {
+    case 3: s |= tail[2] << 16;
+    case 2: s |= tail[1] << 8;
+    case 1: s |= tail[0];
       
-//       s *= seed1;
-//       s  = ROTL(s, 15);
-//       s *= seed2;
-//       h ^= s;
-//   };
+      s *= seed1;
+      s  = ROTL(s, 15);
+      s *= seed2;
+      h ^= s;
+  };
   
-//   return fmix32(h ^ len);
-// }
+  return fmix32(h ^ len);
+}
 
-// uint32_t quick_hash(const char * str) {
-//     unsigned int h = 0;
-//     for (; *str; str++) {
-//         h = 31 * h + *str;
-//     }
-//     return h;
-// }
+uint32_t quick_hash(const char * str) {
+    unsigned int h = 0;
+    for (; *str; str++) {
+        h = 31 * h + *str;
+    }
+    return h;
+}
 
-// uint32_t quick_hash(const void* tmp, uint32_t size) {
-//     const char* str = (const char*)tmp;
-//     unsigned int h = 0;
-//     for(uint32_t i = 0; i < size; ++i) {
-//         h = 31 * h + *str;
-//     }
-//     return h;
-// }
+uint32_t quick_hash(const void* tmp, uint32_t size) {
+    const char* str = (const char*)tmp;
+    unsigned int h = 0;
+    for(uint32_t i = 0; i < size; ++i) {
+        h = 31 * h + *str;
+    }
+    return h;
+}
 
-// uint64_t murmur3_hash64(const void* str, const uint32_t& size,  const uint32_t & seed, const uint32_t& seed2) {
-//     return (((uint64_t)murmur3_hash(str, size, seed)) << 32 | murmur3_hash(str, size, seed2));
-// }
-// uint64_t murmur3_hash64(const char * str, const uint32_t & seed, const uint32_t& seed2) {
-//     return (((uint64_t)murmur3_hash(str, seed)) << 32 | murmur3_hash(str, seed2));
-// }
+uint64_t murmur3_hash64(const void* str, const uint32_t& size,  const uint32_t & seed, const uint32_t& seed2) {
+    return (((uint64_t)murmur3_hash(str, size, seed)) << 32 | murmur3_hash(str, size, seed2));
+}
+uint64_t murmur3_hash64(const char * str, const uint32_t & seed, const uint32_t& seed2) {
+    return (((uint64_t)murmur3_hash(str, seed)) << 32 | murmur3_hash(str, seed2));
+}
 
 std::string base64decode(const std::string &src) {
     std::string result;
