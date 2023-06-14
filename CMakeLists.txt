@@ -81,6 +81,8 @@ set(LIB_SRC
     sylar/rock/rock_server.cc
     sylar/db/sqlite3.cc
     sylar/ds/bitmap.cc
+    sylar/ds/roaring_bitmap.cc
+    sylar/ds/roaring.c
     sylar/email/email.cc
     sylar/email/smtp.cc
     sylar/ns/name_server_module.cc
@@ -108,6 +110,7 @@ set(LIBS
         tinyxml2
         ${OPENSSL_LIBRARIES}
         ${PROTOBUF_LIBRARIES}
+        jemalloc
         ${YAMLCPP})
 
 
