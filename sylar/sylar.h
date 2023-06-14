@@ -1,6 +1,13 @@
-
-#ifndef __SYLAR_H__
-#define __SYLAR_H__
+/**
+ * @file sylar.h
+ * @brief sylar头文件
+ * @author sylar.yin
+ * @email 564628276@qq.com
+ * @date 2019-05-24
+ * @copyright Copyright (c) 2019年 sylar.yin All rights reserved (www.sylar.top)
+ */
+#ifndef __SYLAR_SYLAR_H__
+#define __SYLAR_SYLAR_H__
 
 #include "address.h"
 #include "application.h"
@@ -72,5 +79,3 @@
 #include "util/json_util.h"
 
 #endif
-
-

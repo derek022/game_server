@@ -80,6 +80,7 @@ set(LIB_SRC
     sylar/rock/rock_stream.cc
     sylar/rock/rock_server.cc
     sylar/db/sqlite3.cc
+    sylar/ds/bitmap.cc
     sylar/email/email.cc
     sylar/email/smtp.cc
     sylar/ns/name_server_module.cc
@@ -139,11 +140,13 @@ sylar_add_executable(test_openssl "tests/test_openssl.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_server "tests/test_ws_server.cc" sylar "${LIBS}")
 sylar_add_executable(test_ws_client "tests/test_ws_client.cc" sylar "${LIBS}")
 sylar_add_executable(test_crypto "tests/test_crypto.cc" sylar "${LIBS}")
-endif()
 
 sylar_add_executable(test_sqlite "tests/test_sqlite3.cc" sylar "${LIBS}")
 sylar_add_executable(test_rock "tests/test_rock.cc" sylar "${LIBS}")
 sylar_add_executable(test_nameserver "tests/test_nameserver.cc" sylar "${LIBS}")
+endif()
+
+sylar_add_executable(test_bitmap "tests/test_bitmap.cc" sylar "${LIBS}")
 
 set(ORM_SRCS
     sylar/orm/table.cc
