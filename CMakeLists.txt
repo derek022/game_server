@@ -80,6 +80,8 @@ set(LIB_SRC
     sylar/rock/rock_stream.cc
     sylar/rock/rock_server.cc
     sylar/db/sqlite3.cc
+    sylar/db/redis.cc
+    sylar/db/fox_thread.cc
     sylar/ds/bitmap.cc
     sylar/ds/roaring_bitmap.cc
     sylar/ds/roaring.c
@@ -111,6 +113,8 @@ set(LIBS
         ${OPENSSL_LIBRARIES}
         ${PROTOBUF_LIBRARIES}
         jemalloc
+        event
+        hiredis_vip
         ${YAMLCPP})
 
 

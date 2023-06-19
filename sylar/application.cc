@@ -9,6 +9,8 @@
 #include "sylar/http/ws_server.h"
 #include "sylar/rock/rock_server.h"
 #include "sylar/ns/name_server_module.h"
+#include "sylar/db/fox_thread.h"
+#include "sylar/db/redis.h"
 #include <unistd.h>
 #include <signal.h>
 
@@ -151,6 +153,10 @@ int Application::run_fiber() {
         _exit(0);
     }
     sylar::WorkerMgr::GetInstance()->init();
+    FoxThreadMgr::GetInstance()->init();
+    FoxThreadMgr::GetInstance()->start();
+    RedisMgr::GetInstance();
+
     auto http_confs = g_servers_conf->getValue();
     for(auto& i : http_confs) {
         SYLAR_LOG_DEBUG(g_logger) << std::endl << LexicalCast<TcpServerConf, std::string>()(i);
